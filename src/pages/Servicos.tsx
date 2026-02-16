@@ -6,6 +6,7 @@ import { Helmet } from "react-helmet-async";
 import {
   Stethoscope, Smile, Sparkles, Palette, Heart, ShieldCheck, Baby, CircleDot,
 } from "lucide-react";
+import { DecorativeBlob } from "@/components/SectionDivider";
 
 const services = [
   {
@@ -67,11 +68,12 @@ const ServicosPage = () => {
       </Helmet>
 
       {/* Hero */}
-      <section className="gradient-hero py-16 md:py-24">
-        <div className="container text-center">
+      <section className="gradient-hero py-16 md:py-24 relative overflow-hidden">
+        <DecorativeBlob className="w-[500px] h-[500px] -top-40 -right-40" />
+        <div className="container text-center relative">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-            <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">Tratamentos</span>
-            <h1 className="text-4xl md:text-5xl font-heading font-extrabold text-foreground mb-4">
+            <span className="inline-block px-5 py-2 rounded-full gradient-primary text-primary-foreground text-sm font-semibold mb-4 shadow-card">Tratamentos</span>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-extrabold text-foreground mb-4">
               Nossos <span className="text-gradient">Serviços</span>
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -83,7 +85,7 @@ const ServicosPage = () => {
 
       {/* Services List */}
       <section className="py-20 bg-background">
-        <div className="container space-y-8">
+        <div className="container space-y-6">
           {services.map((s, i) => (
             <motion.div
               key={i}
@@ -91,17 +93,17 @@ const ServicosPage = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.05 }}
-              className="bg-card rounded-2xl border border-border shadow-card p-6 md:p-8 grid grid-cols-1 md:grid-cols-[auto_1fr_auto] gap-6 items-center"
+              className="card-premium p-6 md:p-8 grid grid-cols-1 md:grid-cols-[auto_1fr_auto] gap-6 items-center"
             >
-              <div className="w-14 h-14 rounded-xl gradient-primary flex items-center justify-center flex-shrink-0">
-                <s.icon className="w-7 h-7 text-primary-foreground" />
+              <div className="w-16 h-16 rounded-2xl gradient-primary flex items-center justify-center flex-shrink-0 shadow-card">
+                <s.icon className="w-8 h-8 text-primary-foreground" />
               </div>
               <div>
                 <h2 className="font-heading font-bold text-xl text-foreground mb-2">{s.title}</h2>
                 <p className="text-muted-foreground mb-3">{s.desc}</p>
-                <div className="flex flex-wrap gap-4">
+                <div className="flex flex-wrap gap-3">
                   {s.benefits.map((b, j) => (
-                    <span key={j} className="flex items-center gap-1.5 text-sm text-secondary">
+                    <span key={j} className="flex items-center gap-1.5 text-sm text-secondary font-medium">
                       <CheckCircle className="w-4 h-4" /> {b}
                     </span>
                   ))}
@@ -110,7 +112,7 @@ const ServicosPage = () => {
                   <Clock className="w-4 h-4" /> Duração: {s.duration}
                 </div>
               </div>
-              <Button asChild className="gradient-primary border-0 text-primary-foreground font-heading font-semibold self-center">
+              <Button asChild className="btn-glow border-0 text-primary-foreground font-heading font-semibold self-center rounded-2xl">
                 <Link to="/contato">
                   Agendar <CalendarCheck className="ml-2 w-4 h-4" />
                 </Link>

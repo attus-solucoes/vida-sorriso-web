@@ -1,18 +1,21 @@
 import { motion } from "framer-motion";
 import clinicImage from "@/assets/clinic-interior.jpg";
+import { DecorativeBlob, DecorativeDots } from "./SectionDivider";
 
 export function AboutSection() {
   return (
-    <section className="py-20 md:py-28 bg-background" id="sobre">
-      <div className="container">
+    <section className="py-20 md:py-28 bg-background relative overflow-hidden" id="sobre">
+      <DecorativeBlob className="w-[500px] h-[500px] -bottom-60 -left-60" />
+      <DecorativeDots className="top-20 right-16 hidden lg:block" />
+      <div className="container relative">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
-            <div className="rounded-2xl overflow-hidden shadow-elevated">
-              <img src={clinicImage} alt="Estrutura moderna da Clínica Sorriso Perfeito" className="w-full h-[400px] object-cover" loading="lazy" />
+            <div className="rounded-3xl overflow-hidden shadow-elevated">
+              <img src={clinicImage} alt="Estrutura moderna da Clínica Sorriso Perfeito" className="w-full h-[400px] object-cover hover:scale-105 transition-transform duration-500" loading="lazy" />
             </div>
           </motion.div>
 
@@ -21,8 +24,8 @@ export function AboutSection() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
-            <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">Sobre Nós</span>
-            <h2 className="text-3xl md:text-4xl font-heading font-extrabold text-foreground mb-6">
+            <span className="inline-block px-5 py-2 rounded-full gradient-primary text-primary-foreground text-sm font-semibold mb-4 shadow-card">Sobre Nós</span>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-extrabold text-foreground mb-6">
               Mais de 18 anos cuidando do seu <span className="text-gradient">sorriso</span>
             </h2>
             <p className="text-muted-foreground leading-relaxed mb-4">
@@ -36,8 +39,8 @@ export function AboutSection() {
                 { label: "Missão", text: "Excelência em cada sorriso" },
                 { label: "Visão", text: "Referência em odontologia" },
               ].map((v, i) => (
-                <div key={i} className="bg-muted rounded-xl p-4">
-                  <p className="font-heading font-semibold text-primary text-sm mb-1">{v.label}</p>
+                <div key={i} className="glass-card rounded-2xl p-4">
+                  <p className="font-heading font-bold text-gradient text-sm mb-1">{v.label}</p>
                   <p className="text-sm text-muted-foreground">{v.text}</p>
                 </div>
               ))}

@@ -16,16 +16,16 @@ export function Header() {
   const location = useLocation();
 
   return (
-    <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-md border-b border-border">
+    <header className="sticky top-0 z-50 glass border-b border-border/30">
       <div className="container flex items-center justify-between h-16 md:h-20">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-2">
-          <div className="w-9 h-9 rounded-lg gradient-primary flex items-center justify-center">
-            <span className="text-primary-foreground font-heading font-bold text-lg">S</span>
+        <Link to="/" className="flex items-center gap-2.5 group">
+          <div className="w-10 h-10 rounded-2xl btn-glow flex items-center justify-center">
+            <span className="text-primary-foreground font-heading font-extrabold text-lg">S</span>
           </div>
           <div className="hidden sm:block">
-            <span className="font-heading font-bold text-lg text-foreground">Sorriso</span>
-            <span className="font-heading font-bold text-lg text-primary"> Perfeito</span>
+            <span className="font-heading font-extrabold text-lg text-foreground">Sorriso</span>
+            <span className="font-heading font-extrabold text-lg text-gradient"> Perfeito</span>
           </div>
         </Link>
 
@@ -35,8 +35,10 @@ export function Header() {
             <Link
               key={link.path}
               to={link.path}
-              className={`text-sm font-medium transition-colors hover:text-primary ${
+              className={`relative text-sm font-medium transition-colors hover:text-primary py-1 ${
                 location.pathname === link.path ? "text-primary" : "text-muted-foreground"
+              } after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-primary after:rounded-full after:origin-left after:transition-transform after:duration-300 ${
+                location.pathname === link.path ? "after:scale-x-100" : "after:scale-x-0 hover:after:scale-x-100"
               }`}
             >
               {link.label}
@@ -50,7 +52,7 @@ export function Header() {
             <Phone className="w-4 h-4" />
             (11) 99999-9999
           </a>
-          <Button asChild className="gradient-primary border-0 text-primary-foreground font-heading font-semibold shadow-card hover:shadow-elevated transition-shadow">
+          <Button asChild className="btn-glow border-0 text-primary-foreground font-heading font-semibold rounded-2xl px-6">
             <Link to="/contato">Agende sua Consulta</Link>
           </Button>
         </div>
@@ -72,7 +74,7 @@ export function Header() {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            className="md:hidden overflow-hidden bg-background border-b border-border"
+            className="md:hidden overflow-hidden glass border-b border-border/30"
           >
             <nav className="container py-4 flex flex-col gap-3">
               {navLinks.map((link) => (
@@ -87,7 +89,7 @@ export function Header() {
                   {link.label}
                 </Link>
               ))}
-              <Button asChild className="gradient-primary border-0 text-primary-foreground font-heading font-semibold mt-2">
+              <Button asChild className="btn-glow border-0 text-primary-foreground font-heading font-semibold rounded-2xl mt-2">
                 <Link to="/contato" onClick={() => setMobileOpen(false)}>Agende sua Consulta</Link>
               </Button>
             </nav>
