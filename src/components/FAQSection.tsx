@@ -5,6 +5,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { DecorativeDots } from "./SectionDivider";
 
 const faqs = [
   { q: "Quais convênios são aceitos?", a: "Trabalhamos com os principais convênios odontológicos do mercado, incluindo Amil Dental, Bradesco Dental, SulAmérica e MetLife. Consulte a disponibilidade para o seu plano." },
@@ -17,21 +18,22 @@ const faqs = [
 
 export function FAQSection() {
   return (
-    <section className="py-20 md:py-28 bg-background" id="faq">
-      <div className="container max-w-3xl">
+    <section className="py-20 md:py-28 bg-background relative overflow-hidden" id="faq">
+      <DecorativeDots className="top-20 left-8 hidden lg:block" />
+      <div className="container max-w-3xl relative">
         <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <span className="inline-block px-4 py-1.5 rounded-full bg-secondary/10 text-secondary text-sm font-medium mb-4">FAQ</span>
-          <h2 className="text-3xl md:text-4xl font-heading font-extrabold text-foreground mb-4">
+          <span className="inline-block px-5 py-2 rounded-full gradient-primary text-primary-foreground text-sm font-semibold mb-4 shadow-card">FAQ</span>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-extrabold text-foreground mb-4">
             Perguntas <span className="text-gradient">Frequentes</span>
           </h2>
         </motion.div>
 
-        <Accordion type="single" collapsible className="space-y-3">
+        <Accordion type="single" collapsible className="space-y-4">
           {faqs.map((faq, i) => (
             <motion.div
               key={i}
@@ -40,8 +42,8 @@ export function FAQSection() {
               viewport={{ once: true }}
               transition={{ delay: i * 0.05 }}
             >
-              <AccordionItem value={`faq-${i}`} className="bg-card rounded-xl border border-border px-6 shadow-card">
-                <AccordionTrigger className="font-heading font-semibold text-foreground text-left hover:no-underline py-5">
+              <AccordionItem value={`faq-${i}`} className="card-premium px-6 !border-border/50">
+                <AccordionTrigger className="font-heading font-bold text-foreground text-left hover:no-underline py-5">
                   {faq.q}
                 </AccordionTrigger>
                 <AccordionContent className="text-muted-foreground leading-relaxed pb-5">
