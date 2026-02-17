@@ -1,20 +1,7 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import {
-  Stethoscope, Smile, Sparkles, Palette, Heart, ShieldCheck, Baby, CircleDot,
-} from "lucide-react";
 import { DecorativeBlob } from "./SectionDivider";
-
-const services = [
-  { icon: CircleDot, title: "Implantes Dentários", desc: "Recupere dentes perdidos com implantes de última geração." },
-  { icon: Smile, title: "Ortodontia / Invisalign", desc: "Alinhamento dental com aparelhos modernos e discretos." },
-  { icon: Sparkles, title: "Clareamento Dental", desc: "Dentes mais brancos com procedimentos seguros e eficazes." },
-  { icon: Palette, title: "Estética Dental", desc: "Lentes de contato, facetas e design do sorriso." },
-  { icon: Heart, title: "Tratamento de Canal", desc: "Procedimentos indolores com tecnologia avançada." },
-  { icon: ShieldCheck, title: "Limpeza e Prevenção", desc: "Mantenha sua saúde bucal sempre em dia." },
-  { icon: Stethoscope, title: "Próteses Dentárias", desc: "Próteses fixas e removíveis com máximo conforto." },
-  { icon: Baby, title: "Odontopediatria", desc: "Cuidado especial para os pequenos sorrisos." },
-];
+import { services } from "@/config/siteConfig";
 
 export function ServicesSection() {
   return (
@@ -47,13 +34,18 @@ export function ServicesSection() {
             >
               <Link
                 to="/servicos"
-                className="group block card-premium p-6 h-full"
+                className="group block card-premium p-6 h-full relative"
               >
+                {s.popular && (
+                  <span className="absolute top-3 right-3 px-2 py-1 rounded-full bg-accent text-accent-foreground text-xs font-semibold">
+                    ⭐ Mais Procurado
+                  </span>
+                )}
                 <div className="w-14 h-14 rounded-2xl bg-primary/10 group-hover:gradient-primary flex items-center justify-center mb-5 transition-all duration-300 group-hover:rotate-[10deg]">
                   <s.icon className="w-7 h-7 text-primary group-hover:text-primary-foreground transition-colors duration-300" />
                 </div>
                 <h3 className="font-heading font-bold text-foreground mb-2">{s.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
+                <p className="text-sm text-muted-foreground leading-relaxed">{s.shortDesc}</p>
               </Link>
             </motion.div>
           ))}

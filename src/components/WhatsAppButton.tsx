@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { MessageCircle } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { getWhatsAppLink } from "@/config/siteConfig";
 
 export function WhatsAppButton() {
   const [showTooltip, setShowTooltip] = useState(false);
@@ -29,7 +30,7 @@ export function WhatsAppButton() {
         )}
       </AnimatePresence>
       <motion.a
-        href="https://wa.me/5511999999999?text=Olá! Gostaria de agendar uma consulta."
+        href={getWhatsAppLink()}
         target="_blank"
         rel="noopener noreferrer"
         className="w-14 h-14 rounded-full flex items-center justify-center transition-transform duration-300 hover:scale-110"

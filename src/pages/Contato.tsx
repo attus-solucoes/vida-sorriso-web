@@ -16,6 +16,7 @@ import { Phone, Mail, MapPin, Clock, Send, CheckCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { z } from "zod";
 import { DecorativeBlob } from "@/components/SectionDivider";
+import { clinicInfo, services, seo, getPhoneLink, getEmailLink } from "@/config/siteConfig";
 
 const contactSchema = z.object({
   name: z.string().trim().min(2, "Nome deve ter pelo menos 2 caracteres").max(100),
@@ -26,17 +27,8 @@ const contactSchema = z.object({
   privacy: z.literal(true, { errorMap: () => ({ message: "Aceite a política de privacidade" }) }),
 });
 
-const services = [
-  "Implantes Dentários",
-  "Ortodontia / Invisalign",
-  "Clareamento Dental",
-  "Estética Dental",
-  "Tratamento de Canal",
-  "Limpeza e Prevenção",
-  "Próteses Dentárias",
-  "Odontopediatria",
-  "Outro",
-];
+// Lista de serviços para o select (usando do config + "Outro")
+const serviceOptions = [...services.map(s => s.title), "Outro"];
 
 const ContatoPage = () => {
   const { toast } = useToast();
@@ -67,11 +59,18 @@ const ContatoPage = () => {
     if (errors[field]) setErrors((e) => { const n = { ...e }; delete n[field]; return n; });
   };
 
+  const contactItems = [
+    { icon: Phone, title: "Telefone", text: clinicInfo.phone, href: getPhoneLink() },
+    { icon: Mail, title: "Email", text: clinicInfo.email, href: getEmailLink() },
+    { icon: MapPin, title: "Endereço", text: `${clinicInfo.address.street}\n${clinicInfo.address.neighborhood}, ${clinicInfo.address.city} - ${clinicInfo.address.state}` },
+    { icon: Clock, title: "Horários", text: `${clinicInfo.hours.weekdays}\n${clinicInfo.hours.saturday}` },
+  ];
+
   return (
     <>
       <Helmet>
-        <title>Contato | Clínica Sorriso Perfeito</title>
-        <meta name="description" content="Entre em contato com a Clínica Sorriso Perfeito. Agende sua consulta por telefone, WhatsApp ou pelo formulário online." />
+        <title>{seo.contact.title}</title>
+        <meta name="description" content={seo.contact.description} />
       </Helmet>
 
       <section className="gradient-hero py-16 md:py-24 relative overflow-hidden">
@@ -138,7 +137,7 @@ const ContatoPage = () => {
                           <SelectValue placeholder="Selecione um serviço" />
                         </SelectTrigger>
                         <SelectContent className="bg-card z-50 rounded-xl">
-                          {services.map((s) => (
+                          {serviceOptions.map((s) => (
                             <SelectItem key={s} value={s}>{s}</SelectItem>
                           ))}
                         </SelectContent>
@@ -178,12 +177,7 @@ const ContatoPage = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
-              {[
-                { icon: Phone, title: "Telefone", text: "(11) 99999-9999", href: "tel:+5511999999999" },
-                { icon: Mail, title: "Email", text: "contato@sorrisoperfeito.com.br", href: "mailto:contato@sorrisoperfeito.com.br" },
-                { icon: MapPin, title: "Endereço", text: "Av. Paulista, 1000\nBela Vista, São Paulo - SP" },
-                { icon: Clock, title: "Horários", text: "Seg-Sex: 8h às 18h\nSábado: 8h às 12h" },
-              ].map((item, i) => (
+              {contactItems.map((item, i) => (
                 <div key={i} className="card-premium p-5 flex items-start gap-4">
                   <div className="w-11 h-11 rounded-2xl gradient-primary flex items-center justify-center flex-shrink-0 shadow-card">
                     <item.icon className="w-5 h-5 text-primary-foreground" />
@@ -201,7 +195,7 @@ const ContatoPage = () => {
 
               <div className="rounded-3xl overflow-hidden shadow-elevated">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.1976519367564!2d-46.65390268502165!3d-23.56310278468091!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce59c8da0aa315%3A0x63b9f0a763d3f4b9!2sAv.%20Paulista%2C%201000%20-%20Bela%20Vista%2C%20S%C3%A3o%20Paulo%20-%20SP!5e0!3m2!1spt-BR!2sbr!4v1700000000000!5m2!1spt-BR!2sbr"
+                  src={clinicInfo.mapEmbedUrl}
                   width="100%"
                   height="200"
                   style={{ border: 0 }}

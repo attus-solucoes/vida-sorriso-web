@@ -6,15 +6,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { DecorativeDots } from "./SectionDivider";
-
-const faqs = [
-  { q: "Quais convênios são aceitos?", a: "Trabalhamos com os principais convênios odontológicos do mercado, incluindo Amil Dental, Bradesco Dental, SulAmérica e MetLife. Consulte a disponibilidade para o seu plano." },
-  { q: "Como funciona o agendamento?", a: "Você pode agendar sua consulta pelo WhatsApp, telefone ou pelo formulário em nosso site. Retornamos em até 2 horas durante o horário comercial." },
-  { q: "O clareamento dental dói?", a: "Com a tecnologia que utilizamos, o desconforto é mínimo. Realizamos uma avaliação prévia para garantir que o procedimento seja o mais confortável possível para você." },
-  { q: "Quanto tempo dura um implante dentário?", a: "Com os devidos cuidados e manutenção, um implante dentário pode durar a vida toda. Utilizamos materiais de alta qualidade e seguimos os mais rigorosos padrões internacionais." },
-  { q: "Vocês atendem emergências?", a: "Sim! Temos horários reservados para atendimentos de urgência durante nosso horário de funcionamento. Entre em contato pelo WhatsApp para prioridade no atendimento." },
-  { q: "Qual a forma de pagamento?", a: "Aceitamos cartões de crédito e débito, PIX, boleto e parcelamos em até 12x sem juros. Também trabalhamos com financiamento para tratamentos mais extensos." },
-];
+import { faqs } from "@/config/siteConfig";
 
 export function FAQSection() {
   return (
@@ -44,10 +36,10 @@ export function FAQSection() {
             >
               <AccordionItem value={`faq-${i}`} className="card-premium px-6 !border-border/50">
                 <AccordionTrigger className="font-heading font-bold text-foreground text-left hover:no-underline py-5">
-                  {faq.q}
+                  {faq.question}
                 </AccordionTrigger>
                 <AccordionContent className="text-muted-foreground leading-relaxed pb-5">
-                  {faq.a}
+                  {faq.answer}
                 </AccordionContent>
               </AccordionItem>
             </motion.div>

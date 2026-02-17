@@ -3,78 +3,15 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { CalendarCheck, Clock, CheckCircle, Flame } from "lucide-react";
 import { Helmet } from "react-helmet-async";
-import {
-  Stethoscope, Smile, Sparkles, Palette, Heart, ShieldCheck, Baby, CircleDot,
-} from "lucide-react";
 import { DecorativeBlob } from "@/components/SectionDivider";
-
-const services = [
-  {
-    icon: CircleDot, title: "Implantes Dentários",
-    desc: "Recupere dentes perdidos com implantes de titânio de última geração. Procedimento seguro com resultados naturais e duradouros.",
-    benefits: ["Restaura a função mastigatória", "Resultado estético natural", "Durabilidade de longa vida"],
-    duration: "1 a 3 sessões",
-    popular: true,
-    price: "A partir de R$ 2.500",
-  },
-  {
-    icon: Smile, title: "Ortodontia / Invisalign",
-    desc: "Corrija o alinhamento dos seus dentes com aparelhos tradicionais ou alinhadores transparentes Invisalign.",
-    benefits: ["Sorriso harmonioso", "Melhora na mastigação", "Opções discretas disponíveis"],
-    duration: "12 a 24 meses",
-    price: "A partir de R$ 3.000",
-  },
-  {
-    icon: Sparkles, title: "Clareamento Dental",
-    desc: "Dentes até 8 tons mais brancos com tecnologia LED e produtos de alta qualidade.",
-    benefits: ["Resultado imediato", "Procedimento indolor", "Aumento da autoestima"],
-    duration: "1 a 2 sessões",
-    popular: true,
-    price: "A partir de R$ 800",
-  },
-  {
-    icon: Palette, title: "Estética Dental",
-    desc: "Lentes de contato dental, facetas em porcelana e design do sorriso personalizado.",
-    benefits: ["Sorriso dos sonhos", "Materiais premium", "Resultado natural"],
-    duration: "2 a 4 sessões",
-    price: "A partir de R$ 1.200",
-  },
-  {
-    icon: Heart, title: "Tratamento de Canal",
-    desc: "Procedimentos endodônticos com tecnologia de ponta para preservar seu dente natural.",
-    benefits: ["Elimina dor e infecção", "Preserva o dente", "Procedimento indolor"],
-    duration: "1 a 2 sessões",
-    price: "A partir de R$ 600",
-  },
-  {
-    icon: ShieldCheck, title: "Limpeza e Prevenção",
-    desc: "Profilaxia dental completa, raspagem e orientação para manutenção da saúde bucal.",
-    benefits: ["Previne cáries", "Remove tártaro", "Hálito fresco"],
-    duration: "1 sessão",
-    price: "A partir de R$ 250",
-  },
-  {
-    icon: Stethoscope, title: "Próteses Dentárias",
-    desc: "Próteses fixas e removíveis de alta qualidade para restaurar seu sorriso completo.",
-    benefits: ["Função mastigatória restaurada", "Estética natural", "Conforto no uso"],
-    duration: "3 a 5 sessões",
-    price: "A partir de R$ 1.500",
-  },
-  {
-    icon: Baby, title: "Odontopediatria",
-    desc: "Atendimento especializado para crianças em ambiente lúdico e acolhedor.",
-    benefits: ["Ambiente infantil", "Prevenção desde cedo", "Profissionais especializados"],
-    duration: "Consulta regular",
-    price: "A partir de R$ 200",
-  },
-];
+import { services, seo } from "@/config/siteConfig";
 
 const ServicosPage = () => {
   return (
     <>
       <Helmet>
-        <title>Serviços | Clínica Sorriso Perfeito</title>
-        <meta name="description" content="Conheça todos os tratamentos odontológicos da Clínica Sorriso Perfeito: implantes, ortodontia, clareamento, estética dental e mais." />
+        <title>{seo.services.title}</title>
+        <meta name="description" content={seo.services.description} />
       </Helmet>
 
       {/* Hero */}
@@ -106,7 +43,7 @@ const ServicosPage = () => {
               className="group card-premium p-6 md:p-8 grid grid-cols-1 md:grid-cols-[auto_1fr_auto] gap-6 items-center relative overflow-hidden hover:!border-l-4 hover:!border-l-primary transition-all duration-300"
             >
               {/* Popular badge */}
-              {'popular' in s && s.popular && (
+              {s.popular && (
                 <div className="absolute top-3 right-3 flex items-center gap-1 px-3 py-1 rounded-full gradient-accent text-accent-foreground text-xs font-bold shadow-card">
                   <Flame className="w-3 h-3" /> Mais Procurado
                 </div>
@@ -116,19 +53,23 @@ const ServicosPage = () => {
               </div>
               <div>
                 <h2 className="font-heading font-bold text-xl text-foreground mb-2">{s.title}</h2>
-                <p className="text-muted-foreground mb-3">{s.desc}</p>
+                <p className="text-muted-foreground mb-3">{s.fullDesc || s.shortDesc}</p>
                 <div className="flex flex-wrap gap-3">
-                  {s.benefits.map((b, j) => (
+                  {s.benefits?.map((b, j) => (
                     <span key={j} className="flex items-center gap-1.5 text-sm text-secondary font-medium">
                       <CheckCircle className="w-4 h-4" /> {b}
                     </span>
                   ))}
                 </div>
                 <div className="flex flex-wrap items-center gap-4 mt-3 text-sm text-muted-foreground">
-                  <span className="flex items-center gap-2">
-                    <Clock className="w-4 h-4" /> Duração: {s.duration}
-                  </span>
-                  <span className="font-heading font-bold text-primary">{s.price}</span>
+                  {s.duration && (
+                    <span className="flex items-center gap-2">
+                      <Clock className="w-4 h-4" /> Duração: {s.duration}
+                    </span>
+                  )}
+                  {s.price && (
+                    <span className="font-heading font-bold text-primary">{s.price}</span>
+                  )}
                 </div>
               </div>
               <Button asChild className="btn-glow border-0 text-primary-foreground font-heading font-semibold self-center rounded-2xl">

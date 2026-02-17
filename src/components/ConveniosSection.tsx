@@ -1,14 +1,6 @@
 import { motion } from "framer-motion";
 import { DecorativeDots } from "./SectionDivider";
-
-const convenios = [
-  "Amil Dental",
-  "Bradesco Dental",
-  "SulAmérica",
-  "MetLife",
-  "OdontoPrev",
-  "Porto Seguro",
-];
+import { convenios } from "@/config/siteConfig";
 
 export function ConveniosSection() {
   return (

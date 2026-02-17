@@ -4,27 +4,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, GripVertical } from "lucide-react";
 import { DecorativeBlob } from "./SectionDivider";
-
-const transformations = [
-  {
-    treatment: "Lentes de Contato",
-    duration: "2 semanas",
-    beforeColor: "hsl(38 30% 75%)",
-    afterColor: "hsl(199 89% 92%)",
-  },
-  {
-    treatment: "Clareamento Dental",
-    duration: "1 sessão",
-    beforeColor: "hsl(38 40% 70%)",
-    afterColor: "hsl(168 60% 90%)",
-  },
-  {
-    treatment: "Implantes Dentários",
-    duration: "3 meses",
-    beforeColor: "hsl(0 10% 78%)",
-    afterColor: "hsl(199 70% 90%)",
-  },
-];
+import { transformations } from "@/config/siteConfig";
 
 function BeforeAfterSlider({ item }: { item: typeof transformations[0] }) {
   const containerRef = useRef<HTMLDivElement>(null);

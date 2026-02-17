@@ -1,14 +1,6 @@
 import { motion } from "framer-motion";
-import { Monitor, HeartHandshake, Home, GraduationCap, CreditCard } from "lucide-react";
 import { WaveDivider, DecorativeDots } from "./SectionDivider";
-
-const items = [
-  { icon: Monitor, title: "Tecnologia de Ponta", desc: "Equipamentos digitais de última geração para diagnósticos precisos." },
-  { icon: HeartHandshake, title: "Atendimento Humanizado", desc: "Cada paciente é único. Ouvimos, cuidamos e acolhemos." },
-  { icon: Home, title: "Ambiente Acolhedor", desc: "Clínica moderna e confortável para sua tranquilidade." },
-  { icon: GraduationCap, title: "Profissionais Especializados", desc: "Equipe com formação contínua e certificações reconhecidas." },
-  { icon: CreditCard, title: "Facilidade de Pagamento", desc: "Parcelamento em até 12x e convênios aceitos." },
-];
+import { differentials } from "@/config/siteConfig";
 
 export function DifferentialsSection() {
   return (
@@ -31,7 +23,7 @@ export function DifferentialsSection() {
           </motion.div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
-            {items.map((item, i) => (
+            {differentials.map((item, i) => (
               <motion.div
                 key={i}
                 className="text-center card-premium bg-card p-6 hover:!-translate-y-3"
@@ -44,7 +36,7 @@ export function DifferentialsSection() {
                   <item.icon className="w-7 h-7 text-primary-foreground" />
                 </div>
                 <h3 className="font-heading font-bold text-foreground mb-2 text-sm">{item.title}</h3>
-                <p className="text-xs text-muted-foreground leading-relaxed">{item.desc}</p>
+                <p className="text-xs text-muted-foreground leading-relaxed">{item.description}</p>
               </motion.div>
             ))}
           </div>

@@ -1,18 +1,13 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Helmet } from "react-helmet-async";
-import { Award, GraduationCap, Shield, Heart, X, ChevronLeft, ChevronRight, Maximize2 } from "lucide-react";
+import { X, ChevronLeft, ChevronRight, Maximize2 } from "lucide-react";
 import clinicImage from "@/assets/clinic-interior.jpg";
 import heroImage from "@/assets/hero-dental.jpg";
 import { DecorativeBlob, DecorativeDots } from "@/components/SectionDivider";
+import { clinicInfo, team, certifications, seo, stats } from "@/config/siteConfig";
 
-const team = [
-  { name: "Dr. Ricardo Mendes", role: "Implantodontista", crm: "CRO-SP 12345" },
-  { name: "Dra. Camila Santos", role: "Ortodontista", crm: "CRO-SP 23456" },
-  { name: "Dr. Felipe Oliveira", role: "Endodontista", crm: "CRO-SP 34567" },
-  { name: "Dra. Juliana Costa", role: "Odontopediatra", crm: "CRO-SP 45678" },
-];
-
+// Galeria usa as imagens locais por enquanto
 const galleryItems = [
   { src: clinicImage, label: "Recepção", span: "md:col-span-2" },
   { src: heroImage, label: "Consultório" },
@@ -27,8 +22,8 @@ const SobrePage = () => {
   return (
     <>
       <Helmet>
-        <title>Sobre Nós | Clínica Sorriso Perfeito</title>
-        <meta name="description" content="Conheça a história, equipe e infraestrutura da Clínica Sorriso Perfeito. +18 anos de excelência em odontologia em São Paulo." />
+        <title>{seo.about.title}</title>
+        <meta name="description" content={seo.about.description} />
       </Helmet>
 
       {/* Hero */}
@@ -38,10 +33,10 @@ const SobrePage = () => {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
             <span className="inline-block px-5 py-2 rounded-full gradient-primary text-primary-foreground text-sm font-semibold mb-4 shadow-card">Nossa História</span>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-extrabold text-foreground mb-4">
-              Sobre a <span className="text-gradient">Sorriso Perfeito</span>
+              Sobre a <span className="text-gradient">{clinicInfo.name}</span>
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Mais de 18 anos transformando sorrisos com excelência, tecnologia e carinho.
+              Mais de {stats.yearsExperience} anos transformando sorrisos com excelência, tecnologia e carinho.
             </p>
           </motion.div>
         </div>
@@ -54,24 +49,19 @@ const SobrePage = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
               <div className="rounded-3xl overflow-hidden shadow-elevated">
-                <img src={heroImage} alt="Clínica Sorriso Perfeito" className="w-full h-[400px] object-cover hover:scale-105 transition-transform duration-500" loading="lazy" />
+                <img src={heroImage} alt={`Clínica ${clinicInfo.name}`} className="w-full h-[400px] object-cover hover:scale-105 transition-transform duration-500" loading="lazy" />
               </div>
             </motion.div>
             <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
               <h2 className="text-3xl md:text-4xl font-heading font-extrabold text-foreground mb-6">Nossa <span className="text-gradient">História</span></h2>
               <p className="text-muted-foreground leading-relaxed mb-4">
-                Fundada em 2005 pelo Dr. Ricardo Mendes, a Clínica Sorriso Perfeito nasceu com a missão de democratizar o acesso à odontologia de alta qualidade. O que começou como um pequeno consultório na Av. Paulista cresceu e se tornou referência em tratamentos odontológicos em São Paulo.
+                Fundada em {clinicInfo.foundedYear} pelo {team[0]?.name || "nossos fundadores"}, a Clínica {clinicInfo.name} nasceu com a missão de democratizar o acesso à odontologia de alta qualidade. O que começou como um pequeno consultório na {clinicInfo.address.street} cresceu e se tornou referência em tratamentos odontológicos em {clinicInfo.address.city}.
               </p>
               <p className="text-muted-foreground leading-relaxed mb-6">
                 Hoje, contamos com uma equipe multidisciplinar de especialistas e uma infraestrutura completa, equipada com o que há de mais moderno em tecnologia odontológica. Nossa filosofia permanece a mesma: tratar cada paciente como único, oferecendo o melhor cuidado possível.
               </p>
               <div className="grid grid-cols-2 gap-4">
-                {[
-                  { icon: Award, text: "ISO 9001 Certificada" },
-                  { icon: Shield, text: "ANVISA Regulamentada" },
-                  { icon: GraduationCap, text: "Equipe Especializada" },
-                  { icon: Heart, text: "Atendimento Humanizado" },
-                ].map((item, i) => (
+                {certifications.map((item, i) => (
                   <div key={i} className="glass-card rounded-2xl flex items-center gap-3 p-3.5">
                     <div className="w-9 h-9 rounded-xl gradient-primary flex items-center justify-center flex-shrink-0">
                       <item.icon className="w-4 h-4 text-primary-foreground" />
@@ -112,7 +102,7 @@ const SobrePage = () => {
                 </div>
                 <div className="p-6 text-center">
                   <h3 className="font-heading font-bold text-foreground mb-1">{member.name}</h3>
-                  <span className="inline-block px-3 py-1 rounded-full gradient-primary text-primary-foreground text-xs font-semibold mb-2">{member.role}</span>
+                  <span className="inline-block px-3 py-1 rounded-full gradient-primary text-primary-foreground text-xs font-semibold mb-2">{member.specialty}</span>
                   <p className="text-xs text-muted-foreground">{member.crm}</p>
                 </div>
               </motion.div>

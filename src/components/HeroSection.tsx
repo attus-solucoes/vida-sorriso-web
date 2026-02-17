@@ -6,6 +6,7 @@ import { ArrowRight, Star, Users, Award, CalendarCheck } from "lucide-react";
 import heroImage from "@/assets/hero-dental.jpg";
 import { DecorativeBlob } from "./SectionDivider";
 import { useCountUp } from "@/hooks/useCountUp";
+import { clinicInfo, stats } from "@/config/siteConfig";
 
 export function HeroSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -34,7 +35,7 @@ export function HeroSection() {
               <span className="text-gradient">melhor cuidado</span>
             </h1>
             <p className="text-lg text-muted-foreground leading-relaxed mb-8 max-w-lg">
-              Na Clínica Sorriso Perfeito, combinamos tecnologia de ponta com um atendimento humanizado para transformar o seu sorriso com conforto e segurança.
+              Na Clínica {clinicInfo.name}, combinamos tecnologia de ponta com um atendimento humanizado para transformar o seu sorriso com conforto e segurança.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Button asChild size="lg" className="btn-glow border-0 text-primary-foreground font-heading font-semibold text-base rounded-2xl h-12 px-8">
@@ -60,7 +61,7 @@ export function HeroSection() {
             <div className="rounded-3xl overflow-hidden shadow-elevated">
               <img
                 src={heroImage}
-                alt="Interior moderno da Clínica Sorriso Perfeito"
+                alt={`Interior moderno da Clínica ${clinicInfo.name}`}
                 className="w-full h-[350px] md:h-[450px] object-cover"
                 loading="eager"
               />
@@ -74,8 +75,8 @@ export function HeroSection() {
                 <Star className="w-5 h-5 text-accent-foreground" />
               </div>
               <div>
-                <p className="font-heading font-bold text-sm text-foreground">4.9/5 Estrelas</p>
-                <p className="text-xs text-muted-foreground">+500 avaliações</p>
+                <p className="font-heading font-bold text-sm text-foreground">{stats.googleRating}/5 Estrelas</p>
+                <p className="text-xs text-muted-foreground">+{stats.googleReviews} avaliações</p>
               </div>
             </motion.div>
           </motion.div>
@@ -111,10 +112,10 @@ export function TrustBar() {
       <div className="absolute inset-0 dots-pattern opacity-30" />
       <div className="container relative">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-          <StatItem icon={Award} target={18} prefix="+" label="Anos de Experiência" />
-          <StatItem icon={Users} target={15000} prefix="+" label="Pacientes Atendidos" />
-          <StatItem icon={Star} target={49} prefix="" suffix="" label="Avaliação Google" />
-          <StatItem icon={CalendarCheck} target={30000} prefix="+" label="Procedimentos" />
+          <StatItem icon={Award} target={stats.yearsExperience} prefix="+" label="Anos de Experiência" />
+          <StatItem icon={Users} target={stats.patientsServed} prefix="+" label="Pacientes Atendidos" />
+          <StatItem icon={Star} target={Math.round(stats.googleRating * 10)} prefix="" suffix="" label="Avaliação Google" />
+          <StatItem icon={CalendarCheck} target={stats.procedures} prefix="+" label="Procedimentos" />
         </div>
       </div>
     </section>

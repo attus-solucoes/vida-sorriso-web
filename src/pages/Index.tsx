@@ -13,13 +13,14 @@ import { CalendarCheck } from "lucide-react";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
 import { DecorativeBlob } from "@/components/SectionDivider";
+import { seo } from "@/config/siteConfig";
 
 const Index = () => {
   return (
     <>
       <Helmet>
-        <title>Clínica Sorriso Perfeito | Odontologia de Excelência em São Paulo</title>
-        <meta name="description" content="Clínica odontológica em São Paulo com +18 anos de experiência. Implantes, ortodontia, clareamento e mais. Agende sua consulta!" />
+        <title>{seo.home.title}</title>
+        <meta name="description" content={seo.home.description} />
       </Helmet>
       <HeroSection />
       <TrustBar />

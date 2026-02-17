@@ -2,13 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Star, ChevronLeft, ChevronRight, Quote } from "lucide-react";
 import { DecorativeBlob } from "./SectionDivider";
-
-const testimonials = [
-  { name: "Maria S.", treatment: "Clareamento Dental", text: "Tratamento excelente! Equipe muito atenciosa e resultado incrível no meu clareamento. Saí de lá com o sorriso que sempre sonhei!", rating: 5 },
-  { name: "João P.", treatment: "Tratamento de Canal", text: "Finalmente encontrei uma clínica que me fez perder o medo de dentista. Profissionais incríveis, ambiente acolhedor. Recomendo de olhos fechados!", rating: 5 },
-  { name: "Ana R.", treatment: "Implantes Dentários", text: "Os implantes ficaram perfeitos e naturais. Voltei a sorrir com confiança! O atendimento do início ao fim foi impecável.", rating: 5 },
-  { name: "Carlos M.", treatment: "Ortodontia", text: "Meu tratamento com Invisalign superou todas as expectativas. Equipe sempre disponível para tirar dúvidas. Resultado fantástico!", rating: 5 },
-];
+import { testimonials } from "@/config/siteConfig";
 
 function Avatar({ name }: { name: string }) {
   const initials = name.split(" ").map(n => n[0]).join("");
