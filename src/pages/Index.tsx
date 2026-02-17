@@ -1,8 +1,10 @@
 import { HeroSection, TrustBar } from "@/components/HeroSection";
 import { ServicesSection } from "@/components/ServicesSection";
+import { TransformationsSection } from "@/components/TransformationsSection";
 import { DifferentialsSection } from "@/components/DifferentialsSection";
 import { AboutSection } from "@/components/AboutSection";
 import { TestimonialsSection } from "@/components/TestimonialsSection";
+import { ConveniosSection } from "@/components/ConveniosSection";
 import { FAQSection } from "@/components/FAQSection";
 import { LocationSection } from "@/components/LocationSection";
 import { Link } from "react-router-dom";
@@ -22,9 +24,11 @@ const Index = () => {
       <HeroSection />
       <TrustBar />
       <ServicesSection />
+      <TransformationsSection />
       <DifferentialsSection />
       <AboutSection />
       <TestimonialsSection />
+      <ConveniosSection />
       <FAQSection />
       <LocationSection />
       {/* CTA Final */}

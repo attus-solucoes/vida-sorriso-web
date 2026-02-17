@@ -1,6 +1,7 @@
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Helmet } from "react-helmet-async";
-import { Award, GraduationCap, Shield, Heart } from "lucide-react";
+import { Award, GraduationCap, Shield, Heart, X, ChevronLeft, ChevronRight, Maximize2 } from "lucide-react";
 import clinicImage from "@/assets/clinic-interior.jpg";
 import heroImage from "@/assets/hero-dental.jpg";
 import { DecorativeBlob, DecorativeDots } from "@/components/SectionDivider";
@@ -12,7 +13,17 @@ const team = [
   { name: "Dra. Juliana Costa", role: "Odontopediatra", crm: "CRO-SP 45678" },
 ];
 
+const galleryItems = [
+  { src: clinicImage, label: "Recepção", span: "md:col-span-2" },
+  { src: heroImage, label: "Consultório" },
+  { src: clinicImage, label: "Equipamentos" },
+  { src: heroImage, label: "Sala de Espera", span: "md:col-span-2" },
+  { src: clinicImage, label: "Consultório 2" },
+];
+
 const SobrePage = () => {
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+
   return (
     <>
       <Helmet>
@@ -110,29 +121,81 @@ const SobrePage = () => {
         </div>
       </section>
 
-      {/* Infrastructure */}
+      {/* Gallery / Infrastructure */}
       <section className="py-20 bg-background relative overflow-hidden">
         <div className="container relative">
           <motion.div className="text-center mb-16" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-extrabold text-foreground mb-4">
-              Nossa <span className="text-gradient">Infraestrutura</span>
+              Nossa <span className="text-gradient">Estrutura</span>
             </h2>
           </motion.div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {[clinicImage, heroImage].map((img, i) => (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {galleryItems.map((item, i) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="rounded-3xl overflow-hidden shadow-elevated group"
+                transition={{ delay: i * 0.08 }}
+                className={`rounded-2xl overflow-hidden shadow-elevated group relative cursor-pointer ${item.span || ""}`}
+                onClick={() => setLightboxIndex(i)}
               >
-                <img src={img} alt="Infraestrutura da clínica" className="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+                <img src={item.src} alt={item.label} className="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+                <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/40 transition-colors duration-300 flex items-center justify-center">
+                  <Maximize2 className="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                </div>
+                <div className="absolute bottom-3 left-3 px-3 py-1 rounded-full glass text-xs font-heading font-bold text-foreground">
+                  {item.label}
+                </div>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
+
+      {/* Lightbox */}
+      <AnimatePresence>
+        {lightboxIndex !== null && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] bg-foreground/90 flex items-center justify-center p-4"
+            onClick={() => setLightboxIndex(null)}
+          >
+            <button className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors" aria-label="Fechar">
+              <X className="w-6 h-6" />
+            </button>
+            <button
+              className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors"
+              onClick={(e) => { e.stopPropagation(); setLightboxIndex((p) => (p! > 0 ? p! - 1 : galleryItems.length - 1)); }}
+              aria-label="Anterior"
+            >
+              <ChevronLeft className="w-6 h-6" />
+            </button>
+            <motion.img
+              key={lightboxIndex}
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              src={galleryItems[lightboxIndex].src}
+              alt={galleryItems[lightboxIndex].label}
+              className="max-w-full max-h-[85vh] rounded-2xl object-contain"
+              onClick={(e) => e.stopPropagation()}
+            />
+            <button
+              className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors"
+              onClick={(e) => { e.stopPropagation(); setLightboxIndex((p) => (p! < galleryItems.length - 1 ? p! + 1 : 0)); }}
+              aria-label="Próximo"
+            >
+              <ChevronRight className="w-6 h-6" />
+            </button>
+            <p className="absolute bottom-6 text-white font-heading font-bold text-lg">
+              {galleryItems[lightboxIndex].label}
+            </p>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 };

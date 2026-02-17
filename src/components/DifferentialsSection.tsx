@@ -34,7 +34,7 @@ export function DifferentialsSection() {
             {items.map((item, i) => (
               <motion.div
                 key={i}
-                className="text-center card-premium bg-card p-6"
+                className="text-center card-premium bg-card p-6 hover:!-translate-y-3"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
