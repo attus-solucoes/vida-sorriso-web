@@ -10,6 +10,15 @@ const testimonials = [
   { name: "Carlos M.", treatment: "Ortodontia", text: "Meu tratamento com Invisalign superou todas as expectativas. Equipe sempre disponível para tirar dúvidas. Resultado fantástico!", rating: 5 },
 ];
 
+function Avatar({ name }: { name: string }) {
+  const initials = name.split(" ").map(n => n[0]).join("");
+  return (
+    <div className="w-14 h-14 rounded-full gradient-primary flex items-center justify-center shadow-card mx-auto mb-4">
+      <span className="font-heading font-bold text-primary-foreground text-lg">{initials}</span>
+    </div>
+  );
+}
+
 export function TestimonialsSection() {
   const [current, setCurrent] = useState(0);
 
@@ -40,7 +49,8 @@ export function TestimonialsSection() {
             exit={{ opacity: 0, x: -30 }}
             className="glass-card rounded-3xl p-8 md:p-12 shadow-elevated text-center relative"
           >
-            <Quote className="w-12 h-12 text-primary/15 mx-auto mb-6" />
+            <Quote className="w-12 h-12 text-primary/15 mx-auto mb-4" />
+            <Avatar name={testimonials[current].name} />
             <p className="text-lg md:text-xl text-foreground leading-relaxed mb-6 italic">
               "{testimonials[current].text}"
             </p>

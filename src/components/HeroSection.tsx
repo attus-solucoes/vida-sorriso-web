@@ -1,13 +1,22 @@
+import { useRef } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, Star, Users, Award, CalendarCheck } from "lucide-react";
 import heroImage from "@/assets/hero-dental.jpg";
 import { DecorativeBlob } from "./SectionDivider";
+import { useCountUp } from "@/hooks/useCountUp";
 
 export function HeroSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
+  const imageY = useTransform(scrollYProgress, [0, 1], [0, 80]);
+
   return (
-    <section className="relative overflow-hidden gradient-hero">
+    <section ref={sectionRef} className="relative overflow-hidden gradient-hero">
       <DecorativeBlob className="w-[500px] h-[500px] -top-40 -right-40" />
       <DecorativeBlob className="w-[400px] h-[400px] bottom-0 -left-40" />
       <div className="container py-16 md:py-24 lg:py-32 relative">
@@ -46,6 +55,7 @@ export function HeroSection() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.7, delay: 0.2 }}
             className="relative"
+            style={{ y: imageY }}
           >
             <div className="rounded-3xl overflow-hidden shadow-elevated">
               <img
@@ -55,7 +65,6 @@ export function HeroSection() {
                 loading="eager"
               />
             </div>
-            {/* Floating card */}
             <motion.div
               className="absolute -bottom-4 -left-4 md:-left-8 glass-card rounded-2xl p-4 shadow-elevated flex items-center gap-3"
               animate={{ y: [0, -8, 0] }}
@@ -76,12 +85,25 @@ export function HeroSection() {
   );
 }
 
-const stats = [
-  { icon: Award, value: "+18", label: "Anos de Experiência" },
-  { icon: Users, value: "+15.000", label: "Pacientes Atendidos" },
-  { icon: Star, value: "4.9", label: "Avaliação Google" },
-  { icon: CalendarCheck, value: "+30.000", label: "Procedimentos" },
-];
+function StatItem({ icon: Icon, target, prefix = "", suffix = "", label }: { icon: any; target: number; prefix?: string; suffix?: string; label: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const count = useCountUp(target, 2000, ref);
+  return (
+    <motion.div
+      ref={ref}
+      className="text-center"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+    >
+      <Icon className="w-8 h-8 text-accent mx-auto mb-2" />
+      <p className="text-3xl md:text-4xl font-heading font-extrabold text-primary-foreground">
+        {prefix}{count.toLocaleString("pt-BR")}{suffix}
+      </p>
+      <p className="text-sm text-primary-foreground/70 mt-1">{label}</p>
+    </motion.div>
+  );
+}
 
 export function TrustBar() {
   return (
@@ -89,20 +111,10 @@ export function TrustBar() {
       <div className="absolute inset-0 dots-pattern opacity-30" />
       <div className="container relative">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-          {stats.map((s, i) => (
-            <motion.div
-              key={i}
-              className="text-center"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-            >
-              <s.icon className="w-8 h-8 text-accent mx-auto mb-2" />
-              <p className="text-3xl md:text-4xl font-heading font-extrabold text-primary-foreground">{s.value}</p>
-              <p className="text-sm text-primary-foreground/70 mt-1">{s.label}</p>
-            </motion.div>
-          ))}
+          <StatItem icon={Award} target={18} prefix="+" label="Anos de Experiência" />
+          <StatItem icon={Users} target={15000} prefix="+" label="Pacientes Atendidos" />
+          <StatItem icon={Star} target={49} prefix="" suffix="" label="Avaliação Google" />
+          <StatItem icon={CalendarCheck} target={30000} prefix="+" label="Procedimentos" />
         </div>
       </div>
     </section>
