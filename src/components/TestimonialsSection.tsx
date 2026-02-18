@@ -4,11 +4,15 @@ import { Star, ChevronLeft, ChevronRight, Quote } from "lucide-react";
 import { DecorativeBlob } from "./SectionDivider";
 import { testimonials } from "@/config/siteConfig";
 
-function Avatar({ name }: { name: string }) {
+function Avatar({ name, image }: { name: string; image?: string }) {
   const initials = name.split(" ").map(n => n[0]).join("");
   return (
-    <div className="w-14 h-14 rounded-full gradient-primary flex items-center justify-center shadow-card mx-auto mb-4">
-      <span className="font-heading font-bold text-primary-foreground text-lg">{initials}</span>
+    <div className="w-14 h-14 rounded-full gradient-primary flex items-center justify-center shadow-card mx-auto mb-4 overflow-hidden">
+      {image ? (
+        <img src={image} alt={name} className="w-full h-full object-cover" loading="lazy" />
+      ) : (
+        <span className="font-heading font-bold text-primary-foreground text-lg">{initials}</span>
+      )}
     </div>
   );
 }
@@ -20,11 +24,11 @@ export function TestimonialsSection() {
   const next = () => setCurrent((c) => (c === testimonials.length - 1 ? 0 : c + 1));
 
   return (
-    <section className="py-20 md:py-28 bg-muted relative overflow-hidden">
+    <section className="py-14 md:py-20 bg-muted relative overflow-hidden">
       <DecorativeBlob className="w-[500px] h-[500px] top-0 -left-60" />
       <div className="container relative">
         <motion.div
-          className="text-center max-w-2xl mx-auto mb-16"
+          className="text-center max-w-2xl mx-auto mb-10"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -44,7 +48,7 @@ export function TestimonialsSection() {
             className="glass-card rounded-3xl p-8 md:p-12 shadow-elevated text-center relative"
           >
             <Quote className="w-12 h-12 text-primary/15 mx-auto mb-4" />
-            <Avatar name={testimonials[current].name} />
+            <Avatar name={testimonials[current].name} image={testimonials[current].image} />
             <p className="text-lg md:text-xl text-foreground leading-relaxed mb-6 italic">
               "{testimonials[current].text}"
             </p>

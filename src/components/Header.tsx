@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
+import { clinicInfo, getPhoneLink } from "@/config/siteConfig";
 
 const navLinks = [
   { label: "Home", path: "/" },
@@ -48,9 +49,9 @@ export function Header() {
 
         {/* Desktop CTA */}
         <div className="hidden lg:flex items-center gap-4">
-          <a href="tel:+5511999999999" className="flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
+          <a href={getPhoneLink()} className="flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
             <Phone className="w-4 h-4" />
-            (11) 99999-9999
+            {clinicInfo.phone}
           </a>
           <Button asChild className="btn-glow border-0 text-primary-foreground font-heading font-semibold rounded-2xl px-6">
             <Link to="/contato">Agende sua Consulta</Link>

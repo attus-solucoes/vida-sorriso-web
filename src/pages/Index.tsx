@@ -13,7 +13,7 @@ import { CalendarCheck } from "lucide-react";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
 import { DecorativeBlob } from "@/components/SectionDivider";
-import { seo, clinicInfo, getPhoneLink } from "@/config/siteConfig";
+import { seo, clinicInfo, stats, services, getPhoneLink } from "@/config/siteConfig";
 
 const Index = () => {
   return (
@@ -21,6 +21,37 @@ const Index = () => {
       <Helmet>
         <title>{seo.home.title}</title>
         <meta name="description" content={seo.home.description} />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Dentist",
+            "name": `Clínica ${clinicInfo.name}`,
+            "description": seo.home.description,
+            "url": "https://vida-sorriso-web.lovable.app",
+            "telephone": `+${clinicInfo.phoneClean}`,
+            "email": clinicInfo.email,
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": clinicInfo.address.street,
+              "addressLocality": clinicInfo.address.city,
+              "addressRegion": clinicInfo.address.state,
+              "postalCode": clinicInfo.address.zipCode,
+              "addressCountry": "BR"
+            },
+            "geo": { "@type": "GeoCoordinates", "latitude": -23.5631, "longitude": -46.6539 },
+            "openingHoursSpecification": [
+              { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "08:00", "closes": "18:00" },
+              { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "08:00", "closes": "12:00" }
+            ],
+            "aggregateRating": { "@type": "AggregateRating", "ratingValue": stats.googleRating, "reviewCount": stats.googleReviews, "bestRating": 5 },
+            "priceRange": "$$",
+            "hasOfferCatalog": {
+              "@type": "OfferCatalog",
+              "name": "Tratamentos Odontológicos",
+              "itemListElement": services.slice(0, 6).map(s => ({ "@type": "Offer", "itemOffered": { "@type": "Service", "name": s.title, "description": s.shortDesc } }))
+            }
+          })}
+        </script>
       </Helmet>
       <HeroSection />
       <TrustBar />
@@ -33,7 +64,7 @@ const Index = () => {
       <ConveniosSection />
       <LocationSection />
       {/* CTA Final */}
-      <section className="py-20 md:py-28 gradient-primary relative overflow-hidden">
+      <section className="py-14 md:py-20 gradient-primary relative overflow-hidden">
         <div className="absolute inset-0 dots-pattern opacity-20" />
         <DecorativeBlob className="w-[400px] h-[400px] top-0 right-0 !opacity-[0.1]" />
         <div className="container text-center relative">

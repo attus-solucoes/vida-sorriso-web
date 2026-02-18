@@ -16,7 +16,7 @@ import { Phone, Mail, MapPin, Clock, Send, CheckCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { z } from "zod";
 import { DecorativeBlob } from "@/components/SectionDivider";
-import { clinicInfo, services, seo, getPhoneLink, getEmailLink } from "@/config/siteConfig";
+import { clinicInfo, services, seo, getPhoneLink, getEmailLink, getWhatsAppLink } from "@/config/siteConfig";
 
 const contactSchema = z.object({
   name: z.string().trim().min(2, "Nome deve ter pelo menos 2 caracteres").max(100),
@@ -50,8 +50,14 @@ const ContatoPage = () => {
       return;
     }
     setErrors({});
+    
+    // Redirecionar para WhatsApp com dados do formulário
+    const whatsappMsg = `Olá! Gostaria de agendar uma consulta.\n\n*Nome:* ${form.name}\n*Email:* ${form.email}\n*Telefone:* ${form.phone}\n*Serviço:* ${form.service}${form.message ? `\n*Mensagem:* ${form.message}` : ""}`;
+    const whatsappUrl = getWhatsAppLink(whatsappMsg);
+    window.open(whatsappUrl, "_blank");
+    
     setSubmitted(true);
-    toast({ title: "Mensagem enviada!", description: "Retornaremos em breve." });
+    toast({ title: "Redirecionado para WhatsApp!", description: "Continue a conversa por lá." });
   };
 
   const update = (field: string, value: string | boolean) => {
