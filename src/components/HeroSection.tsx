@@ -1,22 +1,16 @@
 import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { ArrowRight, Star, Users, Award, CalendarCheck } from "lucide-react";
 import { useCountUp } from "@/hooks/useCountUp";
 import { clinicInfo, stats, images } from "@/config/siteConfig";
 
 export function HeroSection() {
   const [videoReady, setVideoReady] = useState(false);
-  const sectionRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start start", "end start"],
-  });
-  const imageY = useTransform(scrollYProgress, [0, 1], [0, 80]);
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden bg-[hsl(215_35%_10%)]">
+    <section className="relative overflow-hidden bg-[hsl(215_35%_10%)]">
       {/* Video Background - Desktop */}
       <video
         autoPlay
@@ -91,11 +85,8 @@ export function HeroSection() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.7, delay: 0.2 }}
             className="relative"
-            style={{ y: imageY }}
           >
-            {/* Organic decorative shape behind image */}
-            <div className="absolute -inset-4 organic-blob bg-gradient-to-br from-primary/20 to-secondary/10 blur-sm" />
-            <div className="relative organic-image overflow-hidden border-gradient shadow-elevated">
+            <div className="relative organic-image overflow-hidden border border-white/10 shadow-elevated">
               <img
                 src={images.hero}
                 alt={`Interior moderno da Clínica ${clinicInfo.name} — consultório odontológico com equipamentos de última geração`}
@@ -107,9 +98,10 @@ export function HeroSection() {
 
             {/* Card flutuante - Avaliação Google */}
             <motion.div
-              className="absolute bottom-6 left-6 glass-dark rounded-lg px-3 py-1.5 shadow-elevated flex items-center gap-1.5 border-gradient max-w-fit z-10"
-              animate={{ y: [0, -4, 0] }}
-              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute bottom-6 left-6 bg-black/60 border border-white/10 rounded-lg px-3 py-1.5 shadow-elevated flex items-center gap-1.5 max-w-fit z-10"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.5 }}
             >
               <Star className="w-3.5 h-3.5 text-amber-400 fill-amber-400 shrink-0" />
               <p className="font-heading font-bold text-[11px] text-[hsl(var(--dark-text))] whitespace-nowrap">4.9/5</p>
@@ -117,9 +109,10 @@ export function HeroSection() {
 
             {/* Card flutuante - Pacientes */}
             <motion.div
-              className="absolute bottom-6 right-6 glass-dark rounded-lg px-3 py-1.5 shadow-elevated flex items-center gap-1.5 border-gradient max-w-fit z-10"
-              animate={{ y: [0, -4, 0] }}
-              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
+              className="absolute bottom-6 right-6 bg-black/60 border border-white/10 rounded-lg px-3 py-1.5 shadow-elevated flex items-center gap-1.5 max-w-fit z-10"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.7 }}
             >
               <Users className="w-3.5 h-3.5 text-primary shrink-0" />
               <p className="font-heading font-bold text-[11px] text-[hsl(var(--dark-text))] whitespace-nowrap">+15 mil sorrisos</p>
@@ -129,8 +122,9 @@ export function HeroSection() {
             <motion.div
               className="absolute top-4 left-4 w-16 h-16 flex items-center justify-center shadow-elevated z-10"
               style={{ borderRadius: '60% 40% 50% 50% / 50% 60% 40% 50%' }}
-              animate={{ rotate: [0, 5, -5, 0] }}
-              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
             >
               <div className="w-full h-full gradient-accent flex items-center justify-center" style={{ borderRadius: 'inherit' }}>
                 <div className="text-center">
