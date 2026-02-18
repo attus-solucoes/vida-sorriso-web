@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -5,8 +7,20 @@ import { CalendarCheck, Clock, CheckCircle, Flame } from "lucide-react";
 import { Helmet } from "react-helmet-async";
 import { DecorativeBlob } from "@/components/SectionDivider";
 import { services, seo } from "@/config/siteConfig";
+import { slugify } from "@/lib/utils";
 
 const ServicosPage = () => {
+  const { hash } = useLocation();
+
+  useEffect(() => {
+    if (hash) {
+      const el = document.getElementById(hash.slice(1));
+      if (el) {
+        setTimeout(() => el.scrollIntoView({ behavior: "smooth", block: "center" }), 300);
+      }
+    }
+  }, [hash]);
+
   return (
     <>
       <Helmet>
@@ -15,7 +29,7 @@ const ServicosPage = () => {
       </Helmet>
 
       {/* Hero */}
-      <section className="gradient-hero py-16 md:py-24 relative overflow-hidden">
+      <section className="gradient-hero py-12 md:py-16 relative overflow-hidden">
         <DecorativeBlob className="w-[500px] h-[500px] -top-40 -right-40" />
         <div className="container text-center relative">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
@@ -31,16 +45,17 @@ const ServicosPage = () => {
       </section>
 
       {/* Services List */}
-      <section className="py-20 bg-background">
+      <section className="py-14 bg-background">
         <div className="container space-y-6">
           {services.map((s, i) => (
             <motion.div
               key={i}
+              id={slugify(s.title)}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.05 }}
-              className="group card-premium p-6 md:p-8 grid grid-cols-1 md:grid-cols-[auto_1fr_auto] gap-6 items-center relative overflow-hidden hover:!border-l-4 hover:!border-l-primary transition-all duration-300"
+              className="group card-premium p-6 md:p-8 grid grid-cols-1 md:grid-cols-[280px_1fr_auto] gap-6 items-center relative overflow-hidden hover:!border-l-4 hover:!border-l-primary transition-all duration-300"
             >
               {/* Popular badge */}
               {s.popular && (
@@ -48,9 +63,14 @@ const ServicosPage = () => {
                   <Flame className="w-3 h-3" /> Mais Procurado
                 </div>
               )}
-              <div className="w-16 h-16 rounded-2xl gradient-primary flex items-center justify-center flex-shrink-0 shadow-card group-hover:rotate-[10deg] transition-transform duration-300">
-                <s.icon className="w-8 h-8 text-primary-foreground" />
+
+              {/* Image placeholder */}
+              <div className="w-full h-48 md:h-full rounded-2xl overflow-hidden bg-muted flex items-center justify-center">
+                <div className="w-20 h-20 rounded-2xl gradient-primary flex items-center justify-center shadow-card">
+                  <s.icon className="w-10 h-10 text-primary-foreground" />
+                </div>
               </div>
+
               <div>
                 <h2 className="font-heading font-bold text-xl text-foreground mb-2">{s.title}</h2>
                 <p className="text-muted-foreground mb-3">{s.fullDesc || s.shortDesc}</p>
@@ -67,10 +87,14 @@ const ServicosPage = () => {
                       <Clock className="w-4 h-4" /> Duração: {s.duration}
                     </span>
                   )}
-                  {s.price && (
-                    <span className="font-heading font-bold text-primary">{s.price}</span>
-                  )}
                 </div>
+                {s.price && (
+                  <div className="mt-3">
+                    <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary font-heading font-bold text-sm">
+                      {s.price}
+                    </span>
+                  </div>
+                )}
               </div>
               <Button asChild className="btn-glow border-0 text-primary-foreground font-heading font-semibold self-center rounded-2xl">
                 <Link to="/contato">

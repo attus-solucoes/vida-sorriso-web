@@ -4,16 +4,17 @@ import { ArrowRight } from "lucide-react";
 import { DecorativeBlob } from "./SectionDivider";
 import { services } from "@/config/siteConfig";
 import { Button } from "./ui/button";
+import { slugify } from "@/lib/utils";
 
 export function ServicesSection() {
   const displayedServices = services.slice(0, 6);
 
   return (
-    <section className="py-20 md:py-28 bg-background relative overflow-hidden" id="servicos">
+    <section className="py-16 md:py-20 bg-background relative overflow-hidden" id="servicos">
       <DecorativeBlob className="w-[600px] h-[600px] -top-60 -right-60" />
       <div className="container relative">
         <motion.div
-          className="text-center max-w-2xl mx-auto mb-16"
+          className="text-center max-w-2xl mx-auto mb-10"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -37,8 +38,8 @@ export function ServicesSection() {
               transition={{ delay: i * 0.08 }}
             >
               <Link
-                to="/servicos"
-                className={`group block card-premium p-6 h-full relative transition-shadow duration-300 hover:shadow-elevated ${
+                to={`/servicos#${slugify(s.title)}`}
+                className={`group block card-premium p-6 h-full relative transition-all duration-300 hover:shadow-elevated hover:scale-[1.02] ${
                   s.popular
                     ? "border-primary/30 bg-gradient-to-br from-primary/5 to-secondary/5"
                     : ""
