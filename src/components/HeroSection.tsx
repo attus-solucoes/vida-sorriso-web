@@ -41,11 +41,10 @@ export function HeroSection() {
       {/* Overlay escuro para legibilidade do texto */}
       <div className="absolute inset-0 bg-[hsl(215_35%_10%/0.78)] z-[1]" />
 
-      {/* Organic animated blobs */}
-      <div className="absolute inset-0 overflow-hidden z-[2]">
-        <div className="absolute w-[700px] h-[700px] -top-48 -left-48 organic-blob bg-primary/15 blur-[120px] animate-[float-slow_18s_ease-in-out_infinite]" />
-        <div className="absolute w-[500px] h-[500px] -bottom-32 -right-32 organic-blob-2 bg-secondary/12 blur-[100px] animate-[float-slow-reverse_22s_ease-in-out_infinite]" />
-        <div className="absolute w-[350px] h-[350px] top-1/3 left-1/2 -translate-x-1/2 organic-blob-3 bg-accent/[0.06] blur-[80px] animate-[float-slow_25s_ease-in-out_infinite]" />
+      {/* Subtle static gradient overlays - no blur animations for GPU performance */}
+      <div className="absolute inset-0 z-[2] pointer-events-none">
+        <div className="absolute w-[600px] h-[600px] -top-48 -left-48 rounded-full bg-primary/10 opacity-60" />
+        <div className="absolute w-[400px] h-[400px] -bottom-32 -right-32 rounded-full bg-secondary/8 opacity-50" />
       </div>
 
       <div className="container py-14 md:py-20 lg:py-28 relative z-10">
@@ -118,7 +117,7 @@ export function HeroSection() {
 
             {/* Card flutuante - Pacientes */}
             <motion.div
-              className="absolute top-6 right-6 glass-dark rounded-lg px-3 py-1.5 shadow-elevated flex items-center gap-1.5 border-gradient max-w-fit z-10"
+              className="absolute bottom-6 right-6 glass-dark rounded-lg px-3 py-1.5 shadow-elevated flex items-center gap-1.5 border-gradient max-w-fit z-10"
               animate={{ y: [0, -4, 0] }}
               transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
             >
