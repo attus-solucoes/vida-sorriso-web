@@ -27,7 +27,8 @@ export function LocationSection() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <motion.div
-            className="rounded-3xl overflow-hidden shadow-elevated"
+            className="overflow-hidden shadow-elevated"
+            style={{ borderRadius: '30% 70% 70% 30% / 30% 30% 70% 70%' }}
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -52,7 +53,7 @@ export function LocationSection() {
           >
             {locationItems.map((item, i) => (
               <div key={i} className="card-premium flex items-start gap-4 p-5">
-                <div className="w-11 h-11 rounded-2xl gradient-primary flex items-center justify-center flex-shrink-0 shadow-card">
+                <div className="w-11 h-11 organic-blob gradient-primary flex items-center justify-center flex-shrink-0 shadow-card glow-halo">
                   <item.icon className="w-5 h-5 text-primary-foreground" />
                 </div>
                 <div>
@@ -63,6 +64,13 @@ export function LocationSection() {
             ))}
           </motion.div>
         </div>
+      </div>
+
+      {/* Wave to dark CTA section */}
+      <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-10">
+        <svg viewBox="0 0 1200 80" preserveAspectRatio="none" className="w-full h-[40px] md:h-[60px]">
+          <path d="M0,50 C200,10 500,70 800,30 C1000,10 1150,60 1200,30 L1200,80 L0,80 Z" fill="hsl(215, 35%, 11%)" />
+        </svg>
       </div>
     </section>
   );

@@ -14,9 +14,10 @@ const SobrePage = () => {
         <meta name="description" content={seo.about.description} />
       </Helmet>
 
-      {/* Hero - Dark mesh */}
-      <section className="bg-dark-section noise-overlay py-16 md:py-24 relative overflow-hidden">
-        <div className="absolute w-[400px] h-[400px] -top-40 -left-40 rounded-full bg-primary/10 blur-[100px]" />
+      {/* Hero - Dark mesh hero variant */}
+      <section className="bg-dark-hero noise-overlay py-16 md:py-24 relative overflow-hidden">
+        <div className="absolute w-[500px] h-[500px] -top-40 -left-40 organic-blob bg-primary/12 blur-[120px]" />
+        <div className="absolute w-[300px] h-[300px] bottom-0 right-0 organic-blob-2 bg-[hsl(260_60%_50%/0.08)] blur-[100px]" />
         <div className="container text-center relative z-10">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
             <span className="inline-block px-5 py-2 rounded-full bg-primary/15 border border-primary/20 text-primary text-sm font-semibold mb-4">Nossa História</span>
@@ -28,6 +29,12 @@ const SobrePage = () => {
             </p>
           </motion.div>
         </div>
+        {/* Wave */}
+        <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-20">
+          <svg viewBox="0 0 1200 80" preserveAspectRatio="none" className="w-full h-[40px] md:h-[60px]">
+            <path d="M0,30 C250,70 500,10 750,50 C950,80 1100,20 1200,40 L1200,80 L0,80 Z" fill="hsl(210, 20%, 99%)" />
+          </svg>
+        </div>
       </section>
 
       {/* Story */}
@@ -38,10 +45,12 @@ const SobrePage = () => {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="relative">
-              <div className="absolute -bottom-4 -right-4 w-full h-full rounded-3xl bg-gradient-to-br from-primary/15 to-secondary/10" />
-              <div className="relative rounded-3xl overflow-hidden shadow-elevated">
+              <div className="absolute -bottom-5 -right-5 w-full h-full organic-blob bg-gradient-to-br from-primary/15 to-secondary/10" />
+              <div className="relative organic-image overflow-hidden shadow-elevated">
                 <img src={images.aboutTeam} alt={`Equipe da Clínica ${clinicInfo.name}`} className="w-full h-[400px] object-cover hover:scale-105 transition-transform duration-500" loading="lazy" />
               </div>
+              {/* Timeline dot */}
+              <div className="hidden lg:block absolute top-1/2 -right-[calc(50%+8px)] w-4 h-4 rounded-full gradient-primary shadow-glow" />
             </motion.div>
             <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
               <h2 className="text-3xl md:text-4xl font-heading font-extrabold text-foreground mb-6">Nossa <span className="text-gradient">História</span></h2>
@@ -54,7 +63,7 @@ const SobrePage = () => {
               <div className="grid grid-cols-2 gap-4">
                 {certifications.map((item, i) => (
                   <div key={i} className="glass-card rounded-2xl flex items-center gap-3 p-3.5 border-gradient">
-                    <div className="w-9 h-9 rounded-xl gradient-primary flex items-center justify-center flex-shrink-0">
+                    <div className="w-9 h-9 organic-blob gradient-primary flex items-center justify-center flex-shrink-0">
                       <item.icon className="w-4 h-4 text-primary-foreground" />
                     </div>
                     <span className="text-sm font-semibold text-foreground">{item.text}</span>
@@ -66,9 +75,9 @@ const SobrePage = () => {
         </div>
       </section>
 
-      {/* Team - Dark section */}
-      <section className="py-20 bg-dark-section noise-overlay relative overflow-hidden">
-        <div className="absolute w-[500px] h-[500px] -bottom-60 -right-60 rounded-full bg-primary/6 blur-[120px]" />
+      {/* Team - Dark deep section */}
+      <section className="py-20 bg-dark-deep noise-overlay relative overflow-hidden">
+        <div className="absolute w-[500px] h-[500px] -bottom-60 -right-60 organic-blob bg-primary/8 blur-[130px]" />
         <div className="container relative z-10">
           <motion.div className="text-center mb-10" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-extrabold text-[hsl(var(--dark-text))] mb-4">
@@ -95,7 +104,7 @@ const SobrePage = () => {
                     </span>
                   )}
                   {/* Hover overlay with bio */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[hsl(215_35%_12%/0.9)] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                  <div className="absolute inset-0 bg-gradient-to-t from-[hsl(215_35%_12%/0.95)] via-[hsl(215_35%_12%/0.5)] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
                     <p className="text-xs text-[hsl(var(--dark-text-muted))]">{member.specialty} · {member.crm}</p>
                   </div>
                 </div>
@@ -106,6 +115,13 @@ const SobrePage = () => {
               </motion.div>
             ))}
           </div>
+        </div>
+
+        {/* Wave to light */}
+        <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-20">
+          <svg viewBox="0 0 1200 80" preserveAspectRatio="none" className="w-full h-[40px] md:h-[60px]">
+            <path d="M0,50 C300,10 500,70 800,30 C1000,10 1150,60 1200,30 L1200,80 L0,80 Z" fill="hsl(210, 20%, 99%)" />
+          </svg>
         </div>
       </section>
 

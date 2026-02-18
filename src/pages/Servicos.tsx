@@ -28,8 +28,8 @@ const ServicosPage = () => {
       </Helmet>
 
       {/* Hero - Dark mesh */}
-      <section className="bg-dark-section noise-overlay py-12 md:py-16 relative overflow-hidden">
-        <div className="absolute w-[500px] h-[500px] -top-40 -right-40 rounded-full bg-primary/10 blur-[100px]" />
+      <section className="bg-dark-hero noise-overlay py-12 md:py-16 relative overflow-hidden">
+        <div className="absolute w-[500px] h-[500px] -top-40 -right-40 organic-blob bg-primary/12 blur-[120px]" />
         <div className="container text-center relative z-10">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
             <span className="inline-block px-5 py-2 rounded-full bg-primary/15 border border-primary/20 text-primary text-sm font-semibold mb-4">Tratamentos</span>
@@ -40,6 +40,12 @@ const ServicosPage = () => {
               Oferecemos tratamentos completos de odontologia com tecnologia avançada e profissionais altamente qualificados.
             </p>
           </motion.div>
+        </div>
+        {/* Wave */}
+        <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-20">
+          <svg viewBox="0 0 1200 80" preserveAspectRatio="none" className="w-full h-[40px] md:h-[60px]">
+            <path d="M0,40 C300,80 600,0 900,50 C1050,70 1150,30 1200,40 L1200,80 L0,80 Z" fill="hsl(210, 20%, 99%)" />
+          </svg>
         </div>
       </section>
 
@@ -54,10 +60,10 @@ const ServicosPage = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.05 }}
-              className="group card-premium p-6 md:p-8 grid grid-cols-1 md:grid-cols-[280px_1fr_auto] gap-6 items-center relative overflow-hidden hover:border-primary/30 transition-all duration-300"
+              className="group card-premium p-6 md:p-8 grid grid-cols-1 md:grid-cols-[200px_1fr_auto] gap-6 items-center relative overflow-hidden hover:border-primary/30 transition-all duration-300"
             >
               {/* Number decoration */}
-              <span className="absolute top-4 left-6 text-7xl font-heading font-extrabold text-primary/[0.04] select-none pointer-events-none">
+              <span className="absolute top-4 left-6 text-8xl font-heading font-extrabold text-primary/[0.06] select-none pointer-events-none">
                 {String(i + 1).padStart(2, '0')}
               </span>
 
@@ -67,8 +73,8 @@ const ServicosPage = () => {
                 </div>
               )}
 
-              <div className="w-full h-48 md:h-full rounded-2xl overflow-hidden bg-muted flex items-center justify-center">
-                <div className="w-20 h-20 rounded-full gradient-primary flex items-center justify-center shadow-glow">
+              <div className="w-full h-48 md:h-full rounded-2xl overflow-hidden flex items-center justify-center bg-gradient-to-br from-primary/5 to-secondary/5">
+                <div className="w-20 h-20 organic-blob gradient-primary flex items-center justify-center shadow-glow glow-halo">
                   <s.icon className="w-10 h-10 text-primary-foreground" />
                 </div>
               </div>
@@ -92,7 +98,7 @@ const ServicosPage = () => {
                 </div>
                 {s.price && (
                   <div className="mt-3">
-                    <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary font-heading font-bold text-sm">
+                    <span className="inline-block px-4 py-1.5 rounded-full bg-gradient-to-r from-primary/10 to-secondary/10 text-primary font-heading font-bold text-sm border border-primary/20">
                       {s.price}
                     </span>
                   </div>

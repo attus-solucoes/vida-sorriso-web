@@ -79,10 +79,10 @@ function BeforeAfterSlider({ item }: { item: typeof transformations[0] }) {
       {/* Slider line */}
       <div
         className="absolute top-0 bottom-0 w-0.5 z-10"
-        style={{ left: `${position}%`, background: 'linear-gradient(to bottom, hsl(199 89% 48%), hsl(38 92% 50%))' }}
+        style={{ left: `${position}%`, background: 'linear-gradient(to bottom, hsl(168 76% 42%), hsl(38 92% 50%))' }}
       >
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 md:w-10 md:h-10 rounded-full bg-white shadow-[0_0_20px_hsl(199_89%_48%/0.4)] flex items-center justify-center">
-          <GripVertical className="w-5 h-5 text-primary" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 md:w-10 md:h-10 rounded-full bg-white shadow-[0_0_20px_hsl(168_76%_42%/0.4)] flex items-center justify-center">
+          <GripVertical className="w-5 h-5 text-secondary" />
         </div>
       </div>
     </div>
@@ -91,10 +91,10 @@ function BeforeAfterSlider({ item }: { item: typeof transformations[0] }) {
 
 export function TransformationsSection() {
   return (
-    <section className="py-16 md:py-24 bg-dark-section noise-overlay relative overflow-hidden">
-      {/* Glow orbs */}
-      <div className="absolute w-[400px] h-[400px] -bottom-40 -left-40 rounded-full bg-primary/8 blur-[100px]" />
-      <div className="absolute w-[300px] h-[300px] top-20 -right-20 rounded-full bg-secondary/6 blur-[80px]" />
+    <section className="py-16 md:py-24 bg-dark-teal noise-overlay relative overflow-hidden">
+      {/* Intensified organic glow orbs */}
+      <div className="absolute w-[500px] h-[500px] -bottom-40 -left-40 organic-blob bg-secondary/15 blur-[120px] animate-[float-slow_20s_ease-in-out_infinite]" />
+      <div className="absolute w-[400px] h-[400px] top-20 -right-20 organic-blob-2 bg-primary/12 blur-[100px]" />
 
       <div className="container relative z-10">
         <motion.div
@@ -103,7 +103,7 @@ export function TransformationsSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <span className="inline-block px-5 py-2 rounded-full bg-primary/15 border border-primary/20 text-primary text-sm font-semibold mb-4">
+          <span className="inline-block px-5 py-2 rounded-full bg-secondary/15 border border-secondary/20 text-secondary text-sm font-semibold mb-4">
             Resultados
           </span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-extrabold text-[hsl(var(--dark-text))] mb-4">
@@ -122,12 +122,12 @@ export function TransformationsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="card-dark overflow-hidden group"
+              className="card-dark overflow-hidden group hover:shadow-[0_20px_50px_-12px_hsl(168_76%_42%/0.2)]"
             >
               <BeforeAfterSlider item={item} />
               <div className="p-5">
                 <h3 className="font-heading font-bold text-[hsl(var(--dark-text))] mb-1">
-                  {item.treatment}
+                  <span className="text-gradient">{item.treatment}</span>
                 </h3>
                 <p className="text-sm text-[hsl(var(--dark-text-muted))]">
                   Tempo de tratamento: {item.duration}
@@ -149,6 +149,13 @@ export function TransformationsSection() {
             </Link>
           </Button>
         </motion.div>
+      </div>
+
+      {/* Wave transition to light section */}
+      <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-20">
+        <svg viewBox="0 0 1200 80" preserveAspectRatio="none" className="w-full h-[40px] md:h-[60px]">
+          <path d="M0,40 C250,80 450,10 700,50 C900,80 1100,20 1200,40 L1200,80 L0,80 Z" fill="hsl(210, 25%, 96%)" />
+        </svg>
       </div>
     </section>
   );

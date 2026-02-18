@@ -63,10 +63,12 @@ const Index = () => {
       <ConveniosSection />
       <LocationSection />
 
-      {/* CTA Final - Dark premium */}
-      <section className="py-16 md:py-24 bg-dark-section noise-overlay relative overflow-hidden">
-        <div className="absolute w-[500px] h-[500px] top-0 right-0 rounded-full bg-primary/8 blur-[120px]" />
-        <div className="absolute w-[400px] h-[400px] bottom-0 left-0 rounded-full bg-secondary/6 blur-[100px]" />
+      {/* CTA Final - Warm dark premium */}
+      <section className="py-16 md:py-24 bg-dark-warm noise-overlay relative overflow-hidden">
+        {/* Organic glowing orbs */}
+        <div className="absolute w-[600px] h-[600px] top-0 right-0 organic-blob bg-primary/15 blur-[130px] animate-[float-slow_18s_ease-in-out_infinite]" />
+        <div className="absolute w-[400px] h-[400px] bottom-0 left-0 organic-blob-2 bg-accent/[0.06] blur-[100px]" />
+
         <div className="container text-center relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -82,7 +84,7 @@ const Index = () => {
             <p className="text-[hsl(var(--dark-text-muted))] text-lg mb-8 max-w-xl mx-auto">
               Agende sua avaliação gratuita e descubra o tratamento ideal para você.
             </p>
-            <Button asChild size="lg" className="btn-glow btn-shimmer border-0 text-primary-foreground font-heading font-bold text-lg shadow-elevated hover:scale-105 transition-all duration-300 rounded-2xl h-14 px-10">
+            <Button asChild size="lg" className="btn-glow btn-shimmer border-0 text-primary-foreground font-heading font-bold text-lg shadow-elevated hover:scale-105 transition-all duration-300 rounded-2xl h-14 px-10 animate-[pulse-glow_3s_ease-in-out_infinite]">
               <Link to="/contato">
                 Agende sua Consulta <CalendarCheck className="ml-2 w-5 h-5" />
               </Link>
