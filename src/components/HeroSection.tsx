@@ -1,13 +1,18 @@
 import { useRef } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, Star, Users, Award, CalendarCheck } from "lucide-react";
 import { useCountUp } from "@/hooks/useCountUp";
 import { clinicInfo, stats, images } from "@/config/siteConfig";
 
 export function HeroSection() {
   const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
+  const imageY = useTransform(scrollYProgress, [0, 1], [0, 80]);
 
   return (
     <section ref={sectionRef} className="relative overflow-hidden bg-[hsl(215_35%_10%)]">
@@ -42,48 +47,114 @@ export function HeroSection() {
       </div>
 
       <div className="container py-14 md:py-20 lg:py-28 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          className="max-w-3xl"
-        >
-          <span className="inline-block px-5 py-2 rounded-full bg-primary/15 border border-primary/20 text-primary text-sm font-semibold mb-6">
-            ✨ Excelência em Odontologia
-          </span>
-          <h1 className="text-4xl md:text-5xl lg:text-7xl font-heading font-extrabold leading-[1.05] text-[hsl(var(--dark-text))] mb-6">
-            Seu sorriso merece{" "}
-            <span className="relative inline-block">
-              <span className="text-gradient">cuidado de excelência</span>
-              <span className="absolute -bottom-2 left-0 w-full h-1 rounded-full bg-gradient-to-r from-primary to-secondary opacity-60" />
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+          >
+            <span className="inline-block px-5 py-2 rounded-full bg-primary/15 border border-primary/20 text-primary text-sm font-semibold mb-6">
+              ✨ Excelência em Odontologia
             </span>
-          </h1>
-          <p className="text-lg md:text-xl text-[hsl(var(--dark-text-muted))] leading-relaxed mb-8 max-w-2xl font-light">
-            Com mais de {stats.yearsExperience} anos de experiência, a Clínica {clinicInfo.name} combina tecnologia de ponta com atendimento humanizado.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4">
-            <Button asChild size="lg" className="btn-glow btn-shimmer border-0 text-primary-foreground font-heading font-semibold text-base rounded-2xl h-14 px-10">
-              <Link to="/contato">
-                Agende sua Consulta <CalendarCheck className="ml-2 w-5 h-5" />
-              </Link>
-            </Button>
-            <Button asChild variant="outline" size="lg" className="font-heading font-semibold text-base border-white/40 text-white hover:bg-white/10 rounded-2xl h-14 px-8 backdrop-blur-sm">
-              <Link to="/servicos">
-                Nossos Tratamentos <ArrowRight className="ml-2 w-5 h-5" />
-              </Link>
-            </Button>
-          </div>
-          {/* Prova social inline */}
-          <div className="flex flex-wrap items-center gap-3 mt-8 text-sm">
-            <div className="flex items-center gap-1.5">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
-              ))}
-              <span className="font-bold text-[hsl(var(--dark-text))] ml-1">{stats.googleRating}/5</span>
-              <span className="text-[hsl(var(--dark-text-muted))]">({stats.googleReviews}+ avaliações)</span>
+            <h1 className="text-4xl md:text-5xl lg:text-7xl font-heading font-extrabold leading-[1.05] text-[hsl(var(--dark-text))] mb-6">
+              Seu sorriso merece{" "}
+              <span className="relative inline-block">
+                <span className="text-gradient">cuidado de excelência</span>
+                <span className="absolute -bottom-2 left-0 w-full h-1 rounded-full bg-gradient-to-r from-primary to-secondary opacity-60" />
+              </span>
+            </h1>
+            <p className="text-lg md:text-xl text-[hsl(var(--dark-text-muted))] leading-relaxed mb-8 max-w-lg font-light">
+              Com mais de {stats.yearsExperience} anos de experiência, a Clínica {clinicInfo.name} combina tecnologia de ponta com atendimento humanizado.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Button asChild size="lg" className="btn-glow btn-shimmer border-0 text-primary-foreground font-heading font-semibold text-base rounded-2xl h-14 px-10">
+                <Link to="/contato">
+                  Agende sua Consulta <CalendarCheck className="ml-2 w-5 h-5" />
+                </Link>
+              </Button>
+              <Button asChild variant="outline" size="lg" className="font-heading font-semibold text-base border-[hsl(var(--dark-text-muted)/0.2)] text-[hsl(var(--dark-text))] hover:bg-[hsl(0_0%_100%/0.05)] rounded-2xl h-14 px-8">
+                <Link to="/servicos">
+                  Nossos Tratamentos <ArrowRight className="ml-2 w-5 h-5" />
+                </Link>
+              </Button>
             </div>
-          </div>
-        </motion.div>
+            {/* Prova social inline */}
+            <div className="flex flex-wrap items-center gap-3 mt-8 text-sm">
+              <div className="flex items-center gap-1.5">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
+                ))}
+                <span className="font-bold text-[hsl(var(--dark-text))] ml-1">{stats.googleRating}/5</span>
+                <span className="text-[hsl(var(--dark-text-muted))]">({stats.googleReviews}+ avaliações)</span>
+              </div>
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+            className="relative"
+            style={{ y: imageY }}
+          >
+            {/* Organic decorative shape behind image */}
+            <div className="absolute -inset-4 organic-blob bg-gradient-to-br from-primary/20 to-secondary/10 blur-sm" />
+            <div className="relative organic-image overflow-hidden border-gradient shadow-elevated">
+              <img
+                src={images.hero}
+                alt={`Interior moderno da Clínica ${clinicInfo.name} — consultório odontológico com equipamentos de última geração`}
+                className="w-full h-[350px] md:h-[480px] object-cover"
+                loading="eager"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[hsl(215_35%_12%/0.4)] to-transparent" />
+            </div>
+
+            {/* Card flutuante - Avaliação Google */}
+            <motion.div
+              className="absolute -bottom-4 -left-4 md:-left-8 glass-dark rounded-2xl p-4 shadow-elevated flex items-center gap-3 border-gradient"
+              animate={{ y: [0, -8, 0] }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <div className="w-11 h-11 rounded-2xl gradient-accent flex items-center justify-center">
+                <Star className="w-5 h-5 text-accent-foreground" />
+              </div>
+              <div>
+                <p className="font-heading font-bold text-sm text-[hsl(var(--dark-text))]">{stats.googleRating}/5 Estrelas</p>
+                <p className="text-xs text-[hsl(var(--dark-text-muted))]">+{stats.googleReviews} avaliações</p>
+              </div>
+            </motion.div>
+
+            {/* Card flutuante - Anos */}
+            <motion.div
+              className="absolute -top-4 -right-4 md:-right-8 glass-dark rounded-2xl p-4 shadow-elevated flex items-center gap-3 border-gradient"
+              animate={{ y: [0, -8, 0] }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
+            >
+              <div className="w-11 h-11 rounded-2xl bg-primary/20 flex items-center justify-center">
+                <Award className="w-5 h-5 text-primary" />
+              </div>
+              <div>
+                <p className="font-heading font-bold text-sm text-[hsl(var(--dark-text))]">+{stats.yearsExperience} anos</p>
+                <p className="text-xs text-[hsl(var(--dark-text-muted))]">de excelência</p>
+              </div>
+            </motion.div>
+
+            {/* Badge selo with wavy border */}
+            <motion.div
+              className="absolute top-6 left-6 w-20 h-20 flex items-center justify-center shadow-elevated"
+              style={{ borderRadius: '60% 40% 50% 50% / 50% 60% 40% 50%' }}
+              animate={{ rotate: [0, 5, -5, 0] }}
+              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <div className="w-full h-full gradient-accent flex items-center justify-center" style={{ borderRadius: 'inherit' }}>
+                <div className="text-center">
+                  <p className="text-[10px] font-heading font-extrabold text-accent-foreground leading-tight">Avaliação</p>
+                  <p className="text-[10px] font-heading font-bold text-accent-foreground leading-tight">Gratuita</p>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        </div>
       </div>
 
       {/* Wave transition to light section */}
