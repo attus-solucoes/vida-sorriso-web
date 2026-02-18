@@ -30,7 +30,7 @@ export function Header() {
         </Link>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-8">
+        <nav className="hidden lg:flex items-center gap-8">
           {navLinks.map((link) => (
             <Link
               key={link.path}
@@ -47,7 +47,7 @@ export function Header() {
         </nav>
 
         {/* Desktop CTA */}
-        <div className="hidden md:flex items-center gap-4">
+        <div className="hidden lg:flex items-center gap-4">
           <a href="tel:+5511999999999" className="flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
             <Phone className="w-4 h-4" />
             (11) 99999-9999
@@ -59,7 +59,7 @@ export function Header() {
 
         {/* Mobile toggle */}
         <button
-          className="md:hidden p-2 text-foreground"
+          className="lg:hidden p-2 text-foreground"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="Toggle menu"
         >
@@ -74,7 +74,7 @@ export function Header() {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            className="md:hidden overflow-hidden glass border-b border-border/30"
+            className="lg:hidden overflow-hidden glass border-b border-border/30"
           >
             <nav className="container py-4 flex flex-col gap-3">
               {navLinks.map((link) => (
