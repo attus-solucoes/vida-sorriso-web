@@ -16,6 +16,8 @@ import lentesAntes from "@/assets/lentes-antes.png";
 import lentesDepois from "@/assets/lentes-depois.png";
 import clareamentoAntes from "@/assets/clareamento-antes.jpeg";
 import clareamentoDepois from "@/assets/clareamento-depois.jpeg";
+import ortodontiaAntes from "@/assets/ortodontia-antes.png";
+import ortodontiaDepois from "@/assets/ortodontia-depois.png";
 
 // =====================================================
 // 🏢 DADOS DA CLÍNICA
@@ -369,10 +371,10 @@ export const transformations: Transformation[] = [
     afterColor: "hsl(168 60% 90%)",
   },
   {
-    treatment: "Implantes Dentários",
-    duration: "3 meses",
-    beforeImage: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=600&q=80",
-    afterImage: "https://images.unsplash.com/photo-1629909615184-74f495363b67?w=600&q=80",
+    treatment: "Ortodontia / Invisalign",
+    duration: "12 a 24 meses",
+    beforeImage: ortodontiaAntes,
+    afterImage: ortodontiaDepois,
     beforeColor: "hsl(0 10% 78%)",
     afterColor: "hsl(199 70% 90%)",
   },
