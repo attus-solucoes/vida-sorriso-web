@@ -355,14 +355,6 @@ export interface Transformation {
 
 export const transformations: Transformation[] = [
   {
-    treatment: "Lentes de Contato",
-    duration: "2 semanas",
-    beforeImage: lentesAntes,
-    afterImage: lentesDepois,
-    beforeColor: "hsl(38 30% 75%)",
-    afterColor: "hsl(199 89% 92%)",
-  },
-  {
     treatment: "Clareamento Dental",
     duration: "1 sessão",
     beforeImage: clareamentoAntes,
@@ -377,6 +369,14 @@ export const transformations: Transformation[] = [
     afterImage: ortodontiaDepois,
     beforeColor: "hsl(0 10% 78%)",
     afterColor: "hsl(199 70% 90%)",
+  },
+  {
+    treatment: "Lentes de Contato",
+    duration: "2 semanas",
+    beforeImage: lentesAntes,
+    afterImage: lentesDepois,
+    beforeColor: "hsl(38 30% 75%)",
+    afterColor: "hsl(199 89% 92%)",
   },
 ];
 
