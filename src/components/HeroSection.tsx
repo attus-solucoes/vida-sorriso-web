@@ -19,7 +19,7 @@ export function HeroSection() {
     <section ref={sectionRef} className="relative overflow-hidden gradient-hero">
       <DecorativeBlob className="w-[500px] h-[500px] -top-40 -right-40" />
       <DecorativeBlob className="w-[400px] h-[400px] bottom-0 -left-40" />
-      <div className="container py-16 md:py-24 lg:py-32 relative">
+      <div className="container py-10 md:py-16 lg:py-20 relative">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}

@@ -1,24 +1,28 @@
 import { useState, useEffect } from "react";
 import { Phone, X } from "lucide-react";
 
+const STORAGE_KEY = "emergency-bar-closed-at";
+const EXPIRY_MS = 24 * 60 * 60 * 1000; // 24h
+
 export function EmergencyBar() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    if (sessionStorage.getItem("emergency-bar-closed") !== "1") {
+    const closedAt = localStorage.getItem(STORAGE_KEY);
+    if (!closedAt || Date.now() - Number(closedAt) > EXPIRY_MS) {
       setVisible(true);
     }
   }, []);
 
   const close = () => {
     setVisible(false);
-    sessionStorage.setItem("emergency-bar-closed", "1");
+    localStorage.setItem(STORAGE_KEY, String(Date.now()));
   };
 
   if (!visible) return null;
 
   return (
-    <div className="bg-destructive text-destructive-foreground text-center text-sm py-2.5 px-4 relative z-[60]">
+    <div className="sticky top-0 z-[60] bg-destructive text-destructive-foreground text-center text-sm py-2.5 px-4">
       <div className="container flex items-center justify-center gap-2 flex-wrap">
         <Phone className="w-4 h-4 animate-pulse" />
         <span className="font-medium">
