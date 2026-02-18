@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
-import { WaveDivider } from "./SectionDivider";
 import { clinicInfo, quickLinks, convenios, getActiveSocials, getPhoneLink, getEmailLink } from "@/config/siteConfig";
 
 export function Footer() {
@@ -8,9 +7,11 @@ export function Footer() {
   
   return (
     <footer className="relative">
-      <WaveDivider className="text-foreground -mb-px" />
-      <div className="bg-foreground text-background">
-        <div className="container py-16">
+      {/* Gradient separator line */}
+      <div className="h-px bg-gradient-to-r from-transparent via-primary to-transparent" />
+
+      <div className="bg-dark-section noise-overlay">
+        <div className="container py-16 relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
             {/* Brand */}
             <div className="lg:col-span-2">
@@ -18,28 +19,28 @@ export function Footer() {
                 <div className="w-10 h-10 rounded-2xl gradient-primary flex items-center justify-center">
                   <span className="text-primary-foreground font-heading font-extrabold text-lg">{clinicInfo.shortName}</span>
                 </div>
-                <span className="font-heading font-extrabold text-lg">{clinicInfo.name}</span>
+                <span className="font-heading font-extrabold text-lg text-[hsl(var(--dark-text))]">{clinicInfo.name}</span>
               </div>
-              <p className="text-background/60 text-sm leading-relaxed mb-6">
+              <p className="text-[hsl(var(--dark-text-muted))] text-sm leading-relaxed mb-6">
                 Clínica odontológica em {clinicInfo.address.city} transformando sorrisos com excelência desde {clinicInfo.foundedYear}.
               </p>
               <div className="flex gap-3 mb-4">
                 {activeSocials.map(({ name, url, icon: Icon }) => (
-                  <a key={name} href={url} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-2xl bg-background/10 flex items-center justify-center hover:bg-primary hover:scale-110 transition-all duration-300" aria-label={name}>
+                  <a key={name} href={url} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-2xl bg-[hsl(0_0%_100%/0.05)] border border-[hsl(0_0%_100%/0.08)] flex items-center justify-center text-[hsl(var(--dark-text-muted))] hover:bg-primary hover:text-primary-foreground hover:scale-110 transition-all duration-300" aria-label={name}>
                     <Icon className="w-4 h-4" />
                   </a>
                 ))}
               </div>
-              <p className="text-xs text-background/40">ISO 9001 · ANVISA · CRO-SP</p>
+              <p className="text-xs text-[hsl(var(--dark-text-muted)/0.5)]">ISO 9001 · ANVISA · CRO-SP</p>
             </div>
 
             {/* Links */}
             <div>
-              <h4 className="font-heading font-semibold text-base mb-4">Tratamentos</h4>
+              <h4 className="font-heading font-semibold text-base text-[hsl(var(--dark-text))] mb-4">Tratamentos</h4>
               <ul className="space-y-2.5">
                 {quickLinks.map((link) => (
                   <li key={link.label}>
-                    <Link to={link.path} className="text-sm text-background/60 hover:text-secondary transition-colors duration-300">
+                    <Link to={link.path} className="text-sm text-[hsl(var(--dark-text-muted))] hover:text-primary transition-colors duration-300 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-px after:bg-primary after:scale-x-0 after:origin-left after:transition-transform after:duration-300 hover:after:scale-x-100">
                       {link.label}
                     </Link>
                   </li>
@@ -49,10 +50,10 @@ export function Footer() {
 
             {/* Convênios */}
             <div>
-              <h4 className="font-heading font-semibold text-base mb-4">Convênios</h4>
+              <h4 className="font-heading font-semibold text-base text-[hsl(var(--dark-text))] mb-4">Convênios</h4>
               <ul className="space-y-2.5">
                 {convenios.map((convenio) => (
-                  <li key={convenio} className="text-sm text-background/60">
+                  <li key={convenio} className="text-sm text-[hsl(var(--dark-text-muted))]">
                     {convenio}
                   </li>
                 ))}
@@ -61,30 +62,30 @@ export function Footer() {
 
             {/* Contact & Hours */}
             <div>
-              <h4 className="font-heading font-semibold text-base mb-4">Contato</h4>
-              <ul className="space-y-2.5 text-sm text-background/60">
-                <li><a href={getPhoneLink()} className="flex items-center gap-2 hover:text-secondary transition-colors duration-300"><Phone className="w-4 h-4 text-secondary" /> {clinicInfo.phone}</a></li>
-                <li><a href={getEmailLink()} className="flex items-center gap-2 hover:text-secondary transition-colors duration-300"><Mail className="w-4 h-4 text-secondary" /> {clinicInfo.email}</a></li>
-                <li className="flex items-start gap-2"><MapPin className="w-4 h-4 text-secondary mt-0.5" /> {clinicInfo.address.street}<br />{clinicInfo.address.city} - {clinicInfo.address.state}</li>
+              <h4 className="font-heading font-semibold text-base text-[hsl(var(--dark-text))] mb-4">Contato</h4>
+              <ul className="space-y-2.5 text-sm text-[hsl(var(--dark-text-muted))]">
+                <li><a href={getPhoneLink()} className="flex items-center gap-2 hover:text-primary transition-colors duration-300"><Phone className="w-4 h-4 text-primary" /> {clinicInfo.phone}</a></li>
+                <li><a href={getEmailLink()} className="flex items-center gap-2 hover:text-primary transition-colors duration-300"><Mail className="w-4 h-4 text-primary" /> {clinicInfo.email}</a></li>
+                <li className="flex items-start gap-2"><MapPin className="w-4 h-4 text-primary mt-0.5" /> {clinicInfo.address.street}<br />{clinicInfo.address.city} - {clinicInfo.address.state}</li>
               </ul>
-              <h4 className="font-heading font-semibold text-base mb-3 mt-6">Horários</h4>
-              <ul className="space-y-2 text-sm text-background/60">
-                <li className="flex items-center gap-2"><Clock className="w-4 h-4 text-secondary" /> {clinicInfo.hours.weekdays}</li>
-                <li className="flex items-center gap-2"><Clock className="w-4 h-4 text-secondary" /> {clinicInfo.hours.saturday}</li>
+              <h4 className="font-heading font-semibold text-base text-[hsl(var(--dark-text))] mb-3 mt-6">Horários</h4>
+              <ul className="space-y-2 text-sm text-[hsl(var(--dark-text-muted))]">
+                <li className="flex items-center gap-2"><Clock className="w-4 h-4 text-primary" /> {clinicInfo.hours.weekdays}</li>
+                <li className="flex items-center gap-2"><Clock className="w-4 h-4 text-primary" /> {clinicInfo.hours.saturday}</li>
               </ul>
             </div>
           </div>
         </div>
 
-        <div className="border-t border-background/10">
-          <div className="container py-6 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-background/40">
+        <div className="border-t border-[hsl(0_0%_100%/0.06)]">
+          <div className="container py-6 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-[hsl(var(--dark-text-muted)/0.5)] relative z-10">
             <p>© {new Date().getFullYear()} Clínica {clinicInfo.name}. Todos os direitos reservados.</p>
             <div className="flex flex-col sm:flex-row items-center gap-4">
               <div className="flex gap-4">
-                <a href="#" className="hover:text-secondary transition-colors duration-300">Política de Privacidade</a>
-                <a href="#" className="hover:text-secondary transition-colors duration-300">Termos de Uso</a>
+                <a href="#" className="hover:text-primary transition-colors duration-300">Política de Privacidade</a>
+                <a href="#" className="hover:text-primary transition-colors duration-300">Termos de Uso</a>
               </div>
-              <span className="text-background/40">
+              <span>
                 Desenvolvido com 💙 por{" "}
                 <a href="https://solviahub.com" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors duration-300">
                   Solvia Hub

@@ -1,17 +1,18 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Star, ChevronLeft, ChevronRight, Quote } from "lucide-react";
-import { DecorativeBlob } from "./SectionDivider";
 import { testimonials } from "@/config/siteConfig";
 
 function Avatar({ name, image }: { name: string; image?: string }) {
   const initials = name.split(" ").map(n => n[0]).join("");
   return (
-    <div className="w-14 h-14 rounded-full gradient-primary flex items-center justify-center shadow-card mx-auto mb-4 overflow-hidden">
+    <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4 overflow-hidden border-gradient shadow-glow">
       {image ? (
         <img src={image} alt={name} className="w-full h-full object-cover" loading="lazy" />
       ) : (
-        <span className="font-heading font-bold text-primary-foreground text-lg">{initials}</span>
+        <div className="w-full h-full gradient-primary flex items-center justify-center">
+          <span className="font-heading font-bold text-primary-foreground text-xl">{initials}</span>
+        </div>
       )}
     </div>
   );
@@ -24,11 +25,11 @@ export function TestimonialsSection() {
   const next = () => setCurrent((c) => (c === testimonials.length - 1 ? 0 : c + 1));
 
   return (
-    <section className="py-14 md:py-20 bg-muted relative overflow-hidden">
-      <DecorativeBlob className="w-[500px] h-[500px] top-0 -left-60" />
+    <section className="py-16 md:py-24 bg-muted relative overflow-hidden">
+      <div className="absolute inset-0 dots-pattern opacity-30" />
       <div className="container relative">
         <motion.div
-          className="text-center max-w-2xl mx-auto mb-10"
+          className="text-center max-w-2xl mx-auto mb-12"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -45,20 +46,25 @@ export function TestimonialsSection() {
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -30 }}
-            className="glass-card rounded-3xl p-8 md:p-12 shadow-elevated text-center relative"
+            className="glass-card rounded-3xl p-8 md:p-12 shadow-elevated text-center relative overflow-hidden border-gradient"
           >
-            <Quote className="w-12 h-12 text-primary/15 mx-auto mb-4" />
-            <Avatar name={testimonials[current].name} image={testimonials[current].image} />
-            <p className="text-lg md:text-xl text-foreground leading-relaxed mb-6 italic">
-              "{testimonials[current].text}"
-            </p>
-            <div className="flex items-center justify-center gap-1 mb-4">
-              {Array.from({ length: testimonials[current].rating }).map((_, i) => (
-                <Star key={i} className="w-5 h-5 fill-accent text-accent" />
-              ))}
+            {/* Giant decorative quote */}
+            <Quote className="absolute top-4 left-6 w-24 h-24 text-primary/5" />
+            <Quote className="absolute bottom-4 right-6 w-24 h-24 text-primary/5 rotate-180" />
+
+            <div className="relative z-10">
+              <Avatar name={testimonials[current].name} image={testimonials[current].image} />
+              <p className="text-lg md:text-xl text-foreground leading-relaxed mb-6 italic">
+                "{testimonials[current].text}"
+              </p>
+              <div className="flex items-center justify-center gap-1 mb-4">
+                {Array.from({ length: testimonials[current].rating }).map((_, i) => (
+                  <Star key={i} className="w-5 h-5 fill-accent text-accent" />
+                ))}
+              </div>
+              <p className="font-heading font-bold text-foreground">{testimonials[current].name}</p>
+              <p className="text-sm text-secondary font-medium">{testimonials[current].treatment}</p>
             </div>
-            <p className="font-heading font-bold text-foreground">{testimonials[current].name}</p>
-            <p className="text-sm text-secondary font-medium">{testimonials[current].treatment}</p>
           </motion.div>
 
           <div className="flex items-center justify-center gap-4 mt-8">

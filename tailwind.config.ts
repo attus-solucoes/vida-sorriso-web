@@ -17,6 +17,10 @@ export default {
         heading: ["Montserrat", "sans-serif"],
         sans: ["Inter", "sans-serif"],
       },
+      fontSize: {
+        "7xl": ["4.5rem", { lineHeight: "1.05" }],
+        "8xl": ["6rem", { lineHeight: "1" }],
+      },
       borderRadius: {
         "4xl": "2rem",
         "5xl": "2.5rem",

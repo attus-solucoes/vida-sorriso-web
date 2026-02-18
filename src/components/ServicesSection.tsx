@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
-import { DecorativeBlob } from "./SectionDivider";
 import { services } from "@/config/siteConfig";
 import { Button } from "./ui/button";
 import { slugify } from "@/lib/utils";
@@ -10,11 +9,13 @@ export function ServicesSection() {
   const displayedServices = services.slice(0, 6);
 
   return (
-    <section className="py-16 md:py-20 bg-background relative overflow-hidden" id="servicos">
-      <DecorativeBlob className="w-[600px] h-[600px] -top-60 -right-60" />
+    <section className="py-16 md:py-24 bg-background relative overflow-hidden" id="servicos">
+      {/* Subtle mesh gradient in corner */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full bg-primary/[0.03] blur-[120px]" />
+
       <div className="container relative">
         <motion.div
-          className="text-center max-w-2xl mx-auto mb-10"
+          className="text-center max-w-2xl mx-auto mb-12"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -39,18 +40,18 @@ export function ServicesSection() {
             >
               <Link
                 to={`/servicos#${slugify(s.title)}`}
-                className={`group block card-premium p-6 h-full relative transition-all duration-300 hover:shadow-elevated hover:scale-[1.02] ${
+                className={`group block card-premium p-6 h-full relative transition-all duration-300 hover:shadow-elevated hover:scale-[1.02] hover:border-primary/30 ${
                   s.popular
-                    ? "border-primary/30 bg-gradient-to-br from-primary/5 to-secondary/5"
+                    ? "border-primary/20 bg-gradient-to-br from-primary/5 to-secondary/5"
                     : ""
                 }`}
               >
                 {s.popular && (
-                  <span className="absolute top-3 right-3 px-3 py-1 rounded-full gradient-primary text-primary-foreground text-xs font-semibold shadow-[0_0_12px_hsl(var(--primary)/0.4)]">
+                  <span className="absolute top-3 right-3 px-3 py-1 rounded-full gradient-primary text-primary-foreground text-xs font-semibold shadow-glow">
                     ⭐ Mais Procurado
                   </span>
                 )}
-                <div className="w-14 h-14 rounded-2xl bg-primary/10 group-hover:gradient-primary flex items-center justify-center mb-5 transition-all duration-300 group-hover:rotate-[10deg] group-hover:scale-115">
+                <div className="w-14 h-14 rounded-full bg-primary/10 group-hover:gradient-primary flex items-center justify-center mb-5 transition-all duration-300 group-hover:shadow-glow group-hover:scale-110">
                   <s.icon className="w-7 h-7 text-primary group-hover:text-primary-foreground transition-colors duration-300" />
                 </div>
                 <h3 className="font-heading font-bold text-foreground mb-2">{s.title}</h3>
@@ -59,9 +60,8 @@ export function ServicesSection() {
                   Saiba mais <ArrowRight className="ml-1 w-3.5 h-3.5" />
                 </span>
                 {s.price && (
-                  <p className="text-sm text-muted-foreground font-medium">{s.price}</p>
+                  <p className="text-sm text-muted-foreground font-medium mt-1">{s.price}</p>
                 )}
-                <ArrowRight className="absolute bottom-5 right-5 w-4 h-4 text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </Link>
             </motion.div>
           ))}
@@ -73,7 +73,7 @@ export function ServicesSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <Button asChild variant="outline" size="lg">
+          <Button asChild variant="outline" size="lg" className="rounded-2xl font-heading font-semibold">
             <Link to="/servicos">
               Ver todos os {services.length} tratamentos <ArrowRight className="w-4 h-4 ml-1" />
             </Link>

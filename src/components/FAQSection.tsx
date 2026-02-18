@@ -5,16 +5,14 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { DecorativeDots } from "./SectionDivider";
 import { faqs } from "@/config/siteConfig";
 
 export function FAQSection() {
   return (
-    <section className="py-14 md:py-20 bg-background relative overflow-hidden" id="faq">
-      <DecorativeDots className="top-20 left-8 hidden lg:block" />
+    <section className="py-16 md:py-24 bg-background relative overflow-hidden" id="faq">
       <div className="container max-w-3xl relative">
         <motion.div
-          className="text-center mb-10"
+          className="text-center mb-12"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -34,7 +32,7 @@ export function FAQSection() {
               viewport={{ once: true }}
               transition={{ delay: i * 0.05 }}
             >
-              <AccordionItem value={`faq-${i}`} className="card-premium px-6 !border-border/50">
+              <AccordionItem value={`faq-${i}`} className="card-premium px-6 !border-border/50 data-[state=open]:border-l-[3px] data-[state=open]:border-l-primary transition-all duration-300">
                 <AccordionTrigger className="font-heading font-bold text-foreground text-left hover:no-underline py-5">
                   {faq.question}
                 </AccordionTrigger>

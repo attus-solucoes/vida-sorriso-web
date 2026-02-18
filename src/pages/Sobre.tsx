@@ -2,7 +2,6 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Helmet } from "react-helmet-async";
 import { X, ChevronLeft, ChevronRight, Maximize2 } from "lucide-react";
-import { DecorativeBlob, DecorativeDots } from "@/components/SectionDivider";
 import { clinicInfo, team, certifications, seo, stats, images, galleryItems } from "@/config/siteConfig";
 
 const SobrePage = () => {
@@ -15,16 +14,16 @@ const SobrePage = () => {
         <meta name="description" content={seo.about.description} />
       </Helmet>
 
-      {/* Hero */}
-      <section className="gradient-hero py-16 md:py-24 relative overflow-hidden">
-        <DecorativeBlob className="w-[500px] h-[500px] -top-40 -left-40" />
-        <div className="container text-center relative">
+      {/* Hero - Dark mesh */}
+      <section className="bg-dark-section noise-overlay py-16 md:py-24 relative overflow-hidden">
+        <div className="absolute w-[400px] h-[400px] -top-40 -left-40 rounded-full bg-primary/10 blur-[100px]" />
+        <div className="container text-center relative z-10">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-            <span className="inline-block px-5 py-2 rounded-full gradient-primary text-primary-foreground text-sm font-semibold mb-4 shadow-card">Nossa História</span>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-extrabold text-foreground mb-4">
+            <span className="inline-block px-5 py-2 rounded-full bg-primary/15 border border-primary/20 text-primary text-sm font-semibold mb-4">Nossa História</span>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-extrabold text-[hsl(var(--dark-text))] mb-4">
               Sobre a <span className="text-gradient">{clinicInfo.name}</span>
             </h1>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-lg text-[hsl(var(--dark-text-muted))] max-w-2xl mx-auto">
               Mais de {stats.yearsExperience} anos transformando sorrisos com excelência, tecnologia e carinho.
             </p>
           </motion.div>
@@ -33,25 +32,28 @@ const SobrePage = () => {
 
       {/* Story */}
       <section className="py-20 bg-background relative overflow-hidden">
-        <DecorativeDots className="top-20 right-16 hidden lg:block" />
         <div className="container relative">
+          {/* Timeline line */}
+          <div className="hidden lg:block absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-primary/20 via-secondary/20 to-transparent -translate-x-1/2" />
+
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-              <div className="rounded-3xl overflow-hidden shadow-elevated">
+            <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="relative">
+              <div className="absolute -bottom-4 -right-4 w-full h-full rounded-3xl bg-gradient-to-br from-primary/15 to-secondary/10" />
+              <div className="relative rounded-3xl overflow-hidden shadow-elevated">
                 <img src={images.aboutTeam} alt={`Equipe da Clínica ${clinicInfo.name}`} className="w-full h-[400px] object-cover hover:scale-105 transition-transform duration-500" loading="lazy" />
               </div>
             </motion.div>
             <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
               <h2 className="text-3xl md:text-4xl font-heading font-extrabold text-foreground mb-6">Nossa <span className="text-gradient">História</span></h2>
               <p className="text-muted-foreground leading-relaxed mb-4">
-                Fundada em {clinicInfo.foundedYear} pelo {team[0]?.name || "nossos fundadores"}, a Clínica {clinicInfo.name} nasceu com a missão de democratizar o acesso à odontologia de alta qualidade. O que começou como um pequeno consultório na {clinicInfo.address.street} cresceu e se tornou referência em tratamentos odontológicos em {clinicInfo.address.city}.
+                Fundada em <strong className="text-foreground">{clinicInfo.foundedYear}</strong> pelo {team[0]?.name || "nossos fundadores"}, a Clínica {clinicInfo.name} nasceu com a missão de democratizar o acesso à odontologia de alta qualidade.
               </p>
               <p className="text-muted-foreground leading-relaxed mb-6">
-                Hoje, contamos com uma equipe multidisciplinar de especialistas e uma infraestrutura completa, equipada com o que há de mais moderno em tecnologia odontológica. Nossa filosofia permanece a mesma: tratar cada paciente como único, oferecendo o melhor cuidado possível.
+                Hoje, contamos com uma equipe multidisciplinar de especialistas e uma infraestrutura completa, equipada com o que há de mais moderno em tecnologia odontológica.
               </p>
               <div className="grid grid-cols-2 gap-4">
                 {certifications.map((item, i) => (
-                  <div key={i} className="glass-card rounded-2xl flex items-center gap-3 p-3.5">
+                  <div key={i} className="glass-card rounded-2xl flex items-center gap-3 p-3.5 border-gradient">
                     <div className="w-9 h-9 rounded-xl gradient-primary flex items-center justify-center flex-shrink-0">
                       <item.icon className="w-4 h-4 text-primary-foreground" />
                     </div>
@@ -64,15 +66,15 @@ const SobrePage = () => {
         </div>
       </section>
 
-      {/* Team */}
-      <section className="py-20 bg-muted relative overflow-hidden">
-        <DecorativeBlob className="w-[500px] h-[500px] -bottom-60 -right-60" />
-        <div className="container relative">
+      {/* Team - Dark section */}
+      <section className="py-20 bg-dark-section noise-overlay relative overflow-hidden">
+        <div className="absolute w-[500px] h-[500px] -bottom-60 -right-60 rounded-full bg-primary/6 blur-[120px]" />
+        <div className="container relative z-10">
           <motion.div className="text-center mb-10" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-extrabold text-foreground mb-4">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-extrabold text-[hsl(var(--dark-text))] mb-4">
               Nossa <span className="text-gradient">Equipe</span>
             </h2>
-            <p className="text-muted-foreground text-lg">Profissionais dedicados ao seu sorriso.</p>
+            <p className="text-[hsl(var(--dark-text-muted))] text-lg">Profissionais dedicados ao seu sorriso.</p>
           </motion.div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {team.map((member, i) => (
@@ -82,21 +84,24 @@ const SobrePage = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="group card-premium overflow-hidden"
+                className="group card-dark overflow-hidden"
               >
-                <div className="h-56 gradient-primary flex items-center justify-center relative overflow-hidden">
+                <div className="h-56 bg-[hsl(0_0%_100%/0.03)] flex items-center justify-center relative overflow-hidden">
                   {member.image ? (
                     <img src={member.image} alt={member.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
                   ) : (
-                    <span className="text-6xl font-heading font-extrabold text-primary-foreground/20 group-hover:text-primary-foreground/30 transition-all duration-300 group-hover:scale-110">
+                    <span className="text-6xl font-heading font-extrabold text-[hsl(var(--dark-text-muted)/0.2)] group-hover:text-[hsl(var(--dark-text-muted)/0.3)] transition-all duration-300 group-hover:scale-110">
                       {member.name.split(" ").map(n => n[0]).join("")}
                     </span>
                   )}
+                  {/* Hover overlay with bio */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[hsl(215_35%_12%/0.9)] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                    <p className="text-xs text-[hsl(var(--dark-text-muted))]">{member.specialty} · {member.crm}</p>
+                  </div>
                 </div>
                 <div className="p-6 text-center">
-                  <h3 className="font-heading font-bold text-foreground mb-1">{member.name}</h3>
-                  <span className="inline-block px-3 py-1 rounded-full gradient-primary text-primary-foreground text-xs font-semibold mb-2">{member.specialty}</span>
-                  <p className="text-xs text-muted-foreground">{member.crm}</p>
+                  <h3 className="font-heading font-bold text-[hsl(var(--dark-text))] mb-1">{member.name}</h3>
+                  <span className="inline-block px-3 py-1 rounded-full bg-primary/15 border border-primary/20 text-primary text-xs font-semibold">{member.specialty}</span>
                 </div>
               </motion.div>
             ))}
