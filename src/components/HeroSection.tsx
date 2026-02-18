@@ -134,10 +134,10 @@ export function HeroSection() {
         </div>
       </div>
 
-      {/* Wave transition to next section */}
+      {/* Wave transition to light section */}
       <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-20">
         <svg viewBox="0 0 1200 80" preserveAspectRatio="none" className="w-full h-[40px] md:h-[60px]">
-          <path d="M0,40 C300,80 600,0 900,50 C1050,70 1150,30 1200,40 L1200,80 L0,80 Z" fill="hsl(215, 35%, 12%)" />
+          <path d="M0,40 C300,80 600,0 900,50 C1050,70 1150,30 1200,40 L1200,80 L0,80 Z" fill="hsl(210, 20%, 99%)" />
         </svg>
       </div>
     </section>
@@ -157,18 +157,18 @@ function StatItem({ icon: Icon, target, prefix = "", suffix = "", label, decimal
       viewport={{ once: true }}
     >
       <Icon className="w-7 h-7 text-primary mx-auto mb-2" />
-      <p className="text-3xl md:text-5xl font-heading font-extrabold text-[hsl(var(--dark-text))]">
+      <p className="text-3xl md:text-5xl font-heading font-extrabold text-foreground">
         {prefix}{displayValue}{suffix}
       </p>
       <div className="w-10 h-0.5 mx-auto mt-2 rounded-full bg-gradient-to-r from-primary to-secondary opacity-60" />
-      <p className="text-sm text-[hsl(var(--dark-text-muted))] mt-2">{label}</p>
+      <p className="text-sm text-muted-foreground mt-2">{label}</p>
     </motion.div>
   );
 }
 
 export function TrustBar() {
   return (
-    <section className="bg-dark-section noise-overlay py-14 relative overflow-hidden">
+    <section className="bg-background py-14 relative overflow-hidden border-b border-border/50">
       <div className="container relative z-10">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           <StatItem icon={Award} target={stats.yearsExperience} prefix="+" label="Anos de Experiência" />
@@ -178,17 +178,10 @@ export function TrustBar() {
         </div>
         {/* Vertical dividers on desktop */}
         <div className="hidden md:block absolute inset-0 pointer-events-none">
-          <div className="absolute left-1/4 top-4 bottom-4 w-px bg-[hsl(0_0%_100%/0.06)]" />
-          <div className="absolute left-1/2 top-4 bottom-4 w-px bg-[hsl(0_0%_100%/0.06)]" />
-          <div className="absolute left-3/4 top-4 bottom-4 w-px bg-[hsl(0_0%_100%/0.06)]" />
+          <div className="absolute left-1/4 top-4 bottom-4 w-px bg-border" />
+          <div className="absolute left-1/2 top-4 bottom-4 w-px bg-border" />
+          <div className="absolute left-3/4 top-4 bottom-4 w-px bg-border" />
         </div>
-      </div>
-
-      {/* Wave transition to light section */}
-      <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-20">
-        <svg viewBox="0 0 1200 80" preserveAspectRatio="none" className="w-full h-[40px] md:h-[60px]">
-          <path d="M0,30 C200,70 500,0 800,50 C1000,70 1100,20 1200,40 L1200,80 L0,80 Z" fill="hsl(210, 20%, 99%)" />
-        </svg>
       </div>
     </section>
   );

@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Star, ChevronLeft, ChevronRight, Quote } from "lucide-react";
+import { Star, ChevronLeft, ChevronRight } from "lucide-react";
 import { testimonials } from "@/config/siteConfig";
 
 function Avatar({ name, image }: { name: string; image?: string }) {
   const initials = name.split(" ").map(n => n[0]).join("");
   return (
-    <div className="w-20 h-20 flex items-center justify-center mx-auto mb-4 overflow-hidden border-gradient shadow-glow" style={{ borderRadius: '60% 40% 50% 50% / 50% 60% 40% 50%' }}>
+    <div className="w-20 h-20 flex items-center justify-center mx-auto mb-4 overflow-hidden rounded-full shadow-card border-2 border-primary/20">
       {image ? (
         <img src={image} alt={name} className="w-full h-full object-cover" loading="lazy" />
       ) : (
@@ -25,11 +25,7 @@ export function TestimonialsSection() {
   const next = () => setCurrent((c) => (c === testimonials.length - 1 ? 0 : c + 1));
 
   return (
-    <section className="py-16 md:py-24 bg-muted relative overflow-hidden">
-      <div className="absolute inset-0 dots-pattern opacity-20" />
-      {/* Organic background gradient */}
-      <div className="absolute top-0 left-0 w-[500px] h-[500px] organic-blob bg-primary/[0.04] blur-[150px]" />
-
+    <section className="py-16 md:py-24 bg-background relative overflow-hidden">
       <div className="container relative">
         <motion.div
           className="text-center max-w-2xl mx-auto mb-12"
@@ -49,11 +45,11 @@ export function TestimonialsSection() {
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -30 }}
-            className="glass-card rounded-3xl p-8 md:p-12 shadow-elevated text-center relative overflow-hidden border-l-[3px] border-l-primary"
+            className="card-premium p-8 md:p-12 text-center relative overflow-hidden border-l-[3px] border-l-primary"
           >
-            {/* Giant decorative quotes with gradient */}
-            <span className="absolute top-2 left-4 text-8xl font-heading font-extrabold text-gradient opacity-10 select-none leading-none">"</span>
-            <span className="absolute bottom-0 right-6 text-8xl font-heading font-extrabold text-gradient opacity-10 select-none leading-none rotate-180">"</span>
+            {/* Decorative quotes */}
+            <span className="absolute top-2 left-4 text-8xl font-heading font-extrabold text-primary/10 select-none leading-none">"</span>
+            <span className="absolute bottom-0 right-6 text-8xl font-heading font-extrabold text-primary/10 select-none leading-none rotate-180">"</span>
 
             <div className="relative z-10">
               <Avatar name={testimonials[current].name} image={testimonials[current].image} />
@@ -71,7 +67,7 @@ export function TestimonialsSection() {
           </motion.div>
 
           <div className="flex items-center justify-center gap-4 mt-8">
-            <button onClick={prev} className="w-11 h-11 rounded-2xl glass-card shadow-card flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-300" aria-label="Anterior">
+            <button onClick={prev} className="w-11 h-11 rounded-2xl card-premium flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-300" aria-label="Anterior">
               <ChevronLeft className="w-5 h-5" />
             </button>
             <div className="flex gap-2">
@@ -84,18 +80,11 @@ export function TestimonialsSection() {
                 />
               ))}
             </div>
-            <button onClick={next} className="w-11 h-11 rounded-2xl glass-card shadow-card flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-300" aria-label="Próximo">
+            <button onClick={next} className="w-11 h-11 rounded-2xl card-premium flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-300" aria-label="Próximo">
               <ChevronRight className="w-5 h-5" />
             </button>
           </div>
         </div>
-      </div>
-
-      {/* Wave to dark section */}
-      <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-10">
-        <svg viewBox="0 0 1200 80" preserveAspectRatio="none" className="w-full h-[40px] md:h-[60px]">
-          <path d="M0,60 C300,20 500,70 800,30 C1000,10 1100,50 1200,30 L1200,80 L0,80 Z" fill="hsl(215, 40%, 9%)" />
-        </svg>
       </div>
     </section>
   );

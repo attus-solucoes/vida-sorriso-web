@@ -83,12 +83,6 @@ export function ServicesSection() {
         </motion.div>
       </div>
 
-      {/* Wave transition to dark section */}
-      <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-10">
-        <svg viewBox="0 0 1200 80" preserveAspectRatio="none" className="w-full h-[40px] md:h-[60px]">
-          <path d="M0,50 C300,10 600,70 900,30 C1050,10 1150,50 1200,30 L1200,80 L0,80 Z" fill="hsl(215, 32%, 13%)" />
-        </svg>
-      </div>
     </section>
   );
 }
