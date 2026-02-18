@@ -30,11 +30,11 @@ export function HeroSection() {
               ✨ Excelência em Odontologia
             </span>
             <h1 className="text-4xl md:text-5xl lg:text-[3.5rem] font-heading font-extrabold leading-[1.1] text-foreground mb-6">
-              Seu sorriso merece o{" "}
-              <span className="text-gradient">melhor cuidado</span>
+              Seu sorriso merece{" "}
+              <span className="text-gradient">cuidado de excelência</span>
             </h1>
             <p className="text-lg text-muted-foreground leading-relaxed mb-8 max-w-lg">
-              Na Clínica {clinicInfo.name}, combinamos tecnologia de ponta com um atendimento humanizado para transformar o seu sorriso com conforto e segurança.
+              Com mais de {stats.yearsExperience} anos de experiência, a Clínica {clinicInfo.name} combina tecnologia de ponta com atendimento humanizado para transformar seu sorriso com conforto e segurança.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Button asChild size="lg" className="btn-glow border-0 text-primary-foreground font-heading font-semibold text-base rounded-2xl h-12 px-8">
@@ -48,6 +48,18 @@ export function HeroSection() {
                 </Link>
               </Button>
             </div>
+            {/* Prova social inline */}
+            <div className="flex flex-wrap items-center gap-3 mt-6 text-sm">
+              <div className="flex items-center gap-1.5">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
+                ))}
+                <span className="font-bold text-foreground ml-1">{stats.googleRating}/5</span>
+                <span className="text-muted-foreground">({stats.googleReviews}+ avaliações no Google)</span>
+              </div>
+              <div className="w-px h-5 bg-border hidden sm:block" />
+              <span className="text-muted-foreground hidden sm:block">Google Verificado</span>
+            </div>
           </motion.div>
 
           <motion.div
@@ -57,14 +69,16 @@ export function HeroSection() {
             className="relative"
             style={{ y: imageY }}
           >
-            <div className="rounded-3xl overflow-hidden shadow-elevated">
+            <div className="rounded-3xl overflow-hidden shadow-elevated relative">
               <img
                 src={images.hero}
-                alt={`Interior moderno da Clínica ${clinicInfo.name}`}
+                alt={`Interior moderno da Clínica ${clinicInfo.name} em ${clinicInfo.address.city} — consultório odontológico com equipamentos de última geração`}
                 className="w-full h-[350px] md:h-[450px] object-cover"
                 loading="eager"
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-foreground/20 to-transparent" />
             </div>
+            {/* Card flutuante - Avaliação Google */}
             <motion.div
               className="absolute -bottom-4 -left-4 md:-left-8 glass-card rounded-2xl p-4 shadow-elevated flex items-center gap-3"
               animate={{ y: [0, -8, 0] }}
@@ -76,6 +90,20 @@ export function HeroSection() {
               <div>
                 <p className="font-heading font-bold text-sm text-foreground">{stats.googleRating}/5 Estrelas</p>
                 <p className="text-xs text-muted-foreground">+{stats.googleReviews} avaliações</p>
+              </div>
+            </motion.div>
+            {/* Card flutuante - Anos de experiência */}
+            <motion.div
+              className="absolute -top-4 -right-4 md:-right-8 rounded-2xl p-4 shadow-elevated flex items-center gap-3 bg-foreground text-background"
+              animate={{ y: [0, -8, 0] }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
+            >
+              <div className="w-11 h-11 rounded-2xl bg-background/20 flex items-center justify-center">
+                <Award className="w-5 h-5 text-background" />
+              </div>
+              <div>
+                <p className="font-heading font-bold text-sm">+{stats.yearsExperience} anos</p>
+                <p className="text-xs text-background/70">de excelência</p>
               </div>
             </motion.div>
           </motion.div>
