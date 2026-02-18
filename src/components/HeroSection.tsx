@@ -74,21 +74,16 @@ export function HeroSection() {
                   Agende sua Consulta <CalendarCheck className="ml-2 w-5 h-5" />
                 </Link>
               </Button>
-              <Button asChild variant="outline" size="lg" className="font-heading font-semibold text-base border-[hsl(var(--dark-text-muted)/0.2)] text-[hsl(var(--dark-text))] hover:bg-[hsl(0_0%_100%/0.05)] rounded-2xl h-14 px-8">
+              <Button asChild variant="outline" size="lg" className="font-heading font-semibold text-base border-primary/40 text-primary hover:bg-primary/10 rounded-2xl h-14 px-8">
                 <Link to="/servicos">
                   Nossos Tratamentos <ArrowRight className="ml-2 w-5 h-5" />
                 </Link>
               </Button>
             </div>
-            {/* Prova social inline */}
-            <div className="flex flex-wrap items-center gap-3 mt-8 text-sm">
-              <div className="flex items-center gap-1.5">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
-                ))}
-                <span className="font-bold text-[hsl(var(--dark-text))] ml-1">{stats.googleRating}/5</span>
-                <span className="text-[hsl(var(--dark-text-muted))]">({stats.googleReviews}+ avaliações)</span>
-              </div>
+            {/* Selo de confiança */}
+            <div className="flex items-center gap-2 mt-8 text-sm text-[hsl(var(--dark-text-muted))]">
+              <Award className="w-4 h-4 text-primary" />
+              <span>Referência em odontologia na região desde 2003</span>
             </div>
           </motion.div>
 
@@ -113,31 +108,31 @@ export function HeroSection() {
 
             {/* Card flutuante - Avaliação Google */}
             <motion.div
-              className="absolute -bottom-4 -left-4 md:-left-8 glass-dark rounded-2xl p-4 shadow-elevated flex items-center gap-3 border-gradient"
-              animate={{ y: [0, -8, 0] }}
+              className="absolute -bottom-3 -left-3 md:-left-6 glass-dark rounded-xl p-3 shadow-elevated flex items-center gap-2.5 border-gradient"
+              animate={{ y: [0, -6, 0] }}
               transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
             >
-              <div className="w-11 h-11 rounded-2xl gradient-accent flex items-center justify-center">
-                <Star className="w-5 h-5 text-accent-foreground" />
+              <div className="w-9 h-9 rounded-xl gradient-accent flex items-center justify-center">
+                <Star className="w-4 h-4 text-accent-foreground" />
               </div>
               <div>
-                <p className="font-heading font-bold text-sm text-[hsl(var(--dark-text))]">{stats.googleRating}/5 Estrelas</p>
-                <p className="text-xs text-[hsl(var(--dark-text-muted))]">+{stats.googleReviews} avaliações</p>
+                <p className="font-heading font-bold text-xs text-[hsl(var(--dark-text))]">{stats.googleRating}/5 Estrelas</p>
+                <p className="text-[10px] text-[hsl(var(--dark-text-muted))]">+{stats.googleReviews} avaliações</p>
               </div>
             </motion.div>
 
             {/* Card flutuante - Anos */}
             <motion.div
-              className="absolute -top-4 -right-4 md:-right-8 glass-dark rounded-2xl p-4 shadow-elevated flex items-center gap-3 border-gradient"
-              animate={{ y: [0, -8, 0] }}
+              className="absolute -top-3 -right-3 md:-right-6 glass-dark rounded-xl p-3 shadow-elevated flex items-center gap-2.5 border-gradient"
+              animate={{ y: [0, -6, 0] }}
               transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
             >
-              <div className="w-11 h-11 rounded-2xl bg-primary/20 flex items-center justify-center">
-                <Award className="w-5 h-5 text-primary" />
+              <div className="w-9 h-9 rounded-xl bg-primary/20 flex items-center justify-center">
+                <Award className="w-4 h-4 text-primary" />
               </div>
               <div>
-                <p className="font-heading font-bold text-sm text-[hsl(var(--dark-text))]">+{stats.yearsExperience} anos</p>
-                <p className="text-xs text-[hsl(var(--dark-text-muted))]">de excelência</p>
+                <p className="font-heading font-bold text-xs text-[hsl(var(--dark-text))]">+{stats.yearsExperience} anos</p>
+                <p className="text-[10px] text-[hsl(var(--dark-text-muted))]">de excelência</p>
               </div>
             </motion.div>
 
