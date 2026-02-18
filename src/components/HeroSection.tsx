@@ -108,22 +108,22 @@ export function HeroSection() {
 
             {/* Card flutuante - Avaliação Google */}
             <motion.div
-              className="absolute -bottom-4 left-4 glass-dark rounded-lg px-3 py-2 shadow-elevated flex items-center gap-2 border-gradient"
-              animate={{ y: [0, -5, 0] }}
+              className="absolute bottom-6 left-6 glass-dark rounded-lg px-3 py-1.5 shadow-elevated flex items-center gap-1.5 border-gradient max-w-fit z-10"
+              animate={{ y: [0, -4, 0] }}
               transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
             >
-              <Star className="w-4 h-4 text-amber-400 fill-amber-400 shrink-0" />
-              <p className="font-heading font-bold text-xs text-[hsl(var(--dark-text))] whitespace-nowrap">{stats.googleRating}/5 Estrelas</p>
+              <Star className="w-3.5 h-3.5 text-amber-400 fill-amber-400 shrink-0" />
+              <p className="font-heading font-bold text-[11px] text-[hsl(var(--dark-text))] whitespace-nowrap">4.9/5</p>
             </motion.div>
 
             {/* Card flutuante - Pacientes */}
             <motion.div
-              className="absolute -top-4 right-4 glass-dark rounded-lg px-3 py-2 shadow-elevated flex items-center gap-2 border-gradient"
-              animate={{ y: [0, -5, 0] }}
+              className="absolute top-6 right-6 glass-dark rounded-lg px-3 py-1.5 shadow-elevated flex items-center gap-1.5 border-gradient max-w-fit z-10"
+              animate={{ y: [0, -4, 0] }}
               transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
             >
-              <Users className="w-4 h-4 text-primary shrink-0" />
-              <p className="font-heading font-bold text-xs text-[hsl(var(--dark-text))] whitespace-nowrap">Milhares de sorrisos</p>
+              <Users className="w-3.5 h-3.5 text-primary shrink-0" />
+              <p className="font-heading font-bold text-[11px] text-[hsl(var(--dark-text))] whitespace-nowrap">+15 mil sorrisos</p>
             </motion.div>
 
             {/* Badge selo with wavy border */}
