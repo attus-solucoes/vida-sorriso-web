@@ -2,19 +2,8 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Helmet } from "react-helmet-async";
 import { X, ChevronLeft, ChevronRight, Maximize2 } from "lucide-react";
-import clinicImage from "@/assets/clinic-interior.jpg";
-import heroImage from "@/assets/hero-dental.jpg";
 import { DecorativeBlob, DecorativeDots } from "@/components/SectionDivider";
-import { clinicInfo, team, certifications, seo, stats } from "@/config/siteConfig";
-
-// Galeria usa as imagens locais por enquanto
-const galleryItems = [
-  { src: clinicImage, label: "Recepção", span: "md:col-span-2" },
-  { src: heroImage, label: "Consultório" },
-  { src: clinicImage, label: "Equipamentos" },
-  { src: heroImage, label: "Sala de Espera", span: "md:col-span-2" },
-  { src: clinicImage, label: "Consultório 2" },
-];
+import { clinicInfo, team, certifications, seo, stats, images, galleryItems } from "@/config/siteConfig";
 
 const SobrePage = () => {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
@@ -49,7 +38,7 @@ const SobrePage = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
               <div className="rounded-3xl overflow-hidden shadow-elevated">
-                <img src={heroImage} alt={`Clínica ${clinicInfo.name}`} className="w-full h-[400px] object-cover hover:scale-105 transition-transform duration-500" loading="lazy" />
+                <img src={images.hero} alt={`Clínica ${clinicInfo.name}`} className="w-full h-[400px] object-cover hover:scale-105 transition-transform duration-500" loading="lazy" />
               </div>
             </motion.div>
             <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
@@ -96,9 +85,13 @@ const SobrePage = () => {
                 className="group card-premium overflow-hidden"
               >
                 <div className="h-56 gradient-primary flex items-center justify-center relative overflow-hidden">
-                  <span className="text-6xl font-heading font-extrabold text-primary-foreground/20 group-hover:text-primary-foreground/30 transition-all duration-300 group-hover:scale-110">
-                    {member.name.split(" ").map(n => n[0]).join("")}
-                  </span>
+                  {member.image ? (
+                    <img src={member.image} alt={member.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+                  ) : (
+                    <span className="text-6xl font-heading font-extrabold text-primary-foreground/20 group-hover:text-primary-foreground/30 transition-all duration-300 group-hover:scale-110">
+                      {member.name.split(" ").map(n => n[0]).join("")}
+                    </span>
+                  )}
                 </div>
                 <div className="p-6 text-center">
                   <h3 className="font-heading font-bold text-foreground mb-1">{member.name}</h3>

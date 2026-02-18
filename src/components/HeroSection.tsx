@@ -3,10 +3,9 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, Star, Users, Award, CalendarCheck } from "lucide-react";
-import heroImage from "@/assets/hero-dental.jpg";
 import { DecorativeBlob } from "./SectionDivider";
 import { useCountUp } from "@/hooks/useCountUp";
-import { clinicInfo, stats } from "@/config/siteConfig";
+import { clinicInfo, stats, images } from "@/config/siteConfig";
 
 export function HeroSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -60,7 +59,7 @@ export function HeroSection() {
           >
             <div className="rounded-3xl overflow-hidden shadow-elevated">
               <img
-                src={heroImage}
+                src={images.hero}
                 alt={`Interior moderno da Clínica ${clinicInfo.name}`}
                 className="w-full h-[350px] md:h-[450px] object-cover"
                 loading="eager"

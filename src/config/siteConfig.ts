@@ -91,28 +91,28 @@ export const team: TeamMember[] = [
     role: "Diretor Clínico",
     specialty: "Implantodontista",
     crm: "CRO-SP 12345",
-    image: "/assets/team/dr-ricardo.jpg",
+    image: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=600&q=80",
   },
   {
     name: "Dra. Camila Santos",
     role: "Ortodontista",
     specialty: "Ortodontista",
     crm: "CRO-SP 23456",
-    image: "/assets/team/dra-camila.jpg",
+    image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=600&q=80",
   },
   {
     name: "Dr. Felipe Oliveira",
     role: "Endodontista",
     specialty: "Endodontista",
     crm: "CRO-SP 34567",
-    image: "/assets/team/dr-felipe.jpg",
+    image: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=600&q=80",
   },
   {
     name: "Dra. Juliana Costa",
     role: "Odontopediatra",
     specialty: "Odontopediatra",
     crm: "CRO-SP 45678",
-    image: "/assets/team/dra-juliana.jpg",
+    image: "https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=600&q=80",
   },
 ];
 
@@ -388,20 +388,20 @@ export interface GalleryItem {
 }
 
 export const galleryItems: GalleryItem[] = [
-  { src: "/assets/infrastructure/reception.jpg", label: "Recepção", span: "md:col-span-2" },
-  { src: "/assets/infrastructure/office-1.jpg", label: "Consultório" },
-  { src: "/assets/infrastructure/equipment.jpg", label: "Equipamentos" },
-  { src: "/assets/infrastructure/office-2.jpg", label: "Sala de Espera", span: "md:col-span-2" },
-  { src: "/assets/infrastructure/technology.jpg", label: "Consultório 2" },
+  { src: "https://images.unsplash.com/photo-1629909615184-74f495363b67?w=1000&q=80", label: "Recepção", span: "md:col-span-2" },
+  { src: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=1000&q=80", label: "Consultório" },
+  { src: "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=1000&q=80", label: "Equipamentos" },
+  { src: "https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?w=1000&q=80", label: "Sala de Espera", span: "md:col-span-2" },
+  { src: "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=1000&q=80", label: "Consultório 2" },
 ];
 
 // =====================================================
 // 🎨 IMAGENS DO SITE
 // =====================================================
 export const images = {
-  hero: "/assets/hero/clinic-main.jpg",
-  clinicInterior: "/assets/infrastructure/office-1.jpg",
-  logo: "", // Deixe vazio para usar o logo padrão de texto
+  hero: "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=1200&q=80",
+  clinicInterior: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=1000&q=80",
+  logo: "",
 };
 
 // =====================================================
