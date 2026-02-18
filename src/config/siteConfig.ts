@@ -20,6 +20,7 @@ import ortodontiaAntes from "@/assets/ortodontia-antes.png";
 import ortodontiaDepois from "@/assets/ortodontia-depois.png";
 import draJulianaImg from "@/assets/dra-juliana.jpg";
 import drFelipeImg from "@/assets/dr-felipe.jpg";
+import recepcaoImg from "@/assets/recepcao.jpeg";
 
 // =====================================================
 // 🏢 DADOS DA CLÍNICA
@@ -407,10 +408,9 @@ export interface GalleryItem {
 }
 
 export const galleryItems: GalleryItem[] = [
-  { src: "https://images.unsplash.com/photo-1629909615184-74f495363b67?w=1000&q=80", label: "Recepção", span: "md:col-span-2" },
+  { src: recepcaoImg, label: "Recepção", span: "md:col-span-2" },
   { src: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=1000&q=80", label: "Consultório" },
   { src: "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=1000&q=80", label: "Equipamentos" },
-  { src: "https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?w=1000&q=80", label: "Sala de Espera", span: "md:col-span-2" },
   { src: "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=1000&q=80", label: "Consultório 2" },
 ];
 
