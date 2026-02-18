@@ -83,7 +83,7 @@ export function HeroSection() {
             {/* Selo de confiança */}
             <div className="flex items-center gap-2 mt-8 text-sm text-[hsl(var(--dark-text-muted))]">
               <Award className="w-4 h-4 text-primary" />
-              <span>Referência em odontologia na região desde 2003</span>
+              <span>Tecnologia de ponta e atendimento humanizado</span>
             </div>
           </motion.div>
 
@@ -108,32 +108,22 @@ export function HeroSection() {
 
             {/* Card flutuante - Avaliação Google */}
             <motion.div
-              className="absolute -bottom-3 -left-3 md:-left-6 glass-dark rounded-xl p-3 shadow-elevated flex items-center gap-2.5 border-gradient"
-              animate={{ y: [0, -6, 0] }}
+              className="absolute -bottom-4 left-4 glass-dark rounded-lg px-3 py-2 shadow-elevated flex items-center gap-2 border-gradient"
+              animate={{ y: [0, -5, 0] }}
               transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
             >
-              <div className="w-9 h-9 rounded-xl gradient-accent flex items-center justify-center">
-                <Star className="w-4 h-4 text-accent-foreground" />
-              </div>
-              <div>
-                <p className="font-heading font-bold text-xs text-[hsl(var(--dark-text))]">{stats.googleRating}/5 Estrelas</p>
-                <p className="text-[10px] text-[hsl(var(--dark-text-muted))]">+{stats.googleReviews} avaliações</p>
-              </div>
+              <Star className="w-4 h-4 text-amber-400 fill-amber-400 shrink-0" />
+              <p className="font-heading font-bold text-xs text-[hsl(var(--dark-text))] whitespace-nowrap">{stats.googleRating}/5 Estrelas</p>
             </motion.div>
 
-            {/* Card flutuante - Anos */}
+            {/* Card flutuante - Pacientes */}
             <motion.div
-              className="absolute -top-3 -right-3 md:-right-6 glass-dark rounded-xl p-3 shadow-elevated flex items-center gap-2.5 border-gradient"
-              animate={{ y: [0, -6, 0] }}
+              className="absolute -top-4 right-4 glass-dark rounded-lg px-3 py-2 shadow-elevated flex items-center gap-2 border-gradient"
+              animate={{ y: [0, -5, 0] }}
               transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
             >
-              <div className="w-9 h-9 rounded-xl bg-primary/20 flex items-center justify-center">
-                <Award className="w-4 h-4 text-primary" />
-              </div>
-              <div>
-                <p className="font-heading font-bold text-xs text-[hsl(var(--dark-text))]">+{stats.yearsExperience} anos</p>
-                <p className="text-[10px] text-[hsl(var(--dark-text-muted))]">de excelência</p>
-              </div>
+              <Users className="w-4 h-4 text-primary shrink-0" />
+              <p className="font-heading font-bold text-xs text-[hsl(var(--dark-text))] whitespace-nowrap">Milhares de sorrisos</p>
             </motion.div>
 
             {/* Badge selo with wavy border */}
