@@ -14,8 +14,8 @@ export function AboutSection() {
           >
             {/* Organic decorative shape behind image */}
             <div className="absolute -bottom-5 -right-5 w-full h-full organic-blob-2 bg-gradient-to-br from-primary/15 to-secondary/10" />
-            <div className="relative organic-image-2 overflow-hidden shadow-elevated">
-              <img src={images.clinicInterior} alt={`Estrutura moderna da Clínica ${clinicInfo.name}`} className="w-full h-[400px] object-cover hover:scale-105 transition-transform duration-500" loading="lazy" />
+            <div className="relative rounded-2xl overflow-hidden shadow-elevated">
+              <img src={images.clinicInterior} alt={`Estrutura moderna da Clínica ${clinicInfo.name}`} className="w-full h-[500px] object-cover hover:scale-105 transition-transform duration-500" loading="lazy" />
             </div>
           </motion.div>
 
