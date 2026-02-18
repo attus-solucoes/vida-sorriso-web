@@ -19,6 +19,7 @@ import clareamentoDepois from "@/assets/clareamento-depois.jpeg";
 import ortodontiaAntes from "@/assets/ortodontia-antes.png";
 import ortodontiaDepois from "@/assets/ortodontia-depois.png";
 import draJulianaImg from "@/assets/dra-juliana.jpg";
+import drFelipeImg from "@/assets/dr-felipe.jpg";
 
 // =====================================================
 // 🏢 DADOS DA CLÍNICA
@@ -113,7 +114,7 @@ export const team: TeamMember[] = [
     role: "Endodontista",
     specialty: "Endodontista",
     crm: "CRO-SP 34567",
-    image: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=600&q=80",
+    image: drFelipeImg,
   },
   {
     name: "Dra. Juliana Costa",
