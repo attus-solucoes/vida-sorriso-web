@@ -12,6 +12,9 @@ import {
   type LucideIcon
 } from "lucide-react";
 
+import lentesAntes from "@/assets/lentes-antes.png";
+import lentesDepois from "@/assets/lentes-depois.png";
+
 // =====================================================
 // 🏢 DADOS DA CLÍNICA
 // =====================================================
@@ -350,8 +353,8 @@ export const transformations: Transformation[] = [
   {
     treatment: "Lentes de Contato",
     duration: "2 semanas",
-    beforeImage: "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=600&q=80",
-    afterImage: "https://images.unsplash.com/photo-1581585742429-0e10e97ef15f?w=600&q=80",
+    beforeImage: lentesAntes,
+    afterImage: lentesDepois,
     beforeColor: "hsl(38 30% 75%)",
     afterColor: "hsl(199 89% 92%)",
   },
