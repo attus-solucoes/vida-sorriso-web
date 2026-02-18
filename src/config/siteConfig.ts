@@ -14,6 +14,8 @@ import {
 
 import lentesAntes from "@/assets/lentes-antes.png";
 import lentesDepois from "@/assets/lentes-depois.png";
+import clareamentoAntes from "@/assets/clareamento-antes.jpeg";
+import clareamentoDepois from "@/assets/clareamento-depois.jpeg";
 
 // =====================================================
 // 🏢 DADOS DA CLÍNICA
@@ -361,8 +363,8 @@ export const transformations: Transformation[] = [
   {
     treatment: "Clareamento Dental",
     duration: "1 sessão",
-    beforeImage: "https://images.unsplash.com/photo-1598256989800-fe5f95da9787?w=600&q=80",
-    afterImage: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&q=80",
+    beforeImage: clareamentoAntes,
+    afterImage: clareamentoDepois,
     beforeColor: "hsl(38 40% 70%)",
     afterColor: "hsl(168 60% 90%)",
   },
