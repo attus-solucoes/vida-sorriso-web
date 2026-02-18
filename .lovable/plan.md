@@ -1,261 +1,278 @@
 
 
-# Redesign Premium - Site Sorriso Perfeito
-## Design de Alta Conversao com Experiencia Visual Diferenciada
+# Redesign Autêntico e Profissional - Sorriso Perfeito
+## De "quadrado e genérico" para fluido, orgânico e premium
 
 ---
 
-## Visao Geral
+## Diagnóstico: O que está "quadrado"
 
-O site atual e funcional mas segue um padrao visual generico: fundo claro uniforme, secoes empilhadas com o mesmo ritmo, badges identicos em todas as secoes, e pouca variacao de textura/profundidade. O redesign proposto cria **contraste dramatico entre secoes**, usa **backgrounds ricos com textura**, **tipografia com mais hierarquia** e **micro-interacoes sofisticadas** para criar uma experiencia premium que se destaca e converte melhor.
+Após analisar todas as 4 páginas e todos os componentes, identifiquei os problemas que fazem o site parecer genérico apesar das dark sections:
+
+1. **Todas as secoes seguem o mesmo template**: badge pill no topo, titulo grande, subtitulo, grid de cards. Nao ha variacao de layout.
+2. **Cards sao todos retangulos identicos**: mesma estrutura, mesmo padding, mesmo border-radius. Monotono.
+3. **Dark sections muito uniformes**: todas usam o mesmo `gradient-mesh` sem variacao. O navy escuro fica repetitivo.
+4. **Gradientes sem vida**: os glow orbs sao muito sutis (opacity 0.06-0.10), quase invisiveis. O mesh gradient precisa de mais intensidade e variacao.
+5. **Badges de secao todos iguais**: pills arredondados com estilo identico em todas as secoes. Previsivel.
+6. **Espacamento entre hero dark e content branco**: a transicao entre secoes e abrupta - corta reto de escuro para branco.
+7. **Pagina Servicos**: cards com area de icone cinza vazia muito grande (280px), parece placeholder inacabado.
+8. **Header rigido**: o `glass` effect no scroll funciona mas o header fica com bg branco opaco sobre secoes dark, quebrando a imersao.
 
 ---
 
-## Principios do Redesign
+## Estrategia: Design Organico e Fluido
 
-1. **Ritmo visual alternado** - Alternar entre secoes claras e escuras/coloridas para criar contraste e guiar o olho
-2. **Backgrounds com profundidade** - Substituir fundos planos por gradientes ricos, mesh gradients e texturas sutis
-3. **Hierarquia tipografica agressiva** - H1 maior e mais impactante, subtitulos com peso visual diferente
-4. **Espacos brancos intencionais** - Menos padding generico, mais espacamento estrategico que guia a leitura
-5. **CTAs imposssiveis de ignorar** - Botoes maiores, mais destacados, com animacoes que atraem o olhar
+Em vez de boxes rigidos, vamos criar **fluxo visual** com:
+- **Transicoes suaves entre secoes** usando wave dividers e gradientes que "derramam" de uma secao na outra
+- **Variacao de layouts** - nem toda secao precisa ser titulo+grid
+- **Gradientes mais vivos e variados** por secao
+- **Formas organicas** nos backgrounds (blobs, curvas)
+- **Tipografia com mais personalidade** - misturar pesos e estilos
+- **Micro-detalhes que criam sofisticacao** sem ser exagerado
 
 ---
 
-## Fase 1 - Sistema Visual Global (CSS + Tailwind)
+## Fase 1 - Sistema de Transicoes e Backgrounds (CSS)
 
-### 1.1 Novos backgrounds e texturas no CSS
+### 1.1 Wave dividers entre secoes
 - **Arquivo:** `src/index.css`
-- Adicionar novas variaveis CSS para backgrounds ricos:
-  - `--gradient-dark`: gradiente escuro navy para secoes de contraste (ex: `linear-gradient(135deg, hsl(215 35% 12%), hsl(215 25% 17%))`)
-  - `--gradient-mesh`: mesh gradient sutil com 3+ cores para o hero (azul, turquesa, toque de violeta)
-  - `--noise-texture`: textura de ruido sutil via SVG data URI para dar "grain" sofisticado
-- Criar classes utilitarias: `.bg-dark-section`, `.bg-mesh-hero`, `.noise-overlay`
-- Adicionar animacao `@keyframes shimmer` para efeitos de brilho em CTAs
-- Adicionar animacao `@keyframes gradient-rotate` para backgrounds animados no hero
+- Adicionar classes `.wave-divider-top` e `.wave-divider-bottom` usando SVG inline como `clip-path` ou pseudo-elementos
+- Isso cria transicoes onduladas entre secoes dark e light, eliminando o corte reto
+- Exemplo: entre Hero (dark) e Services (light), uma onda suave
+- Variacao: entre Services (light) e Transformations (dark), onda diferente
 
-### 1.2 Tipografia com mais impacto
-- **Arquivo:** `tailwind.config.ts`
-- Adicionar tamanhos de fonte maiores para uso no hero: `7xl` e `8xl`
-- Ajustar line-height dos headings para `1.05` (mais compacto e impactante)
+### 1.2 Gradientes com mais intensidade e variacao
+- **Arquivo:** `src/index.css`
+- Aumentar a intensidade dos glow orbs nas dark sections: de `primary/8` para `primary/15`, de `secondary/6` para `secondary/12`
+- Criar variantes do mesh gradient para cada dark section nao ser identica:
+  - Hero: mesh com toque de violeta mais forte
+  - Transformacoes: mesh com teal dominante
+  - Diferenciais: mesh com navy mais profundo
+  - CTA Final: mesh com primary vibrante
+- Adicionar uma classe `.bg-dark-warm` com um toque sutil de cor quente (amber/gold) misturado no navy
 
----
-
-## Fase 2 - Hero Section (Impacto nos Primeiros 3 Segundos)
-
-### 2.1 Hero com background imersivo
-- **Arquivo:** `src/components/HeroSection.tsx`
-- Substituir o `gradient-hero` (fundo quase branco) por um **mesh gradient animado** que combina azul profundo, turquesa e um toque sutil de violeta
-- O fundo tera uma animacao lenta de rotacao/shift de cores (15-20s loop) criando movimento sutil
-- Adicionar overlay de textura noise para profundidade
-
-### 2.2 Tipografia hero dramatica
-- H1 com tamanho `text-5xl md:text-6xl lg:text-7xl` (atualmente `3.5rem`)
-- A palavra "excelencia" com destaque diferenciado: alem do gradiente de texto, adicionar um underline decorativo animado (uma linha gradiente abaixo)
-- Subtitulo com `text-xl` e `font-light` para contraste de peso com o H1
-
-### 2.3 Imagem hero com moldura premium
-- Envolver a imagem em um container com borda gradiente (2px) + sombra colorida grande
-- Adicionar um badge/selo circular no canto (tipo "Avaliacao Gratuita") com animacao rotate
-
-### 2.4 Cards flutuantes com glassmorphism mais pronunciado
-- Aumentar o blur do glass para 20px
-- Adicionar borda gradiente de 1px nos cards flutuantes
-- Background com mais opacidade para melhor leitura
+### 1.3 Classe para blob organico
+- Novo utilitario `.organic-blob` usando `border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%` para formas nao-simetricas
+- Usar nos glow orbs de background em vez de `rounded-full`
 
 ---
 
-## Fase 3 - TrustBar (Barra de Estatisticas)
+## Fase 2 - Header com transparencia real sobre dark
 
-### 3.1 Background escuro dramatico
-- **Arquivo:** `src/components/HeroSection.tsx` (componente TrustBar)
-- Trocar de `gradient-primary` para background **dark navy** (`bg-dark-section`)
-- Numeros em branco/turquesa brilhante para maximo contraste
-- Adicionar linhas verticais separadoras sutis entre os stats
-- Adicionar `noise-overlay` para textura
-
----
-
-## Fase 4 - Secao de Servicos
-
-### 4.1 Layout com card em destaque
-- **Arquivo:** `src/components/ServicesSection.tsx`
-- Manter grid 3 colunas mas o primeiro card "popular" ocupa 2 colunas (col-span-2) com layout horizontal (icone + texto lado a lado) - cria hierarquia visual
-- Cards com hover que revela uma borda gradiente animada (border-image com gradient)
-- Background da secao: branco limpo com mesh gradient sutil no canto superior direito
-
-### 4.2 Icones com containers mais sofisticados
-- Trocar o container quadrado do icone por um circulo com borda gradiente + sombra colorida
-- No hover, o icone ganha uma animacao de "pulse" sutil alem do scale
-
----
-
-## Fase 5 - Secao de Transformacoes
-
-### 5.1 Background escuro para impacto das fotos
-- **Arquivo:** `src/components/TransformationsSection.tsx`
-- Mudar fundo para **dark section** (navy escuro) - as fotos antes/depois se destacam muito mais em fundo escuro
-- Textos em branco/light para contraste
-- Adicionar glow sutil atras de cada card (sombra colorida turquesa)
-
-### 5.2 Slider antes/depois mais polido
-- Linha do slider com gradiente (turquesa para dourado)
-- Botao central do slider maior com sombra glow
-
----
-
-## Fase 6 - Secao de Depoimentos
-
-### 6.1 Layout visual mais rico
-- **Arquivo:** `src/components/TestimonialsSection.tsx`
-- Card do depoimento com borda gradiente sutil
-- Aspas decorativas maiores (tamanho `text-8xl`) com gradiente de texto, posicionadas como decoracao de fundo
-- Foto do paciente maior (80x80) com borda gradiente circular
-- Fundo da secao: gradiente sutil claro (manter leve) com dots pattern
-
----
-
-## Fase 7 - Secao de Diferenciais
-
-### 7.1 Cards com icones animados
-- **Arquivo:** `src/components/DifferentialsSection.tsx`
-- Fundo: alternar para **dark section** (cria contraste com a secao anterior clara)
-- Cards com fundo glass escuro (bg-white/5 com backdrop-blur)
-- Icone com glow animado no hover (sombra turquesa pulsante)
-- Textos em branco/light
-
----
-
-## Fase 8 - FAQ Section
-
-### 8.1 Visual mais clean e focado
-- **Arquivo:** `src/components/FAQSection.tsx`
-- Fundo branco limpo (contraste com secao escura anterior)
-- Accordion items com borda esquerda gradiente de 3px ao expandir
-- Icone de expansao customizado (de chevron para circulo com +/-)
-
----
-
-## Fase 9 - Secao Sobre (Home)
-
-### 9.1 Layout com imagem sangrada
-- **Arquivo:** `src/components/AboutSection.tsx`
-- Imagem maior, saindo dos limites do container de um lado (overflow visible do lado esquerdo)
-- Adicionar um elemento decorativo: um retangulo gradiente atras da imagem (offset de 20px) para profundidade
-- Numeros/stats inline dentro do texto (ex: "mais de **21 anos**" com destaque bold + cor)
-
----
-
-## Fase 10 - CTA Final (Fundo da Home)
-
-### 10.1 CTA com background premium
-- **Arquivo:** `src/pages/Index.tsx`
-- Trocar `gradient-primary` por background **dark navy** com mesh gradient sutil
-- Botao CTA maior (`h-14 px-10 text-lg`) com animacao shimmer (brilho percorrendo o botao)
-- Adicionar urgencia: "Vagas limitadas para este mes" em texto pequeno abaixo do botao
-
----
-
-## Fase 11 - Header Refinado
-
-### 11.1 Header com transicao de transparencia
+### 2.1 Header adaptativo ao contexto
 - **Arquivo:** `src/components/Header.tsx`
-- Header inicia **transparente** no topo (sem fundo) e ganha fundo glass ao rolar (usando scroll listener + state)
-- Logo com animacao sutil no hover (scale + glow)
-- Botao CTA do header com animacao shimmer
+- Quando `scrolled` e false E a pagina atual e Home ("/"), o header deve ter texto claro (para ficar legivel sobre o hero dark)
+- Quando `scrolled` e true, manter o glass branco atual
+- Nas paginas internas que tem hero dark, tambem adaptar
+- Adicionar `transition-colors` mais suave (500ms)
 
 ---
 
-## Fase 12 - Footer Premium
+## Fase 3 - Hero com mais organicidade
 
-### 12.1 Footer com mais profundidade
-- **Arquivo:** `src/components/Footer.tsx`
-- Adicionar mesh gradient sutil no fundo (em vez de cor solida flat)
-- Separador decorativo no topo: linha gradiente horizontal (turquesa para dourado para turquesa)
-- Links com hover animado (underline que cresce da esquerda para direita)
+### 3.1 Background com blobs animados organicos
+- **Arquivo:** `src/components/HeroSection.tsx`
+- Trocar os glow orbs `rounded-full` por formas organicas com border-radius assimetrico
+- Aumentar intensidade: `bg-primary/15` em vez de `bg-primary/10`
+- Adicionar um terceiro blob com cor diferente (accent/amber sutil)
+- Os blobs devem ter animacao `float-slow` com timing diferentes
+
+### 3.2 Imagem hero com shape organico
+- Em vez do `rounded-3xl` padrao, usar clip-path organico ou border-radius assimetrico na imagem
+- Exemplo: `border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%`
+- Isso quebra a rigidez retangular e cria identidade visual unica
+
+### 3.3 Decorative elements mais autenticost
+- O badge "Avaliacao Gratuita" pode ter forma menos circular - usar um selo com borda ondulada
+- Cards flutuantes com cantos mais assimetricos
 
 ---
 
-## Fase 13 - Paginas Internas
+## Fase 4 - TrustBar com transicao suave
 
-### 13.1 Pagina Servicos
+### 4.1 Wave divider acima da TrustBar
+- Adicionar pseudo-elemento wave entre Hero e TrustBar para eliminar o corte reto
+- Alternativa: fundir TrustBar com o Hero (sem separacao visivel)
+
+### 4.2 Stats com mais personalidade
+- Numeros maiores (`text-4xl md:text-5xl`) 
+- Adicionar underline gradiente abaixo de cada numero
+- Substituir icones genericos por emojis ou numeros com gradiente de cor
+
+---
+
+## Fase 5 - Services com layout mais dinamico
+
+### 5.1 Cards com formas organicas
+- **Arquivo:** `src/components/ServicesSection.tsx`
+- Background dos icones: trocar circulo perfeito por forma organica (organic-blob)
+- Cada card popular deve ter um destaque visual diferente: borda gradiente assimetrica, nao apenas cor
+- Adicionar wave divider abaixo da secao
+
+### 5.2 Background da secao com textura sutil
+- Adicionar `dots-pattern` muito sutil no fundo (opacity baixa)
+- Ou um gradiente radial no canto que "sangra" da secao
+
+---
+
+## Fase 6 - Transformacoes com mais impacto
+
+### 6.1 Gradiente variado
+- **Arquivo:** `src/components/TransformationsSection.tsx`
+- Usar mesh gradient com teal/turquesa dominante (diferente do hero que e navy/violeta)
+- Glow orbs maiores e mais intensos atras dos cards
+- Wave divider no topo (transicao de light para dark)
+
+### 6.2 Cards com borda glow
+- Adicionar sombra colorida turquesa sutil nos cards ao hover
+- Texto do tratamento em gradiente
+
+---
+
+## Fase 7 - Depoimentos com layout quebrado
+
+### 7.1 Layout menos "centralizado/quadrado"
+- **Arquivo:** `src/components/TestimonialsSection.tsx`
+- Quote marks decorativas maiores e com gradiente (nao apenas opacity baixa)
+- Card com uma borda lateral gradiente de 3px (lateral, nao toda volta) para dar assimetria
+- Background com gradiente radial sutil em vez de `bg-muted` flat
+
+---
+
+## Fase 8 - Diferenciais com glass e glow
+
+### 8.1 Variacao de mesh gradient
+- **Arquivo:** `src/components/DifferentialsSection.tsx`
+- Usar navy mais profundo que as outras dark sections
+- Cards glass-dark com hover que ativa um glow colorido atras do icone (nao so sombra, um halo visivel)
+- Wave divider no topo
+
+---
+
+## Fase 9 - FAQ com borda lateral animada
+
+### 9.1 Visual mais dinâmico
+- **Arquivo:** `src/components/FAQSection.tsx`
+- Ao expandir, item ganha borda esquerda gradiente (3px) que anima de cima para baixo
+- Fundo com gradiente sutil (nao branco puro) para nao ser flat demais
+
+---
+
+## Fase 10 - Secoes About, Convenios, Location
+
+### 10.1 About com imagem organica
+- **Arquivo:** `src/components/AboutSection.tsx`
+- Imagem com border-radius organico assimetrico
+- O retangulo decorativo atras tambem com forma organica
+- Numeros destacados inline com cor gradient (ex: "mais de **21 anos**" com text-gradient)
+
+### 10.2 Convenios com hover mais sofisticado
+- **Arquivo:** `src/components/ConveniosSection.tsx`
+- Cards com transicao de borda ao hover: de transparente para gradiente
+
+### 10.3 Location com mapa bleeding
+- **Arquivo:** `src/components/LocationSection.tsx`
+- Mapa com cantos mais organicos
+- Cards de info com icones que tem glow sutil
+
+---
+
+## Fase 11 - CTA Final com urgencia visual
+
+### 11.1 CTA com background unico
+- **Arquivo:** `src/pages/Index.tsx`
+- Mesh gradient com primary mais vibrante (intensidade maior)
+- Blobs organicos animados
+- Wave divider no topo
+- Botao com tamanho heroico e glow pulsante
+
+---
+
+## Fase 12 - Pagina Servicos mais premium
+
+### 12.1 Cards de servico redesenhados
 - **Arquivo:** `src/pages/Servicos.tsx`
-- Hero com background mesh gradient (consistente com Home)
-- Cards de servico alternando alinhamento (impar: icone esquerda, par: icone direita) para criar ritmo visual
-- Adicionar numeracao grande e sutil atras de cada card ("01", "02", etc.) como elemento decorativo
+- Reduzir a area cinza do icone (de 280px para 200px) ou trocar por um layout vertical
+- Icone com fundo gradient + forma organica em vez de circulo em fundo cinza
+- Badge de preco mais destacado: fundo gradient sutil, nao apenas pill outline
+- Numeracao decorativa com opacity maior para ser mais visivel como elemento de design
 
-### 13.2 Pagina Sobre
-- **Arquivo:** `src/pages/Sobre.tsx`
-- Timeline vertical decorativa conectando as secoes (linha gradiente vertical)
-- Cards da equipe com hover que mostra overlay gradiente com bio resumida
-
-### 13.3 Pagina Contato
-- **Arquivo:** `src/pages/Contato.tsx`
-- Formulario com fundo glass-card e borda gradiente sutil
-- Inputs com focus state mais visivel (borda turquesa + glow sutil)
-- Lado direito (info de contato) com fundo escuro para contraste
+### 12.2 Hero mais compacto
+- Reduzir padding do hero da pagina servicos
+- Adicionar wave divider na transicao para o conteudo
 
 ---
 
-## Resumo do Padrao de Cores por Secao (Home)
+## Fase 13 - Paginas Sobre e Contato
+
+### 13.1 Sobre
+- **Arquivo:** `src/pages/Sobre.tsx`
+- Imagem da equipe com shape organico
+- Timeline com dots gradientes nos pontos de conexao
+- Cards de equipe com hover overlay gradient mais visivel
+
+### 13.2 Contato
+- **Arquivo:** `src/pages/Contato.tsx`
+- Formulario com cantos mais suaves e sombra mais presente
+- Cards de contato dark com icones glow
+- Inputs com border-radius organico (nao perfeitamente retangular)
+
+---
+
+## Fase 14 - Footer com transicao e vida
+
+### 14.1 Footer mais organico
+- **Arquivo:** `src/components/Footer.tsx`
+- Wave divider no topo (transicao da secao anterior para o footer)
+- Linha separadora gradiente mais grossa e visivel (2px em vez de 1px)
+- Links com hover underline animado que ja existe - manter
+
+---
+
+## Resumo Visual das Mudancas
 
 ```text
-+---------------------------+
-| Emergency Bar (vermelho)  |
-+---------------------------+
-| Header (transparente)     |
-+---------------------------+
-| Hero (mesh gradient rico) |  -> Escuro/Colorido
-+---------------------------+
-| TrustBar (navy escuro)    |  -> Escuro
-+---------------------------+
-| Servicos (branco)         |  -> Claro
-+---------------------------+
-| Transformacoes (navy)     |  -> Escuro
-+---------------------------+
-| Depoimentos (claro/muted) |  -> Claro
-+---------------------------+
-| Diferenciais (navy)       |  -> Escuro
-+---------------------------+
-| FAQ (branco)              |  -> Claro
-+---------------------------+
-| Sobre (branco)            |  -> Claro
-+---------------------------+
-| Convenios (muted)         |  -> Claro
-+---------------------------+
-| Localizacao (muted)       |  -> Claro
-+---------------------------+
-| CTA Final (navy + mesh)   |  -> Escuro
-+---------------------------+
-| Footer (navy escuro)      |  -> Escuro
-+---------------------------+
-```
+ANTES (quadrado):          DEPOIS (organico):
++------------------+       ~~~~~~~~~~~~~~~~~~~~
+| Hero (dark)      |       ~  Hero (dark)      ~
++------------------+       ~~~  wave  ~~~~~~~~~~~
+| TrustBar         |       |  TrustBar          |
++------------------+       ~~~  wave  ~~~~~~~~~~~
+| Services (white) |       ~  Services (warm)   ~
++------------------+       ~~~  wave  ~~~~~~~~~~~
+| Transforms (dark)|       ~  Transforms (teal) ~
++------------------+       ~~~  wave  ~~~~~~~~~~~
 
-Esse padrao alternado de claro/escuro cria um ritmo visual que mantem o visitante engajado e guia o olhar naturalmente pela pagina.
+Cortes retos -> Ondas suaves
+Circulos -> Blobs organicos
+Gradientes identicos -> Variacao por secao
+Cards rigidos -> Formas com personalidade
+```
 
 ---
 
 ## Ordem de Implementacao
 
-| Passo | O que | Impacto |
-|-------|-------|---------|
-| 1 | Sistema visual global (CSS + Tailwind) | Base para tudo |
-| 2 | Hero Section redesign | Primeiro impacto |
-| 3 | TrustBar + Header | Continuidade visual |
-| 4 | Servicos + CTA Final | Conversao |
-| 5 | Transformacoes + Diferenciais (dark sections) | Contraste dramatico |
-| 6 | Depoimentos + FAQ + Sobre | Polish |
-| 7 | Footer + Paginas internas | Finalizacao |
+| Passo | Componentes | Foco |
+|-------|-------------|------|
+| 1 | CSS (index.css) | Wave dividers, blobs, gradientes intensos |
+| 2 | HeroSection + TrustBar | Organicidade, blobs animados, imagem com shape |
+| 3 | Header | Texto adaptativo em dark sections |
+| 4 | ServicesSection + TransformationsSection | Cards vivos, transicoes wave |
+| 5 | TestimonialsSection + DifferentialsSection + FAQSection | Layout quebrado, glow, variacao |
+| 6 | AboutSection + ConveniosSection + LocationSection | Formas organicas, detalhes |
+| 7 | Index CTA + Footer | Wave dividers, urgencia |
+| 8 | Servicos + Sobre + Contato (paginas) | Consistencia e polish |
 
 ---
 
 ## Notas Tecnicas
 
-- Todas as mudancas usam apenas CSS/Tailwind + Framer Motion (sem novas dependencias)
-- Mesh gradients sao implementados via CSS puro com `radial-gradient` multiplos
-- Textura noise via SVG inline em data URI (sem arquivo externo)
-- Animacao shimmer via `@keyframes` + `background-size` animado
-- Header transparente via `useEffect` + `useState` com scroll listener e `IntersectionObserver`
-- Todos os dados continuam vindo do `siteConfig.ts` - nenhuma alteracao de dados
-- Performance: as animacoes usam propriedades GPU-accelerated (`transform`, `opacity`)
-- Acessibilidade: todos os contrastes de texto respeitam WCAG AA (ratio minimo 4.5:1 para texto normal, 3:1 para texto grande)
+- Wave dividers via SVG paths em pseudo-elementos CSS (::before/::after) com `position: absolute` - zero impacto em performance
+- Blobs organicos via `border-radius` CSS puro - nenhuma dependencia nova
+- Gradientes variados via novas CSS custom properties
+- Todas as animacoes continuam em propriedades GPU-accelerated (transform, opacity)
+- Nenhuma dependencia nova necessaria
+- Responsividade mantida - waves e blobs se adaptam com `width: 100%` e `height` fixo
+- Acessibilidade: wave dividers sao puramente decorativos (pointer-events: none, aria-hidden)
 
