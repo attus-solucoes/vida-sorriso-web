@@ -1,48 +1,38 @@
 
+# Correcoes no Header e Hero Section
 
-# Corrigir Carregamento do Video de Fundo no Hero
+## 1. Header — Logo "Sorriso"
 
-## Problema
+**Problema**: Na imagem, o header tem fundo `glass` (translucido branco quando scrollado), mas "Sorriso" fica em `text-white` sobre o hero, o que funciona. Porem, ao usar `glass` no scroll, o branco some. A logica `isTransparent` ja trata isso, mas o fundo glass pode nao ter opacidade suficiente para garantir contraste.
 
-Quando o site abre, a imagem poster aparece primeiro e depois de alguns segundos o video "pula" para o lugar. Isso acontece porque:
+**Solucao**: Manter a logica atual (`text-white` no hero, `text-foreground` quando scrollado). O comportamento ja esta correto no codigo. O usuario confirmou que branco esta ok desde que visivel com fundo branco — e quando scrollado, `isTransparent` e `false`, entao ja mostra `text-foreground`. Nenhuma mudanca necessaria no header.
 
-1. O video leva tempo para baixar e ficar pronto para reproduzir
-2. Nao ha transicao suave entre a imagem poster e o video -- ele simplesmente aparece de repente
-3. O navegador nao recebe instrucao para priorizar o download do video
+## 2. Cards flutuantes — Sobreposicao e tamanho
 
-## Solucao
+**Problema visivel na imagem**:
+- O card "Milhares de sorrisos" esta esticado horizontalmente na parte inferior da imagem, parecendo um banner largo em vez de um card compacto
+- O card "4.9/5 Estrelas" esta parcialmente escondido
+- Ambos competem visualmente com o badge "Avaliacao Gratuita"
 
-Duas mudancas simples que eliminam o "pulo" visual:
+**Solucao**: Reposicionar os cards para cantos opostos da imagem com tamanho compacto e garantir que nao sobreponham:
 
-### 1. Preload do video no HTML (index.html)
+- Card "4.9/5 Estrelas": posicionar no canto inferior-esquerdo (`-bottom-4 -left-4`)
+- Card "Milhares de sorrisos": posicionar no canto superior-direito (`-top-4 -right-4`)
+- Badge "Avaliacao Gratuita": manter no top-left mas ajustar posicao para `top-4 left-4` (dentro da imagem, nao no canto extremo)
 
-Adicionar uma tag `link rel="preload"` no `head` do HTML para que o navegador comece a baixar o video ANTES mesmo do React inicializar:
+Reduzir o badge de `w-20 h-20` para `w-16 h-16` para ser mais discreto.
 
-```html
-<link rel="preload" as="video" href="/videos/hero-bg.mp4" type="video/mp4" />
-```
+## 3. Resultado esperado
 
-Isso adianta o download em varios segundos.
+Os 3 elementos flutuantes ficam em cantos diferentes sem sobreposicao:
+- Top-left: Badge "Avaliacao Gratuita" (menor)
+- Top-right: Card "Milhares de sorrisos"
+- Bottom-left: Card "4.9/5 Estrelas"
 
-### 2. Transicao suave com fade-in (HeroSection.tsx)
-
-Em vez do video aparecer de repente, ele comeca invisivel (opacity 0) e faz fade-in quando esta pronto para tocar:
-
-- Adicionar um estado `videoReady` (useState, inicia false)
-- No elemento `video`, escutar o evento `onCanPlayThrough` para setar `videoReady = true`
-- Aplicar `opacity-0` por padrao e `opacity-100` quando pronto
-- Usar `transition-opacity duration-1000` para a transicao ser suave (1 segundo)
-
-Resultado: o visitante ve o fundo solido escuro (ou poster), e o video aparece gradualmente sem nenhum "pulo".
-
----
-
-## Arquivos Modificados
+## Arquivos modificados
 
 | Arquivo | Mudanca |
 |---------|---------|
-| `index.html` | Adicionar `link preload` para o video |
-| `src/components/HeroSection.tsx` | Adicionar estado `videoReady` + fade-in no video |
+| `src/components/HeroSection.tsx` | Reposicionar cards flutuantes, reduzir badge |
 
-Nenhuma outra mudanca. Hero, blobs, cards, textos -- tudo permanece identico.
-
+O header nao precisa de mudanca — a logica `isTransparent` ja funciona corretamente.
