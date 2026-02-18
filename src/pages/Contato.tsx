@@ -12,14 +12,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Phone, Mail, MapPin, Clock, Send, CheckCircle } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, MessageCircle, CheckCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { z } from "zod";
-import { clinicInfo, services, seo, getPhoneLink, getEmailLink, getWhatsAppLink } from "@/config/siteConfig";
+import { clinicInfo, services, seo, getPhoneLink, getEmailLink } from "@/config/siteConfig";
 
 const contactSchema = z.object({
   name: z.string().trim().min(2, "Nome deve ter pelo menos 2 caracteres").max(100),
-  email: z.string().trim().email("Email inválido").max(255),
+  email: z.string().trim().max(255).optional().or(z.literal("")),
   phone: z.string().trim().min(10, "Telefone inválido").max(20),
   service: z.string().min(1, "Selecione um serviço"),
   message: z.string().trim().max(1000).optional(),
@@ -48,13 +48,22 @@ const ContatoPage = () => {
       return;
     }
     setErrors({});
-    
-    const whatsappMsg = `Olá! Gostaria de agendar uma consulta.\n\n*Nome:* ${form.name}\n*Email:* ${form.email}\n*Telefone:* ${form.phone}\n*Serviço:* ${form.service}${form.message ? `\n*Mensagem:* ${form.message}` : ""}`;
-    const whatsappUrl = getWhatsAppLink(whatsappMsg);
-    window.open(whatsappUrl, "_blank");
-    
+
+    const mensagem = [
+      `🦷 *Nova Consulta - ${clinicInfo.name}*`,
+      ``,
+      `*Nome:* ${form.name}`,
+      `*Telefone:* ${form.phone}`,
+      form.email ? `*Email:* ${form.email}` : '',
+      `*Serviço:* ${form.service}`,
+      form.message ? `\n*Mensagem:* ${form.message}` : '',
+    ].filter(Boolean).join('\n');
+
+    const whatsappUrl = `https://wa.me/${clinicInfo.phoneClean}?text=${encodeURIComponent(mensagem)}`;
+    window.open(whatsappUrl, '_blank');
+
     setSubmitted(true);
-    toast({ title: "Redirecionado para WhatsApp!", description: "Continue a conversa por lá." });
+    toast({ title: "Redirecionando para o WhatsApp...", description: "Complete o envio no WhatsApp." });
   };
 
   const update = (field: string, value: string | boolean) => {
@@ -128,7 +137,7 @@ const ContatoPage = () => {
                       {errors.name && <p className="text-destructive text-xs mt-1">{errors.name}</p>}
                     </div>
                     <div>
-                      <label htmlFor="email" className="text-sm font-medium text-foreground mb-1.5 block">Email *</label>
+                      <label htmlFor="email" className="text-sm font-medium text-foreground mb-1.5 block">Email</label>
                       <Input id="email" type="email" value={form.email} onChange={(e) => update("email", e.target.value)} placeholder="seu@email.com" className="rounded-xl focus:ring-primary focus:border-primary focus:shadow-[0_0_0_3px_hsl(199_89%_48%/0.1)]" />
                       {errors.email && <p className="text-destructive text-xs mt-1">{errors.email}</p>}
                     </div>
@@ -137,7 +146,7 @@ const ContatoPage = () => {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label htmlFor="phone" className="text-sm font-medium text-foreground mb-1.5 block">Telefone / WhatsApp *</label>
-                      <Input id="phone" value={form.phone} onChange={(e) => update("phone", e.target.value)} placeholder="(11) 99999-9999" className="rounded-xl focus:ring-primary focus:border-primary focus:shadow-[0_0_0_3px_hsl(199_89%_48%/0.1)]" />
+                      <Input id="phone" value={form.phone} onChange={(e) => update("phone", e.target.value)} placeholder="(35) 9879-5485" className="rounded-xl focus:ring-primary focus:border-primary focus:shadow-[0_0_0_3px_hsl(199_89%_48%/0.1)]" />
                       {errors.phone && <p className="text-destructive text-xs mt-1">{errors.phone}</p>}
                     </div>
                     <div>
@@ -173,9 +182,17 @@ const ContatoPage = () => {
                   </div>
                   {errors.privacy && <p className="text-destructive text-xs">{errors.privacy}</p>}
 
-                  <Button type="submit" size="lg" className="btn-glow btn-shimmer border-0 text-primary-foreground font-heading font-semibold w-full sm:w-auto rounded-2xl">
-                    Enviar Mensagem <Send className="ml-2 w-4 h-4" />
-                  </Button>
+                  <div>
+                    <Button
+                      type="submit"
+                      size="lg"
+                      className="w-full sm:w-auto rounded-2xl font-heading font-semibold border-0 text-white bg-[hsl(142,70%,45%)] hover:bg-[hsl(142,70%,38%)] shadow-[0_4px_20px_hsl(142_70%_45%/0.35)]"
+                    >
+                      <MessageCircle className="mr-2 w-5 h-5" />
+                      Enviar pelo WhatsApp
+                    </Button>
+                    <p className="text-xs text-muted-foreground mt-2">Você será redirecionado para o WhatsApp</p>
+                  </div>
                 </form>
               )}
             </motion.div>

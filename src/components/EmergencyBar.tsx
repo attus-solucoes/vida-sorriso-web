@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Phone, X } from "lucide-react";
+import { clinicInfo } from "@/config/siteConfig";
 
 const STORAGE_KEY = "emergency-bar-closed-at";
 const EXPIRY_MS = 24 * 60 * 60 * 1000; // 24h
@@ -27,8 +28,8 @@ export function EmergencyBar() {
         <Phone className="w-4 h-4 animate-pulse" />
         <span className="font-medium">
           🚨 Emergências Odontológicas 24h:{" "}
-          <a href="tel:+5511999999999" className="underline font-bold hover:opacity-80 transition-opacity">
-            (11) 99999-9999
+          <a href={`tel:+${clinicInfo.phoneClean}`} className="underline font-bold hover:opacity-80 transition-opacity">
+            {clinicInfo.phone}
           </a>
         </span>
         <button
