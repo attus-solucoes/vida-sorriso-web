@@ -36,7 +36,7 @@ function BeforeAfterSlider({ item }: { item: typeof transformations[0] }) {
   return (
     <div
       ref={containerRef}
-      className="relative w-full h-64 md:h-72 rounded-2xl overflow-hidden cursor-col-resize select-none touch-none group"
+      className="relative w-full h-64 md:h-72 rounded-2xl overflow-hidden cursor-col-resize select-none touch-none group bg-muted"
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
       onPointerUp={handlePointerUp}
@@ -51,10 +51,10 @@ function BeforeAfterSlider({ item }: { item: typeof transformations[0] }) {
         ) : (
           <div className="text-center">
             <span className="text-4xl">😁</span>
-            <p className="font-heading font-bold text-[hsl(var(--dark-text-muted))] mt-2">Depois</p>
+            <p className="font-heading font-bold text-muted-foreground mt-2">Depois</p>
           </div>
         )}
-        <span className="absolute bottom-3 right-3 px-2 py-0.5 rounded-full bg-[hsl(0_0%_100%/0.15)] text-xs font-bold text-[hsl(var(--dark-text))]">Depois</span>
+        <span className="absolute bottom-3 right-3 px-2 py-0.5 rounded-full bg-foreground/10 text-xs font-bold text-foreground">Depois</span>
       </div>
 
       {/* Before (clipped) */}
@@ -70,10 +70,10 @@ function BeforeAfterSlider({ item }: { item: typeof transformations[0] }) {
         ) : (
           <div className="text-center">
             <span className="text-4xl">😐</span>
-            <p className="font-heading font-bold text-[hsl(var(--dark-text-muted))] mt-2">Antes</p>
+            <p className="font-heading font-bold text-muted-foreground mt-2">Antes</p>
           </div>
         )}
-        <span className="absolute bottom-3 left-3 px-2 py-0.5 rounded-full bg-[hsl(0_0%_100%/0.15)] text-xs font-bold text-[hsl(var(--dark-text))]">Antes</span>
+        <span className="absolute bottom-3 left-3 px-2 py-0.5 rounded-full bg-foreground/10 text-xs font-bold text-foreground">Antes</span>
       </div>
 
       {/* Slider line */}
@@ -91,11 +91,7 @@ function BeforeAfterSlider({ item }: { item: typeof transformations[0] }) {
 
 export function TransformationsSection() {
   return (
-    <section className="py-16 md:py-24 bg-dark-teal noise-overlay relative overflow-hidden">
-      {/* Intensified organic glow orbs */}
-      <div className="absolute w-[500px] h-[500px] -bottom-40 -left-40 organic-blob bg-secondary/15 blur-[120px] animate-[float-slow_20s_ease-in-out_infinite]" />
-      <div className="absolute w-[400px] h-[400px] top-20 -right-20 organic-blob-2 bg-primary/12 blur-[100px]" />
-
+    <section className="py-16 md:py-24 bg-muted/30 relative overflow-hidden">
       <div className="container relative z-10">
         <motion.div
           className="text-center max-w-2xl mx-auto mb-12"
@@ -103,13 +99,13 @@ export function TransformationsSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <span className="inline-block px-5 py-2 rounded-full bg-secondary/15 border border-secondary/20 text-secondary text-sm font-semibold mb-4">
+          <span className="inline-block px-5 py-2 rounded-full gradient-primary text-primary-foreground text-sm font-semibold mb-4 shadow-card">
             Resultados
           </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-extrabold text-[hsl(var(--dark-text))] mb-4">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-extrabold text-foreground mb-4">
             Veja as <span className="text-gradient">Transformações</span>
           </h2>
-          <p className="text-[hsl(var(--dark-text-muted))] text-lg">
+          <p className="text-muted-foreground text-lg">
             Resultados reais de pacientes que confiaram em nós
           </p>
         </motion.div>
@@ -122,14 +118,14 @@ export function TransformationsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="card-dark overflow-hidden group hover:shadow-[0_20px_50px_-12px_hsl(168_76%_42%/0.2)]"
+              className="card-premium overflow-hidden group"
             >
               <BeforeAfterSlider item={item} />
               <div className="p-5">
-                <h3 className="font-heading font-bold text-[hsl(var(--dark-text))] mb-1">
+                <h3 className="font-heading font-bold text-foreground mb-1">
                   <span className="text-gradient">{item.treatment}</span>
                 </h3>
-                <p className="text-sm text-[hsl(var(--dark-text-muted))]">
+                <p className="text-sm text-muted-foreground">
                   Tempo de tratamento: {item.duration}
                 </p>
               </div>
@@ -143,19 +139,12 @@ export function TransformationsSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <Button asChild variant="outline" size="lg" className="font-heading font-semibold rounded-2xl border-[hsl(var(--dark-text-muted)/0.2)] text-[hsl(var(--dark-text))] hover:bg-[hsl(0_0%_100%/0.05)]">
+          <Button asChild variant="outline" size="lg" className="font-heading font-semibold rounded-2xl">
             <Link to="/servicos">
               Ver Mais Resultados <ArrowRight className="ml-2 w-4 h-4" />
             </Link>
           </Button>
         </motion.div>
-      </div>
-
-      {/* Wave transition to light section */}
-      <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-20">
-        <svg viewBox="0 0 1200 80" preserveAspectRatio="none" className="w-full h-[40px] md:h-[60px]">
-          <path d="M0,40 C250,80 450,10 700,50 C900,80 1100,20 1200,40 L1200,80 L0,80 Z" fill="hsl(210, 25%, 96%)" />
-        </svg>
       </div>
     </section>
   );

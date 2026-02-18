@@ -53,8 +53,8 @@ export function LocationSection() {
           >
             {locationItems.map((item, i) => (
               <div key={i} className="card-premium flex items-start gap-4 p-5">
-                <div className="w-11 h-11 organic-blob gradient-primary flex items-center justify-center flex-shrink-0 shadow-card glow-halo">
-                  <item.icon className="w-5 h-5 text-primary-foreground" />
+                <div className="w-11 h-11 rounded-2xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                  <item.icon className="w-5 h-5 text-primary" />
                 </div>
                 <div>
                   <h4 className="font-heading font-bold text-foreground text-sm mb-1">{item.title}</h4>

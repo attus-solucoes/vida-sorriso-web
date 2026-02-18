@@ -84,7 +84,7 @@ const Index = () => {
             <p className="text-[hsl(var(--dark-text-muted))] text-lg mb-8 max-w-xl mx-auto">
               Agende sua avaliação gratuita e descubra o tratamento ideal para você.
             </p>
-            <Button asChild size="lg" className="btn-glow btn-shimmer border-0 text-primary-foreground font-heading font-bold text-lg shadow-elevated hover:scale-105 transition-all duration-300 rounded-2xl h-14 px-10 animate-[pulse-glow_3s_ease-in-out_infinite]">
+            <Button asChild size="lg" className="btn-glow btn-shimmer border-0 text-primary-foreground font-heading font-bold text-lg shadow-elevated hover:scale-105 transition-all duration-300 rounded-2xl h-14 px-10">
               <Link to="/contato">
                 Agende sua Consulta <CalendarCheck className="ml-2 w-5 h-5" />
               </Link>
