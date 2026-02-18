@@ -13,7 +13,7 @@ import { CalendarCheck } from "lucide-react";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
 import { DecorativeBlob } from "@/components/SectionDivider";
-import { seo } from "@/config/siteConfig";
+import { seo, clinicInfo, getPhoneLink } from "@/config/siteConfig";
 
 const Index = () => {
   return (
@@ -26,11 +26,11 @@ const Index = () => {
       <TrustBar />
       <ServicesSection />
       <TransformationsSection />
-      <DifferentialsSection />
-      <AboutSection />
       <TestimonialsSection />
-      <ConveniosSection />
+      <DifferentialsSection />
       <FAQSection />
+      <AboutSection />
+      <ConveniosSection />
       <LocationSection />
       {/* CTA Final */}
       <section className="py-20 md:py-28 gradient-primary relative overflow-hidden">
@@ -42,6 +42,9 @@ const Index = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
+            <span className="inline-block px-5 py-2 rounded-full bg-primary-foreground/15 text-primary-foreground text-sm font-semibold mb-4">
+              Avaliação gratuita e sem compromisso
+            </span>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-extrabold text-primary-foreground mb-4">
               Pronto para transformar seu sorriso?
             </h2>
@@ -53,6 +56,12 @@ const Index = () => {
                 Agende sua Consulta <CalendarCheck className="ml-2 w-5 h-5" />
               </Link>
             </Button>
+            <p className="text-primary-foreground/70 text-sm mt-4">
+              ou ligue agora:{" "}
+              <a href={getPhoneLink()} className="text-primary-foreground font-semibold hover:underline">
+                {clinicInfo.phone}
+              </a>
+            </p>
           </motion.div>
         </div>
       </section>
