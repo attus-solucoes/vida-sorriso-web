@@ -15,7 +15,6 @@ import {
 import { Phone, Mail, MapPin, Clock, Send, CheckCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { z } from "zod";
-import { DecorativeBlob } from "@/components/SectionDivider";
 import { clinicInfo, services, seo, getPhoneLink, getEmailLink, getWhatsAppLink } from "@/config/siteConfig";
 
 const contactSchema = z.object({
@@ -27,7 +26,6 @@ const contactSchema = z.object({
   privacy: z.literal(true, { errorMap: () => ({ message: "Aceite a política de privacidade" }) }),
 });
 
-// Lista de serviços para o select (usando do config + "Outro")
 const serviceOptions = [...services.map(s => s.title), "Outro"];
 
 const ContatoPage = () => {
@@ -51,7 +49,6 @@ const ContatoPage = () => {
     }
     setErrors({});
     
-    // Redirecionar para WhatsApp com dados do formulário
     const whatsappMsg = `Olá! Gostaria de agendar uma consulta.\n\n*Nome:* ${form.name}\n*Email:* ${form.email}\n*Telefone:* ${form.phone}\n*Serviço:* ${form.service}${form.message ? `\n*Mensagem:* ${form.message}` : ""}`;
     const whatsappUrl = getWhatsAppLink(whatsappMsg);
     window.open(whatsappUrl, "_blank");
@@ -79,15 +76,16 @@ const ContatoPage = () => {
         <meta name="description" content={seo.contact.description} />
       </Helmet>
 
-      <section className="gradient-hero py-16 md:py-24 relative overflow-hidden">
-        <DecorativeBlob className="w-[500px] h-[500px] -top-40 -right-40" />
-        <div className="container text-center relative">
+      {/* Hero - Dark mesh */}
+      <section className="bg-dark-section noise-overlay py-16 md:py-24 relative overflow-hidden">
+        <div className="absolute w-[400px] h-[400px] -top-40 -right-40 rounded-full bg-primary/10 blur-[100px]" />
+        <div className="container text-center relative z-10">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-            <span className="inline-block px-5 py-2 rounded-full gradient-primary text-primary-foreground text-sm font-semibold mb-4 shadow-card">Contato</span>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-extrabold text-foreground mb-4">
+            <span className="inline-block px-5 py-2 rounded-full bg-primary/15 border border-primary/20 text-primary text-sm font-semibold mb-4">Contato</span>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-extrabold text-[hsl(var(--dark-text))] mb-4">
               Fale <span className="text-gradient">Conosco</span>
             </h1>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-lg text-[hsl(var(--dark-text-muted))] max-w-2xl mx-auto">
               Estamos prontos para atender você. Agende sua consulta ou tire suas dúvidas.
             </p>
           </motion.div>
@@ -97,16 +95,16 @@ const ContatoPage = () => {
       <section className="py-20 bg-background">
         <div className="container">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
-            {/* Form */}
+            {/* Form - glass card with gradient border */}
             <motion.div
-              className="lg:col-span-2 card-premium p-8"
+              className="lg:col-span-2 glass-card rounded-3xl p-8 border-gradient"
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
               {submitted ? (
                 <div className="text-center py-16">
-                  <div className="w-20 h-20 rounded-full gradient-primary flex items-center justify-center mx-auto mb-6">
+                  <div className="w-20 h-20 rounded-full gradient-primary flex items-center justify-center mx-auto mb-6 shadow-glow">
                     <CheckCircle className="w-10 h-10 text-primary-foreground" />
                   </div>
                   <h3 className="font-heading font-bold text-2xl text-foreground mb-2">Mensagem Enviada!</h3>
@@ -120,12 +118,12 @@ const ContatoPage = () => {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label htmlFor="name" className="text-sm font-medium text-foreground mb-1.5 block">Nome completo *</label>
-                      <Input id="name" value={form.name} onChange={(e) => update("name", e.target.value)} placeholder="Seu nome" className="rounded-xl" />
+                      <Input id="name" value={form.name} onChange={(e) => update("name", e.target.value)} placeholder="Seu nome" className="rounded-xl focus:ring-primary focus:border-primary focus:shadow-[0_0_0_3px_hsl(199_89%_48%/0.1)]" />
                       {errors.name && <p className="text-destructive text-xs mt-1">{errors.name}</p>}
                     </div>
                     <div>
                       <label htmlFor="email" className="text-sm font-medium text-foreground mb-1.5 block">Email *</label>
-                      <Input id="email" type="email" value={form.email} onChange={(e) => update("email", e.target.value)} placeholder="seu@email.com" className="rounded-xl" />
+                      <Input id="email" type="email" value={form.email} onChange={(e) => update("email", e.target.value)} placeholder="seu@email.com" className="rounded-xl focus:ring-primary focus:border-primary focus:shadow-[0_0_0_3px_hsl(199_89%_48%/0.1)]" />
                       {errors.email && <p className="text-destructive text-xs mt-1">{errors.email}</p>}
                     </div>
                   </div>
@@ -133,7 +131,7 @@ const ContatoPage = () => {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label htmlFor="phone" className="text-sm font-medium text-foreground mb-1.5 block">Telefone / WhatsApp *</label>
-                      <Input id="phone" value={form.phone} onChange={(e) => update("phone", e.target.value)} placeholder="(11) 99999-9999" className="rounded-xl" />
+                      <Input id="phone" value={form.phone} onChange={(e) => update("phone", e.target.value)} placeholder="(11) 99999-9999" className="rounded-xl focus:ring-primary focus:border-primary focus:shadow-[0_0_0_3px_hsl(199_89%_48%/0.1)]" />
                       {errors.phone && <p className="text-destructive text-xs mt-1">{errors.phone}</p>}
                     </div>
                     <div>
@@ -154,7 +152,7 @@ const ContatoPage = () => {
 
                   <div>
                     <label htmlFor="message" className="text-sm font-medium text-foreground mb-1.5 block">Mensagem (opcional)</label>
-                    <Textarea id="message" value={form.message} onChange={(e) => update("message", e.target.value)} placeholder="Conte-nos mais sobre sua necessidade..." rows={4} className="rounded-xl" />
+                    <Textarea id="message" value={form.message} onChange={(e) => update("message", e.target.value)} placeholder="Conte-nos mais sobre sua necessidade..." rows={4} className="rounded-xl focus:ring-primary focus:border-primary focus:shadow-[0_0_0_3px_hsl(199_89%_48%/0.1)]" />
                   </div>
 
                   <div className="flex items-start gap-2">
@@ -169,14 +167,14 @@ const ContatoPage = () => {
                   </div>
                   {errors.privacy && <p className="text-destructive text-xs">{errors.privacy}</p>}
 
-                  <Button type="submit" size="lg" className="btn-glow border-0 text-primary-foreground font-heading font-semibold w-full sm:w-auto rounded-2xl">
+                  <Button type="submit" size="lg" className="btn-glow btn-shimmer border-0 text-primary-foreground font-heading font-semibold w-full sm:w-auto rounded-2xl">
                     Enviar Mensagem <Send className="ml-2 w-4 h-4" />
                   </Button>
                 </form>
               )}
             </motion.div>
 
-            {/* Contact Info */}
+            {/* Contact Info - Dark side */}
             <motion.div
               className="space-y-5"
               initial={{ opacity: 0, x: 20 }}
@@ -184,16 +182,16 @@ const ContatoPage = () => {
               viewport={{ once: true }}
             >
               {contactItems.map((item, i) => (
-                <div key={i} className="card-premium p-5 flex items-start gap-4">
-                  <div className="w-11 h-11 rounded-2xl gradient-primary flex items-center justify-center flex-shrink-0 shadow-card">
+                <div key={i} className="bg-dark-section noise-overlay rounded-3xl p-5 flex items-start gap-4 relative z-0">
+                  <div className="w-11 h-11 rounded-2xl gradient-primary flex items-center justify-center flex-shrink-0 shadow-glow relative z-10">
                     <item.icon className="w-5 h-5 text-primary-foreground" />
                   </div>
-                  <div>
-                    <h4 className="font-heading font-bold text-foreground text-sm mb-1">{item.title}</h4>
+                  <div className="relative z-10">
+                    <h4 className="font-heading font-bold text-[hsl(var(--dark-text))] text-sm mb-1">{item.title}</h4>
                     {item.href ? (
-                      <a href={item.href} className="text-sm text-muted-foreground hover:text-primary transition-colors duration-300 whitespace-pre-line">{item.text}</a>
+                      <a href={item.href} className="text-sm text-[hsl(var(--dark-text-muted))] hover:text-primary transition-colors duration-300 whitespace-pre-line">{item.text}</a>
                     ) : (
-                      <p className="text-sm text-muted-foreground whitespace-pre-line">{item.text}</p>
+                      <p className="text-sm text-[hsl(var(--dark-text-muted))] whitespace-pre-line">{item.text}</p>
                     )}
                   </div>
                 </div>

@@ -1,11 +1,9 @@
 import { motion } from "framer-motion";
-import { DecorativeDots } from "./SectionDivider";
 import { convenios } from "@/config/siteConfig";
 
 export function ConveniosSection() {
   return (
-    <section className="py-14 md:py-20 bg-muted/50 relative overflow-hidden">
-      <DecorativeDots className="top-16 right-12 hidden lg:block" />
+    <section className="py-16 md:py-20 bg-muted/50 relative overflow-hidden">
       <div className="container relative">
         <motion.div
           className="text-center max-w-2xl mx-auto mb-12"
@@ -32,7 +30,7 @@ export function ConveniosSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.08 }}
-              className="group card-premium p-6 flex items-center justify-center h-24 grayscale hover:grayscale-0 transition-all duration-300"
+              className="group card-premium p-6 flex items-center justify-center h-24 grayscale hover:grayscale-0 transition-all duration-300 hover:border-primary/30"
             >
               <span className="font-heading font-bold text-sm text-muted-foreground group-hover:text-primary transition-colors duration-300 text-center leading-tight">
                 {name}

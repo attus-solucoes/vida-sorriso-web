@@ -12,7 +12,6 @@ import { Button } from "@/components/ui/button";
 import { CalendarCheck } from "lucide-react";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
-import { DecorativeBlob } from "@/components/SectionDivider";
 import { seo, clinicInfo, stats, services, getPhoneLink } from "@/config/siteConfig";
 
 const Index = () => {
@@ -63,33 +62,37 @@ const Index = () => {
       <AboutSection />
       <ConveniosSection />
       <LocationSection />
-      {/* CTA Final */}
-      <section className="py-14 md:py-20 gradient-primary relative overflow-hidden">
-        <div className="absolute inset-0 dots-pattern opacity-20" />
-        <DecorativeBlob className="w-[400px] h-[400px] top-0 right-0 !opacity-[0.1]" />
-        <div className="container text-center relative">
+
+      {/* CTA Final - Dark premium */}
+      <section className="py-16 md:py-24 bg-dark-section noise-overlay relative overflow-hidden">
+        <div className="absolute w-[500px] h-[500px] top-0 right-0 rounded-full bg-primary/8 blur-[120px]" />
+        <div className="absolute w-[400px] h-[400px] bottom-0 left-0 rounded-full bg-secondary/6 blur-[100px]" />
+        <div className="container text-center relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <span className="inline-block px-5 py-2 rounded-full bg-primary-foreground/15 text-primary-foreground text-sm font-semibold mb-4">
+            <span className="inline-block px-5 py-2 rounded-full bg-primary/15 border border-primary/20 text-primary text-sm font-semibold mb-4">
               Avaliação gratuita e sem compromisso
             </span>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-extrabold text-primary-foreground mb-4">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-extrabold text-[hsl(var(--dark-text))] mb-4">
               Pronto para transformar seu sorriso?
             </h2>
-            <p className="text-primary-foreground/80 text-lg mb-8 max-w-xl mx-auto">
+            <p className="text-[hsl(var(--dark-text-muted))] text-lg mb-8 max-w-xl mx-auto">
               Agende sua avaliação gratuita e descubra o tratamento ideal para você.
             </p>
-            <Button asChild size="lg" className="gradient-accent border-0 text-accent-foreground font-heading font-bold text-base shadow-elevated hover:scale-105 transition-all duration-300 rounded-2xl h-12 px-8">
+            <Button asChild size="lg" className="btn-glow btn-shimmer border-0 text-primary-foreground font-heading font-bold text-lg shadow-elevated hover:scale-105 transition-all duration-300 rounded-2xl h-14 px-10">
               <Link to="/contato">
                 Agende sua Consulta <CalendarCheck className="ml-2 w-5 h-5" />
               </Link>
             </Button>
-            <p className="text-primary-foreground/70 text-sm mt-4">
+            <p className="text-[hsl(var(--dark-text-muted))] text-xs mt-4">
+              ⏰ Vagas limitadas para este mês
+            </p>
+            <p className="text-[hsl(var(--dark-text-muted)/0.6)] text-sm mt-2">
               ou ligue agora:{" "}
-              <a href={getPhoneLink()} className="text-primary-foreground font-semibold hover:underline">
+              <a href={getPhoneLink()} className="text-primary font-semibold hover:underline">
                 {clinicInfo.phone}
               </a>
             </p>

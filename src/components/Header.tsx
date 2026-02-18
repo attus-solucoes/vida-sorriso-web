@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -14,14 +14,28 @@ const navLinks = [
 
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
 
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <header className="sticky top-0 z-50 glass border-b border-border/30">
+    <header
+      className={`sticky top-0 z-50 transition-all duration-500 ${
+        scrolled
+          ? "glass border-b border-border/30 shadow-card"
+          : "bg-transparent border-b border-transparent"
+      }`}
+    >
       <div className="container flex items-center justify-between h-16 md:h-20">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2.5 group">
-          <div className="w-10 h-10 rounded-2xl btn-glow flex items-center justify-center">
+          <div className="w-10 h-10 rounded-2xl btn-glow flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
             <span className="text-primary-foreground font-heading font-extrabold text-lg">S</span>
           </div>
           <div className="hidden sm:block">
@@ -53,7 +67,7 @@ export function Header() {
             <Phone className="w-4 h-4" />
             {clinicInfo.phone}
           </a>
-          <Button asChild className="btn-glow border-0 text-primary-foreground font-heading font-semibold rounded-2xl px-6">
+          <Button asChild className="btn-glow btn-shimmer border-0 text-primary-foreground font-heading font-semibold rounded-2xl px-6">
             <Link to="/contato">Agende sua Consulta</Link>
           </Button>
         </div>
