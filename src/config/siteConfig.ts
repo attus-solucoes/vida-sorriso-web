@@ -18,6 +18,7 @@ import clareamentoAntes from "@/assets/clareamento-antes.jpeg";
 import clareamentoDepois from "@/assets/clareamento-depois.jpeg";
 import ortodontiaAntes from "@/assets/ortodontia-antes.png";
 import ortodontiaDepois from "@/assets/ortodontia-depois.png";
+import draJulianaImg from "@/assets/dra-juliana.jpg";
 
 // =====================================================
 // 🏢 DADOS DA CLÍNICA
@@ -119,7 +120,7 @@ export const team: TeamMember[] = [
     role: "Odontopediatra",
     specialty: "Odontopediatra",
     crm: "CRO-SP 45678",
-    image: "https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=600&q=80",
+    image: draJulianaImg,
   },
 ];
 
