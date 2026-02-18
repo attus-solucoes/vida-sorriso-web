@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { motion, useScroll, useTransform } from "framer-motion";
@@ -7,6 +7,7 @@ import { useCountUp } from "@/hooks/useCountUp";
 import { clinicInfo, stats, images } from "@/config/siteConfig";
 
 export function HeroSection() {
+  const [videoReady, setVideoReady] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -24,7 +25,8 @@ export function HeroSection() {
         playsInline
         preload="auto"
         poster={images.hero}
-        className="absolute inset-0 w-full h-full object-cover z-0 hidden md:block"
+        onCanPlayThrough={() => setVideoReady(true)}
+        className={`absolute inset-0 w-full h-full object-cover z-0 hidden md:block transition-opacity duration-1000 ${videoReady ? 'opacity-100' : 'opacity-0'}`}
       >
         <source src={images.heroVideo} type="video/mp4" />
       </video>
