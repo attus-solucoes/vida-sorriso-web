@@ -45,7 +45,7 @@ export function Header() {
             <span className="text-primary-foreground font-heading font-extrabold text-lg">S</span>
           </div>
           <div className="hidden sm:block">
-            <span className={`font-heading font-extrabold text-lg transition-colors duration-500 ${isTransparent ? 'text-[hsl(var(--dark-text))]' : 'text-foreground'}`}>Sorriso</span>
+            <span className={`font-heading font-extrabold text-lg transition-colors duration-500 ${isTransparent ? 'text-white' : 'text-foreground'}`}>Sorriso</span>
             <span className="font-heading font-extrabold text-lg text-gradient"> Perfeito</span>
           </div>
         </Link>
