@@ -54,7 +54,10 @@ export function ServicesSection() {
                   <s.icon className="w-7 h-7 text-primary group-hover:text-primary-foreground transition-colors duration-300" />
                 </div>
                 <h3 className="font-heading font-bold text-foreground mb-2">{s.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed mb-4">{s.shortDesc}</p>
+                <p className="text-sm text-muted-foreground leading-relaxed mb-3">{s.shortDesc}</p>
+                <span className="inline-flex items-center text-sm font-semibold text-primary group-hover:translate-x-1 transition-transform duration-300">
+                  Saiba mais <ArrowRight className="ml-1 w-3.5 h-3.5" />
+                </span>
                 {s.price && (
                   <p className="text-sm text-muted-foreground font-medium">{s.price}</p>
                 )}

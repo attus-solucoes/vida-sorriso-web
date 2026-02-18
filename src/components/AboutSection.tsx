@@ -1,10 +1,10 @@
 import { motion } from "framer-motion";
-import clinicImage from "@/assets/clinic-interior.jpg";
 import { DecorativeBlob, DecorativeDots } from "./SectionDivider";
+import { images, stats, clinicInfo } from "@/config/siteConfig";
 
 export function AboutSection() {
   return (
-    <section className="py-20 md:py-28 bg-background relative overflow-hidden" id="sobre">
+    <section className="py-14 md:py-20 bg-background relative overflow-hidden" id="sobre">
       <DecorativeBlob className="w-[500px] h-[500px] -bottom-60 -left-60" />
       <DecorativeDots className="top-20 right-16 hidden lg:block" />
       <div className="container relative">
@@ -15,7 +15,7 @@ export function AboutSection() {
             viewport={{ once: true }}
           >
             <div className="rounded-3xl overflow-hidden shadow-elevated">
-              <img src={clinicImage} alt="Estrutura moderna da Clínica Sorriso Perfeito" className="w-full h-[400px] object-cover hover:scale-105 transition-transform duration-500" loading="lazy" />
+              <img src={images.clinicInterior} alt={`Estrutura moderna da Clínica ${clinicInfo.name}`} className="w-full h-[400px] object-cover hover:scale-105 transition-transform duration-500" loading="lazy" />
             </div>
           </motion.div>
 
@@ -26,10 +26,10 @@ export function AboutSection() {
           >
             <span className="inline-block px-5 py-2 rounded-full gradient-primary text-primary-foreground text-sm font-semibold mb-4 shadow-card">Sobre Nós</span>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-extrabold text-foreground mb-6">
-              Mais de 18 anos cuidando do seu <span className="text-gradient">sorriso</span>
+              Mais de {stats.yearsExperience} anos cuidando do seu <span className="text-gradient">sorriso</span>
             </h2>
             <p className="text-muted-foreground leading-relaxed mb-4">
-              Fundada em 2005, a Clínica Sorriso Perfeito nasceu do sonho de oferecer odontologia de excelência com um atendimento verdadeiramente humano. Localizada no coração de São Paulo, contamos com uma infraestrutura moderna e uma equipe de especialistas dedicados.
+              Fundada em {clinicInfo.foundedYear}, a Clínica {clinicInfo.name} nasceu do sonho de oferecer odontologia de excelência com um atendimento verdadeiramente humano. Localizada no coração de {clinicInfo.address.city}, contamos com uma infraestrutura moderna e uma equipe de especialistas dedicados.
             </p>
             <p className="text-muted-foreground leading-relaxed mb-6">
               Nossa missão é proporcionar a melhor experiência em saúde bucal, aliando tecnologia de ponta ao cuidado individualizado que cada paciente merece.

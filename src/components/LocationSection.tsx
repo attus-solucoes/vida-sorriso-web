@@ -14,10 +14,10 @@ export function LocationSection() {
   return (
     <>
       <WaveDivider className="text-muted -mb-px" />
-      <section className="py-20 md:py-28 bg-muted relative overflow-hidden" id="localizacao">
+      <section className="py-14 md:py-20 bg-muted relative overflow-hidden" id="localizacao">
         <div className="container relative">
           <motion.div
-            className="text-center max-w-2xl mx-auto mb-16"
+            className="text-center max-w-2xl mx-auto mb-10"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}

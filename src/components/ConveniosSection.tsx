@@ -4,7 +4,7 @@ import { convenios } from "@/config/siteConfig";
 
 export function ConveniosSection() {
   return (
-    <section className="py-20 md:py-28 bg-muted/50 relative overflow-hidden">
+    <section className="py-14 md:py-20 bg-muted/50 relative overflow-hidden">
       <DecorativeDots className="top-16 right-12 hidden lg:block" />
       <div className="container relative">
         <motion.div

@@ -10,11 +10,11 @@ import { faqs } from "@/config/siteConfig";
 
 export function FAQSection() {
   return (
-    <section className="py-20 md:py-28 bg-background relative overflow-hidden" id="faq">
+    <section className="py-14 md:py-20 bg-background relative overflow-hidden" id="faq">
       <DecorativeDots className="top-20 left-8 hidden lg:block" />
       <div className="container max-w-3xl relative">
         <motion.div
-          className="text-center mb-16"
+          className="text-center mb-10"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}

@@ -45,26 +45,36 @@ function BeforeAfterSlider({ item }: { item: typeof transformations[0] }) {
       {/* After (full background) */}
       <div
         className="absolute inset-0 flex items-center justify-center"
-        style={{ background: item.afterColor }}
+        style={{ background: item.afterImage ? undefined : item.afterColor }}
       >
-        <div className="text-center">
-          <span className="text-4xl">😁</span>
-          <p className="font-heading font-bold text-foreground/60 mt-2">Depois</p>
-        </div>
+        {item.afterImage ? (
+          <img src={item.afterImage} alt="Depois" className="w-full h-full object-cover" loading="lazy" />
+        ) : (
+          <div className="text-center">
+            <span className="text-4xl">😁</span>
+            <p className="font-heading font-bold text-foreground/60 mt-2">Depois</p>
+          </div>
+        )}
+        <span className="absolute bottom-3 right-3 px-2 py-0.5 rounded-full bg-background/80 text-xs font-bold text-foreground">Depois</span>
       </div>
 
       {/* Before (clipped) */}
       <div
         className="absolute inset-0 flex items-center justify-center"
         style={{
-          background: item.beforeColor,
+          background: item.beforeImage ? undefined : item.beforeColor,
           clipPath: `inset(0 ${100 - position}% 0 0)`,
         }}
       >
-        <div className="text-center">
-          <span className="text-4xl">😐</span>
-          <p className="font-heading font-bold text-foreground/60 mt-2">Antes</p>
-        </div>
+        {item.beforeImage ? (
+          <img src={item.beforeImage} alt="Antes" className="w-full h-full object-cover" loading="lazy" />
+        ) : (
+          <div className="text-center">
+            <span className="text-4xl">😐</span>
+            <p className="font-heading font-bold text-foreground/60 mt-2">Antes</p>
+          </div>
+        )}
+        <span className="absolute bottom-3 left-3 px-2 py-0.5 rounded-full bg-background/80 text-xs font-bold text-foreground">Antes</span>
       </div>
 
       {/* Slider line */}
@@ -82,11 +92,11 @@ function BeforeAfterSlider({ item }: { item: typeof transformations[0] }) {
 
 export function TransformationsSection() {
   return (
-    <section className="py-20 md:py-28 bg-background relative overflow-hidden">
+    <section className="py-14 md:py-20 bg-background relative overflow-hidden">
       <DecorativeBlob className="w-[500px] h-[500px] -bottom-40 -left-40" />
       <div className="container relative">
         <motion.div
-          className="text-center max-w-2xl mx-auto mb-16"
+          className="text-center max-w-2xl mx-auto mb-10"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}

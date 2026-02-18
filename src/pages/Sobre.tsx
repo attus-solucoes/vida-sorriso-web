@@ -38,7 +38,7 @@ const SobrePage = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
               <div className="rounded-3xl overflow-hidden shadow-elevated">
-                <img src={images.hero} alt={`Clínica ${clinicInfo.name}`} className="w-full h-[400px] object-cover hover:scale-105 transition-transform duration-500" loading="lazy" />
+                <img src={images.aboutTeam} alt={`Equipe da Clínica ${clinicInfo.name}`} className="w-full h-[400px] object-cover hover:scale-105 transition-transform duration-500" loading="lazy" />
               </div>
             </motion.div>
             <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
@@ -68,7 +68,7 @@ const SobrePage = () => {
       <section className="py-20 bg-muted relative overflow-hidden">
         <DecorativeBlob className="w-[500px] h-[500px] -bottom-60 -right-60" />
         <div className="container relative">
-          <motion.div className="text-center mb-16" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+          <motion.div className="text-center mb-10" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-extrabold text-foreground mb-4">
               Nossa <span className="text-gradient">Equipe</span>
             </h2>
@@ -107,7 +107,7 @@ const SobrePage = () => {
       {/* Gallery / Infrastructure */}
       <section className="py-20 bg-background relative overflow-hidden">
         <div className="container relative">
-          <motion.div className="text-center mb-16" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+          <motion.div className="text-center mb-10" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-extrabold text-foreground mb-4">
               Nossa <span className="text-gradient">Estrutura</span>
             </h2>

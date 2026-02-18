@@ -6,12 +6,12 @@ export function DifferentialsSection() {
   return (
     <>
       <WaveDivider className="text-muted -mb-px" />
-      <section className="py-20 md:py-28 bg-muted relative overflow-hidden">
+      <section className="py-14 md:py-20 bg-muted relative overflow-hidden">
         <DecorativeDots className="top-12 right-12 hidden lg:block" />
         <DecorativeDots className="bottom-12 left-12 hidden lg:block" />
         <div className="container relative">
           <motion.div
-            className="text-center max-w-2xl mx-auto mb-16"
+            className="text-center max-w-2xl mx-auto mb-10"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}

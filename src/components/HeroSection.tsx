@@ -113,9 +113,10 @@ export function HeroSection() {
   );
 }
 
-function StatItem({ icon: Icon, target, prefix = "", suffix = "", label }: { icon: any; target: number; prefix?: string; suffix?: string; label: string }) {
+function StatItem({ icon: Icon, target, prefix = "", suffix = "", label, decimal }: { icon: any; target: number; prefix?: string; suffix?: string; label: string; decimal?: boolean }) {
   const ref = useRef<HTMLDivElement>(null);
   const count = useCountUp(target, 2000, ref);
+  const displayValue = decimal ? (count / 10).toFixed(1) : count.toLocaleString("pt-BR");
   return (
     <motion.div
       ref={ref}
@@ -126,7 +127,7 @@ function StatItem({ icon: Icon, target, prefix = "", suffix = "", label }: { ico
     >
       <Icon className="w-8 h-8 text-accent mx-auto mb-2" />
       <p className="text-3xl md:text-4xl font-heading font-extrabold text-primary-foreground">
-        {prefix}{count.toLocaleString("pt-BR")}{suffix}
+        {prefix}{displayValue}{suffix}
       </p>
       <p className="text-sm text-primary-foreground/70 mt-1">{label}</p>
     </motion.div>
@@ -141,7 +142,7 @@ export function TrustBar() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           <StatItem icon={Award} target={stats.yearsExperience} prefix="+" label="Anos de Experiência" />
           <StatItem icon={Users} target={stats.patientsServed} prefix="+" label="Pacientes Atendidos" />
-          <StatItem icon={Star} target={Math.round(stats.googleRating * 10)} prefix="" suffix="" label="Avaliação Google" />
+          <StatItem icon={Star} target={49} prefix="" suffix="/5" label="Avaliação Google" decimal />
           <StatItem icon={CalendarCheck} target={stats.procedures} prefix="+" label="Procedimentos" />
         </div>
       </div>

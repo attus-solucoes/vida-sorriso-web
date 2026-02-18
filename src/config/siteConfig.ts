@@ -20,7 +20,7 @@ export const clinicInfo = {
   name: "Sorriso Perfeito",
   shortName: "S", // Letra para o logo
   slogan: "Transformando sorrisos e mudando vidas",
-  description: "Clínica odontológica em São Paulo com +18 anos de experiência. Implantes, ortodontia, clareamento e mais.",
+  get description() { return `Clínica odontológica em São Paulo com +${new Date().getFullYear() - this.foundedYear} anos de experiência. Implantes, ortodontia, clareamento e mais.`; },
   foundedYear: 2005,
   
   // Contato
@@ -67,7 +67,7 @@ export const clinicInfo = {
 // 📊 ESTATÍSTICAS / NÚMEROS
 // =====================================================
 export const stats = {
-  yearsExperience: 18,
+  yearsExperience: new Date().getFullYear() - clinicInfo.foundedYear,
   patientsServed: 15000,
   googleRating: 4.9,
   procedures: 30000,
@@ -261,24 +261,28 @@ export const testimonials: Testimonial[] = [
     treatment: "Clareamento Dental",
     text: "Tratamento excelente! Equipe muito atenciosa e resultado incrível no meu clareamento. Saí de lá com o sorriso que sempre sonhei!",
     rating: 5,
+    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&q=80",
   },
   {
     name: "João P.",
     treatment: "Tratamento de Canal",
     text: "Finalmente encontrei uma clínica que me fez perder o medo de dentista. Profissionais incríveis, ambiente acolhedor. Recomendo de olhos fechados!",
     rating: 5,
+    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80",
   },
   {
     name: "Ana R.",
     treatment: "Implantes Dentários",
     text: "Os implantes ficaram perfeitos e naturais. Voltei a sorrir com confiança! O atendimento do início ao fim foi impecável.",
     rating: 5,
+    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&q=80",
   },
   {
     name: "Carlos M.",
     treatment: "Ortodontia",
     text: "Meu tratamento com Invisalign superou todas as expectativas. Equipe sempre disponível para tirar dúvidas. Resultado fantástico!",
     rating: 5,
+    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&q=80",
   },
 ];
 
@@ -346,18 +350,24 @@ export const transformations: Transformation[] = [
   {
     treatment: "Lentes de Contato",
     duration: "2 semanas",
+    beforeImage: "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=600&q=80",
+    afterImage: "https://images.unsplash.com/photo-1581585742429-0e10e97ef15f?w=600&q=80",
     beforeColor: "hsl(38 30% 75%)",
     afterColor: "hsl(199 89% 92%)",
   },
   {
     treatment: "Clareamento Dental",
     duration: "1 sessão",
+    beforeImage: "https://images.unsplash.com/photo-1598256989800-fe5f95da9787?w=600&q=80",
+    afterImage: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&q=80",
     beforeColor: "hsl(38 40% 70%)",
     afterColor: "hsl(168 60% 90%)",
   },
   {
     treatment: "Implantes Dentários",
     duration: "3 meses",
+    beforeImage: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=600&q=80",
+    afterImage: "https://images.unsplash.com/photo-1629909615184-74f495363b67?w=600&q=80",
     beforeColor: "hsl(0 10% 78%)",
     afterColor: "hsl(199 70% 90%)",
   },
@@ -401,6 +411,7 @@ export const galleryItems: GalleryItem[] = [
 export const images = {
   hero: "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=1200&q=80",
   clinicInterior: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=1000&q=80",
+  aboutTeam: "https://images.unsplash.com/photo-1629909615184-74f495363b67?w=1000&q=80",
   logo: "",
 };
 
@@ -419,10 +430,10 @@ export const socialIcons: Record<string, LucideIcon> = {
 // 🔗 LINKS RÁPIDOS DO FOOTER
 // =====================================================
 export const quickLinks = [
-  { label: "Implantes Dentários", path: "/servicos" },
-  { label: "Ortodontia", path: "/servicos" },
-  { label: "Clareamento", path: "/servicos" },
-  { label: "Estética Dental", path: "/servicos" },
+  { label: "Implantes Dentários", path: "/servicos#implantes-dentarios" },
+  { label: "Ortodontia", path: "/servicos#ortodontia--invisalign" },
+  { label: "Clareamento", path: "/servicos#clareamento-dental" },
+  { label: "Estética Dental", path: "/servicos#estetica-dental" },
 ];
 
 // =====================================================
