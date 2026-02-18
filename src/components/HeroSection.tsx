@@ -128,7 +128,7 @@ export function HeroSection() {
 
             {/* Badge selo with wavy border */}
             <motion.div
-              className="absolute top-6 left-6 w-20 h-20 flex items-center justify-center shadow-elevated"
+              className="absolute top-4 left-4 w-16 h-16 flex items-center justify-center shadow-elevated z-10"
               style={{ borderRadius: '60% 40% 50% 50% / 50% 60% 40% 50%' }}
               animate={{ rotate: [0, 5, -5, 0] }}
               transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
