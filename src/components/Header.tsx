@@ -12,10 +12,16 @@ const navLinks = [
   { label: "Contato", path: "/contato" },
 ];
 
+// Pages that have dark hero backgrounds
+const darkHeroPages = ["/", "/servicos", "/sobre", "/contato"];
+
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+
+  const isOnDarkHero = darkHeroPages.includes(location.pathname);
+  const isTransparent = !scrolled && isOnDarkHero;
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -39,7 +45,7 @@ export function Header() {
             <span className="text-primary-foreground font-heading font-extrabold text-lg">S</span>
           </div>
           <div className="hidden sm:block">
-            <span className="font-heading font-extrabold text-lg text-foreground">Sorriso</span>
+            <span className={`font-heading font-extrabold text-lg transition-colors duration-500 ${isTransparent ? 'text-[hsl(var(--dark-text))]' : 'text-foreground'}`}>Sorriso</span>
             <span className="font-heading font-extrabold text-lg text-gradient"> Perfeito</span>
           </div>
         </Link>
@@ -50,8 +56,10 @@ export function Header() {
             <Link
               key={link.path}
               to={link.path}
-              className={`relative text-sm font-medium transition-colors hover:text-primary py-1 ${
-                location.pathname === link.path ? "text-primary" : "text-muted-foreground"
+              className={`relative text-sm font-medium transition-colors duration-500 hover:text-primary py-1 ${
+                location.pathname === link.path
+                  ? "text-primary"
+                  : isTransparent ? "text-[hsl(var(--dark-text-muted))]" : "text-muted-foreground"
               } after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-primary after:rounded-full after:origin-left after:transition-transform after:duration-300 ${
                 location.pathname === link.path ? "after:scale-x-100" : "after:scale-x-0 hover:after:scale-x-100"
               }`}
@@ -63,7 +71,7 @@ export function Header() {
 
         {/* Desktop CTA */}
         <div className="hidden lg:flex items-center gap-4">
-          <a href={getPhoneLink()} className="flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
+          <a href={getPhoneLink()} className={`flex items-center gap-2 text-sm font-medium transition-colors duration-500 hover:text-primary ${isTransparent ? 'text-[hsl(var(--dark-text-muted))]' : 'text-muted-foreground'}`}>
             <Phone className="w-4 h-4" />
             {clinicInfo.phone}
           </a>
@@ -74,7 +82,7 @@ export function Header() {
 
         {/* Mobile toggle */}
         <button
-          className="lg:hidden p-2 text-foreground"
+          className={`lg:hidden p-2 transition-colors duration-500 ${isTransparent ? 'text-[hsl(var(--dark-text))]' : 'text-foreground'}`}
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="Toggle menu"
         >

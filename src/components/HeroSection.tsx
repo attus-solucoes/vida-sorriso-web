@@ -15,12 +15,12 @@ export function HeroSection() {
   const imageY = useTransform(scrollYProgress, [0, 1], [0, 80]);
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden bg-dark-section noise-overlay">
-      {/* Animated mesh gradient orbs */}
+    <section ref={sectionRef} className="relative overflow-hidden bg-dark-hero noise-overlay">
+      {/* Organic animated blobs */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute w-[600px] h-[600px] -top-40 -left-40 rounded-full bg-primary/10 blur-[120px] animate-[gradient-rotate_15s_ease-in-out_infinite]" />
-        <div className="absolute w-[500px] h-[500px] -bottom-40 -right-40 rounded-full bg-secondary/8 blur-[100px] animate-[gradient-rotate_20s_ease-in-out_infinite_reverse]" />
-        <div className="absolute w-[300px] h-[300px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[hsl(260_60%_50%/0.05)] blur-[80px]" />
+        <div className="absolute w-[700px] h-[700px] -top-48 -left-48 organic-blob bg-primary/15 blur-[120px] animate-[float-slow_18s_ease-in-out_infinite]" />
+        <div className="absolute w-[500px] h-[500px] -bottom-32 -right-32 organic-blob-2 bg-secondary/12 blur-[100px] animate-[float-slow-reverse_22s_ease-in-out_infinite]" />
+        <div className="absolute w-[350px] h-[350px] top-1/3 left-1/2 -translate-x-1/2 organic-blob-3 bg-accent/[0.06] blur-[80px] animate-[float-slow_25s_ease-in-out_infinite]" />
       </div>
 
       <div className="container py-14 md:py-20 lg:py-28 relative z-10">
@@ -74,9 +74,9 @@ export function HeroSection() {
             className="relative"
             style={{ y: imageY }}
           >
-            {/* Decorative rectangle behind image */}
-            <div className="absolute -inset-3 rounded-[2rem] bg-gradient-to-br from-primary/20 to-secondary/10 blur-sm" />
-            <div className="relative rounded-3xl overflow-hidden border-gradient">
+            {/* Organic decorative shape behind image */}
+            <div className="absolute -inset-4 organic-blob bg-gradient-to-br from-primary/20 to-secondary/10 blur-sm" />
+            <div className="relative organic-image overflow-hidden border-gradient shadow-elevated">
               <img
                 src={images.hero}
                 alt={`Interior moderno da Clínica ${clinicInfo.name} — consultório odontológico com equipamentos de última geração`}
@@ -116,19 +116,29 @@ export function HeroSection() {
               </div>
             </motion.div>
 
-            {/* Badge selo */}
+            {/* Badge selo with wavy border */}
             <motion.div
-              className="absolute top-6 left-6 w-20 h-20 rounded-full gradient-accent flex items-center justify-center shadow-elevated"
+              className="absolute top-6 left-6 w-20 h-20 flex items-center justify-center shadow-elevated"
+              style={{ borderRadius: '60% 40% 50% 50% / 50% 60% 40% 50%' }}
               animate={{ rotate: [0, 5, -5, 0] }}
               transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
             >
-              <div className="text-center">
-                <p className="text-[10px] font-heading font-extrabold text-accent-foreground leading-tight">Avaliação</p>
-                <p className="text-[10px] font-heading font-bold text-accent-foreground leading-tight">Gratuita</p>
+              <div className="w-full h-full gradient-accent flex items-center justify-center" style={{ borderRadius: 'inherit' }}>
+                <div className="text-center">
+                  <p className="text-[10px] font-heading font-extrabold text-accent-foreground leading-tight">Avaliação</p>
+                  <p className="text-[10px] font-heading font-bold text-accent-foreground leading-tight">Gratuita</p>
+                </div>
               </div>
             </motion.div>
           </motion.div>
         </div>
+      </div>
+
+      {/* Wave transition to next section */}
+      <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-20">
+        <svg viewBox="0 0 1200 80" preserveAspectRatio="none" className="w-full h-[40px] md:h-[60px]">
+          <path d="M0,40 C300,80 600,0 900,50 C1050,70 1150,30 1200,40 L1200,80 L0,80 Z" fill="hsl(215, 35%, 12%)" />
+        </svg>
       </div>
     </section>
   );
@@ -147,17 +157,18 @@ function StatItem({ icon: Icon, target, prefix = "", suffix = "", label, decimal
       viewport={{ once: true }}
     >
       <Icon className="w-7 h-7 text-primary mx-auto mb-2" />
-      <p className="text-3xl md:text-4xl font-heading font-extrabold text-[hsl(var(--dark-text))]">
+      <p className="text-3xl md:text-5xl font-heading font-extrabold text-[hsl(var(--dark-text))]">
         {prefix}{displayValue}{suffix}
       </p>
-      <p className="text-sm text-[hsl(var(--dark-text-muted))] mt-1">{label}</p>
+      <div className="w-10 h-0.5 mx-auto mt-2 rounded-full bg-gradient-to-r from-primary to-secondary opacity-60" />
+      <p className="text-sm text-[hsl(var(--dark-text-muted))] mt-2">{label}</p>
     </motion.div>
   );
 }
 
 export function TrustBar() {
   return (
-    <section className="bg-dark-section noise-overlay py-12 relative overflow-hidden border-t border-[hsl(0_0%_100%/0.05)]">
+    <section className="bg-dark-section noise-overlay py-14 relative overflow-hidden">
       <div className="container relative z-10">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           <StatItem icon={Award} target={stats.yearsExperience} prefix="+" label="Anos de Experiência" />
@@ -171,6 +182,13 @@ export function TrustBar() {
           <div className="absolute left-1/2 top-4 bottom-4 w-px bg-[hsl(0_0%_100%/0.06)]" />
           <div className="absolute left-3/4 top-4 bottom-4 w-px bg-[hsl(0_0%_100%/0.06)]" />
         </div>
+      </div>
+
+      {/* Wave transition to light section */}
+      <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-20">
+        <svg viewBox="0 0 1200 80" preserveAspectRatio="none" className="w-full h-[40px] md:h-[60px]">
+          <path d="M0,30 C200,70 500,0 800,50 C1000,70 1100,20 1200,40 L1200,80 L0,80 Z" fill="hsl(210, 20%, 99%)" />
+        </svg>
       </div>
     </section>
   );

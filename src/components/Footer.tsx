@@ -7,8 +7,15 @@ export function Footer() {
   
   return (
     <footer className="relative">
+      {/* Wave divider on top */}
+      <div className="absolute -top-[59px] left-0 w-full overflow-hidden leading-none z-10">
+        <svg viewBox="0 0 1200 80" preserveAspectRatio="none" className="w-full h-[60px]">
+          <path d="M0,40 C300,80 600,0 900,50 C1050,70 1150,30 1200,40 L1200,80 L0,80 Z" fill="hsl(215, 35%, 12%)" />
+        </svg>
+      </div>
+
       {/* Gradient separator line */}
-      <div className="h-px bg-gradient-to-r from-transparent via-primary to-transparent" />
+      <div className="h-[2px] bg-gradient-to-r from-transparent via-primary/60 to-transparent" />
 
       <div className="bg-dark-section noise-overlay">
         <div className="container py-16 relative z-10">

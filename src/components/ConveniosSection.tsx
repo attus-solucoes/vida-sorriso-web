@@ -30,7 +30,7 @@ export function ConveniosSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.08 }}
-              className="group card-premium p-6 flex items-center justify-center h-24 grayscale hover:grayscale-0 transition-all duration-300 hover:border-primary/30"
+              className="group card-premium p-6 flex items-center justify-center h-24 grayscale hover:grayscale-0 transition-all duration-300 hover:border-gradient"
             >
               <span className="font-heading font-bold text-sm text-muted-foreground group-hover:text-primary transition-colors duration-300 text-center leading-tight">
                 {name}

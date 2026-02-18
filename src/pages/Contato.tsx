@@ -76,9 +76,9 @@ const ContatoPage = () => {
         <meta name="description" content={seo.contact.description} />
       </Helmet>
 
-      {/* Hero - Dark mesh */}
-      <section className="bg-dark-section noise-overlay py-16 md:py-24 relative overflow-hidden">
-        <div className="absolute w-[400px] h-[400px] -top-40 -right-40 rounded-full bg-primary/10 blur-[100px]" />
+      {/* Hero - Dark mesh hero */}
+      <section className="bg-dark-hero noise-overlay py-16 md:py-24 relative overflow-hidden">
+        <div className="absolute w-[400px] h-[400px] -top-40 -right-40 organic-blob bg-primary/12 blur-[120px]" />
         <div className="container text-center relative z-10">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
             <span className="inline-block px-5 py-2 rounded-full bg-primary/15 border border-primary/20 text-primary text-sm font-semibold mb-4">Contato</span>
@@ -90,6 +90,12 @@ const ContatoPage = () => {
             </p>
           </motion.div>
         </div>
+        {/* Wave */}
+        <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-20">
+          <svg viewBox="0 0 1200 80" preserveAspectRatio="none" className="w-full h-[40px] md:h-[60px]">
+            <path d="M0,40 C250,80 450,10 700,50 C900,80 1100,20 1200,40 L1200,80 L0,80 Z" fill="hsl(210, 20%, 99%)" />
+          </svg>
+        </div>
       </section>
 
       <section className="py-20 bg-background">
@@ -97,14 +103,14 @@ const ContatoPage = () => {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
             {/* Form - glass card with gradient border */}
             <motion.div
-              className="lg:col-span-2 glass-card rounded-3xl p-8 border-gradient"
+              className="lg:col-span-2 glass-card rounded-3xl p-8 border-gradient shadow-elevated"
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
               {submitted ? (
                 <div className="text-center py-16">
-                  <div className="w-20 h-20 rounded-full gradient-primary flex items-center justify-center mx-auto mb-6 shadow-glow">
+                  <div className="w-20 h-20 organic-blob gradient-primary flex items-center justify-center mx-auto mb-6 shadow-glow">
                     <CheckCircle className="w-10 h-10 text-primary-foreground" />
                   </div>
                   <h3 className="font-heading font-bold text-2xl text-foreground mb-2">Mensagem Enviada!</h3>
@@ -183,7 +189,7 @@ const ContatoPage = () => {
             >
               {contactItems.map((item, i) => (
                 <div key={i} className="bg-dark-section noise-overlay rounded-3xl p-5 flex items-start gap-4 relative z-0">
-                  <div className="w-11 h-11 rounded-2xl gradient-primary flex items-center justify-center flex-shrink-0 shadow-glow relative z-10">
+                  <div className="w-11 h-11 organic-blob gradient-primary flex items-center justify-center flex-shrink-0 shadow-glow glow-halo relative z-10">
                     <item.icon className="w-5 h-5 text-primary-foreground" />
                   </div>
                   <div className="relative z-10">
@@ -197,7 +203,7 @@ const ContatoPage = () => {
                 </div>
               ))}
 
-              <div className="rounded-3xl overflow-hidden shadow-elevated">
+              <div className="overflow-hidden shadow-elevated" style={{ borderRadius: '30% 70% 70% 30% / 30% 30% 70% 70%' }}>
                 <iframe
                   src={clinicInfo.mapEmbedUrl}
                   width="100%"

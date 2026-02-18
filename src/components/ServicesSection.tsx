@@ -10,8 +10,10 @@ export function ServicesSection() {
 
   return (
     <section className="py-16 md:py-24 bg-background relative overflow-hidden" id="servicos">
-      {/* Subtle mesh gradient in corner */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full bg-primary/[0.03] blur-[120px]" />
+      {/* Organic gradient bleed */}
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] organic-blob bg-primary/[0.04] blur-[150px]" />
+      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] organic-blob-2 bg-secondary/[0.03] blur-[120px]" />
+      <div className="absolute inset-0 dots-pattern opacity-20" />
 
       <div className="container relative">
         <motion.div
@@ -51,7 +53,7 @@ export function ServicesSection() {
                     ⭐ Mais Procurado
                   </span>
                 )}
-                <div className="w-14 h-14 rounded-full bg-primary/10 group-hover:gradient-primary flex items-center justify-center mb-5 transition-all duration-300 group-hover:shadow-glow group-hover:scale-110">
+                <div className="w-14 h-14 organic-blob bg-primary/10 group-hover:gradient-primary flex items-center justify-center mb-5 transition-all duration-300 group-hover:shadow-glow group-hover:scale-110 glow-halo">
                   <s.icon className="w-7 h-7 text-primary group-hover:text-primary-foreground transition-colors duration-300" />
                 </div>
                 <h3 className="font-heading font-bold text-foreground mb-2">{s.title}</h3>
@@ -79,6 +81,13 @@ export function ServicesSection() {
             </Link>
           </Button>
         </motion.div>
+      </div>
+
+      {/* Wave transition to dark section */}
+      <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-10">
+        <svg viewBox="0 0 1200 80" preserveAspectRatio="none" className="w-full h-[40px] md:h-[60px]">
+          <path d="M0,50 C300,10 600,70 900,30 C1050,10 1150,50 1200,30 L1200,80 L0,80 Z" fill="hsl(215, 32%, 13%)" />
+        </svg>
       </div>
     </section>
   );
