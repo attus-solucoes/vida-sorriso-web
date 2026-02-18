@@ -50,7 +50,7 @@ const SobrePage = () => {
                 <img src={images.aboutTeam} alt={`Equipe da Clínica ${clinicInfo.name}`} className="w-full h-[400px] object-cover hover:scale-105 transition-transform duration-500" loading="lazy" />
               </div>
               {/* Timeline dot */}
-              <div className="hidden lg:block absolute top-1/2 -right-[calc(50%+8px)] w-4 h-4 rounded-full gradient-primary shadow-glow" />
+              
             </motion.div>
             <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
               <h2 className="text-3xl md:text-4xl font-heading font-extrabold text-foreground mb-6">Nossa <span className="text-gradient">História</span></h2>
@@ -61,14 +61,14 @@ const SobrePage = () => {
                 Hoje, contamos com uma equipe multidisciplinar de especialistas e uma infraestrutura completa, equipada com o que há de mais moderno em tecnologia odontológica.
               </p>
               <div className="grid grid-cols-2 gap-4">
-                {certifications.map((item, i) => (
-                  <div key={i} className="glass-card rounded-2xl flex items-center gap-3 p-3.5 border-gradient">
+                {certifications.map((item, i) =>
+                <div key={i} className="glass-card rounded-2xl flex items-center gap-3 p-3.5 border-gradient">
                     <div className="w-9 h-9 organic-blob gradient-primary flex items-center justify-center flex-shrink-0">
                       <item.icon className="w-4 h-4 text-primary-foreground" />
                     </div>
                     <span className="text-sm font-semibold text-foreground">{item.text}</span>
                   </div>
-                ))}
+                )}
               </div>
             </motion.div>
           </div>
@@ -86,23 +86,23 @@ const SobrePage = () => {
             <p className="text-[hsl(var(--dark-text-muted))] text-lg">Profissionais dedicados ao seu sorriso.</p>
           </motion.div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {team.map((member, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="group card-dark overflow-hidden"
-              >
+            {team.map((member, i) =>
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+              className="group card-dark overflow-hidden">
+
                 <div className="h-56 bg-[hsl(0_0%_100%/0.03)] flex items-center justify-center relative overflow-hidden">
-                  {member.image ? (
-                    <img src={member.image} alt={member.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
-                  ) : (
-                    <span className="text-6xl font-heading font-extrabold text-[hsl(var(--dark-text-muted)/0.2)] group-hover:text-[hsl(var(--dark-text-muted)/0.3)] transition-all duration-300 group-hover:scale-110">
-                      {member.name.split(" ").map(n => n[0]).join("")}
+                  {member.image ?
+                <img src={member.image} alt={member.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" /> :
+
+                <span className="text-6xl font-heading font-extrabold text-[hsl(var(--dark-text-muted)/0.2)] group-hover:text-[hsl(var(--dark-text-muted)/0.3)] transition-all duration-300 group-hover:scale-110">
+                      {member.name.split(" ").map((n) => n[0]).join("")}
                     </span>
-                  )}
+                }
                   {/* Hover overlay with bio */}
                   <div className="absolute inset-0 bg-gradient-to-t from-[hsl(215_35%_12%/0.95)] via-[hsl(215_35%_12%/0.5)] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
                     <p className="text-xs text-[hsl(var(--dark-text-muted))]">{member.specialty} · {member.crm}</p>
@@ -113,7 +113,7 @@ const SobrePage = () => {
                   <span className="inline-block px-3 py-1 rounded-full bg-primary/15 border border-primary/20 text-primary text-xs font-semibold">{member.specialty}</span>
                 </div>
               </motion.div>
-            ))}
+            )}
           </div>
         </div>
 
@@ -134,16 +134,16 @@ const SobrePage = () => {
             </h2>
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {galleryItems.map((item, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08 }}
-                className={`rounded-2xl overflow-hidden shadow-elevated group relative cursor-pointer ${item.span || ""}`}
-                onClick={() => setLightboxIndex(i)}
-              >
+            {galleryItems.map((item, i) =>
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.08 }}
+              className={`rounded-2xl overflow-hidden shadow-elevated group relative cursor-pointer ${item.span || ""}`}
+              onClick={() => setLightboxIndex(i)}>
+
                 <img src={item.src} alt={item.label} className="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
                 <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/40 transition-colors duration-300 flex items-center justify-center">
                   <Maximize2 className="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -152,56 +152,56 @@ const SobrePage = () => {
                   {item.label}
                 </div>
               </motion.div>
-            ))}
+            )}
           </div>
         </div>
       </section>
 
       {/* Lightbox */}
       <AnimatePresence>
-        {lightboxIndex !== null && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] bg-foreground/90 flex items-center justify-center p-4"
-            onClick={() => setLightboxIndex(null)}
-          >
+        {lightboxIndex !== null &&
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 z-[100] bg-foreground/90 flex items-center justify-center p-4"
+          onClick={() => setLightboxIndex(null)}>
+
             <button className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors" aria-label="Fechar">
               <X className="w-6 h-6" />
             </button>
             <button
-              className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors"
-              onClick={(e) => { e.stopPropagation(); setLightboxIndex((p) => (p! > 0 ? p! - 1 : galleryItems.length - 1)); }}
-              aria-label="Anterior"
-            >
+            className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors"
+            onClick={(e) => {e.stopPropagation();setLightboxIndex((p) => p! > 0 ? p! - 1 : galleryItems.length - 1);}}
+            aria-label="Anterior">
+
               <ChevronLeft className="w-6 h-6" />
             </button>
             <motion.img
-              key={lightboxIndex}
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              src={galleryItems[lightboxIndex].src}
-              alt={galleryItems[lightboxIndex].label}
-              className="max-w-full max-h-[85vh] rounded-2xl object-contain"
-              onClick={(e) => e.stopPropagation()}
-            />
+            key={lightboxIndex}
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.9, opacity: 0 }}
+            src={galleryItems[lightboxIndex].src}
+            alt={galleryItems[lightboxIndex].label}
+            className="max-w-full max-h-[85vh] rounded-2xl object-contain"
+            onClick={(e) => e.stopPropagation()} />
+
             <button
-              className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors"
-              onClick={(e) => { e.stopPropagation(); setLightboxIndex((p) => (p! < galleryItems.length - 1 ? p! + 1 : 0)); }}
-              aria-label="Próximo"
-            >
+            className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors"
+            onClick={(e) => {e.stopPropagation();setLightboxIndex((p) => p! < galleryItems.length - 1 ? p! + 1 : 0);}}
+            aria-label="Próximo">
+
               <ChevronRight className="w-6 h-6" />
             </button>
             <p className="absolute bottom-6 text-white font-heading font-bold text-lg">
               {galleryItems[lightboxIndex].label}
             </p>
           </motion.div>
-        )}
+        }
       </AnimatePresence>
-    </>
-  );
+    </>);
+
 };
 
 export default SobrePage;
