@@ -15,9 +15,32 @@ export function HeroSection() {
   const imageY = useTransform(scrollYProgress, [0, 1], [0, 80]);
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden bg-dark-hero noise-overlay">
+    <section ref={sectionRef} className="relative overflow-hidden bg-[hsl(215_35%_10%)]">
+      {/* Video Background - Desktop */}
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        poster={images.hero}
+        className="absolute inset-0 w-full h-full object-cover z-0 hidden md:block"
+      >
+        <source src={images.heroVideo} type="video/mp4" />
+      </video>
+
+      {/* Fallback imagem - Mobile */}
+      <img
+        src={images.hero}
+        alt=""
+        className="absolute inset-0 w-full h-full object-cover z-0 md:hidden"
+      />
+
+      {/* Overlay escuro para legibilidade do texto */}
+      <div className="absolute inset-0 bg-[hsl(215_35%_10%/0.78)] z-[1]" />
+
       {/* Organic animated blobs */}
-      <div className="absolute inset-0 overflow-hidden">
+      <div className="absolute inset-0 overflow-hidden z-[2]">
         <div className="absolute w-[700px] h-[700px] -top-48 -left-48 organic-blob bg-primary/15 blur-[120px] animate-[float-slow_18s_ease-in-out_infinite]" />
         <div className="absolute w-[500px] h-[500px] -bottom-32 -right-32 organic-blob-2 bg-secondary/12 blur-[100px] animate-[float-slow-reverse_22s_ease-in-out_infinite]" />
         <div className="absolute w-[350px] h-[350px] top-1/3 left-1/2 -translate-x-1/2 organic-blob-3 bg-accent/[0.06] blur-[80px] animate-[float-slow_25s_ease-in-out_infinite]" />
