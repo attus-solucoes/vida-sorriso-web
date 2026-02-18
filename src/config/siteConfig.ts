@@ -34,8 +34,8 @@ export const clinicInfo = {
   foundedYear: 2005,
   
   // Contato
-  phone: "(35) 9879-5485",
-  phoneClean: "5535987955485", // Sem formatação para links
+  phone: "(35) 99879-5485",
+  phoneClean: "5535998795485", // Sem formatação para links
   email: "contato@sorrisoperfeito.com.br",
   whatsappMessage: "Olá! Gostaria de agendar uma consulta.",
   
