@@ -19,6 +19,7 @@ function BeforeAfterSlider({ item }: { item: typeof transformations[0] }) {
   }, []);
 
   const handlePointerDown = useCallback((e: React.PointerEvent) => {
+    e.preventDefault();
     isDragging.current = true;
     (e.target as HTMLElement).setPointerCapture(e.pointerId);
     updatePosition(e.clientX);
@@ -36,7 +37,7 @@ function BeforeAfterSlider({ item }: { item: typeof transformations[0] }) {
   return (
     <div
       ref={containerRef}
-      className="relative w-full h-64 md:h-72 rounded-2xl overflow-hidden cursor-col-resize select-none group"
+      className="relative w-full h-64 md:h-72 rounded-2xl overflow-hidden cursor-col-resize select-none touch-none group"
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
       onPointerUp={handlePointerUp}
@@ -71,7 +72,7 @@ function BeforeAfterSlider({ item }: { item: typeof transformations[0] }) {
         className="absolute top-0 bottom-0 w-0.5 bg-white shadow-lg z-10"
         style={{ left: `${position}%` }}
       >
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white shadow-elevated flex items-center justify-center">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 md:w-10 md:h-10 rounded-full bg-white shadow-elevated flex items-center justify-center">
           <GripVertical className="w-5 h-5 text-primary" />
         </div>
       </div>
