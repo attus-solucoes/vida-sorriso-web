@@ -60,7 +60,7 @@ const ContatoPage = () => {
     ].filter(Boolean).join('\n');
 
     const whatsappUrl = `https://wa.me/${clinicInfo.phoneClean}?text=${encodeURIComponent(mensagem)}`;
-    window.open(whatsappUrl, '_blank');
+    window.location.href = whatsappUrl;
 
     setSubmitted(true);
     toast({ title: "Redirecionando para o WhatsApp...", description: "Complete o envio no WhatsApp." });
