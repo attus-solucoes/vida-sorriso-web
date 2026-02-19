@@ -33,7 +33,9 @@ export function HeroSection() {
       />
 
       {/* Overlay escuro para legibilidade do texto */}
-      <div className="absolute inset-0 bg-[hsl(215_35%_10%/0.78)] z-[1]" />
+      {/* Overlay responsivo: mais transparente no mobile para mostrar a imagem */}
+      <div className="absolute inset-0 bg-[hsl(215_35%_10%/0.65)] md:hidden z-[1]" />
+      <div className="absolute inset-0 bg-[hsl(215_35%_10%/0.78)] hidden md:block z-[1]" />
 
       {/* Subtle static gradient overlays - no blur animations for GPU performance */}
       <div className="absolute inset-0 z-[2] pointer-events-none">
@@ -41,7 +43,7 @@ export function HeroSection() {
         <div className="absolute w-[400px] h-[400px] -bottom-32 -right-32 rounded-full bg-secondary/8 opacity-50" />
       </div>
 
-      <div className="container py-14 md:py-20 lg:py-28 relative z-10">
+      <div className="container py-10 md:py-20 lg:py-28 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -84,7 +86,7 @@ export function HeroSection() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.7, delay: 0.2 }}
-            className="relative"
+            className="relative hidden lg:block"
           >
             <div className="relative organic-image overflow-hidden border border-white/10 shadow-elevated">
               <img
