@@ -33,10 +33,6 @@ export function WhatsAppButton() {
         href={getWhatsAppLink()}
         target="_blank"
         rel="noopener noreferrer"
-        onClick={(e) => {
-          e.preventDefault();
-          window.open(getWhatsAppLink(), '_blank', 'noopener,noreferrer');
-        }}
         className="w-14 h-14 rounded-full flex items-center justify-center transition-transform duration-300 hover:scale-110"
         style={{
           background: "hsl(142, 70%, 45%)",

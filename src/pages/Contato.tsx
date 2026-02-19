@@ -60,7 +60,14 @@ const ContatoPage = () => {
     ].filter(Boolean).join('\n');
 
     const whatsappUrl = `https://wa.me/${clinicInfo.phoneClean}?text=${encodeURIComponent(mensagem)}`;
-    window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+    // Use a native <a> click to avoid popup/iframe blocking
+    const a = document.createElement('a');
+    a.href = whatsappUrl;
+    a.target = '_blank';
+    a.rel = 'noopener noreferrer';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
 
     setSubmitted(true);
     toast({ title: "Abrindo WhatsApp...", description: "Complete o envio na nova aba." });
