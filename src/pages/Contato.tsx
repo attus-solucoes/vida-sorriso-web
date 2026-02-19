@@ -20,7 +20,6 @@ import { clinicInfo, services, seo, getPhoneLink, getEmailLink } from "@/config/
 const contactSchema = z.object({
   name: z.string().trim().min(2, "Nome deve ter pelo menos 2 caracteres").max(100),
   email: z.string().trim().max(255).optional().or(z.literal("")),
-  phone: z.string().trim().min(10, "Telefone inválido").max(20),
   service: z.string().min(1, "Selecione um serviço"),
   message: z.string().trim().max(1000).optional(),
   privacy: z.literal(true, { errorMap: () => ({ message: "Aceite a política de privacidade" }) }),
@@ -33,7 +32,7 @@ const ContatoPage = () => {
   const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [form, setForm] = useState({
-    name: "", email: "", phone: "", service: "", message: "", privacy: false,
+    name: "", email: "", service: "", message: "", privacy: false,
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -50,20 +49,21 @@ const ContatoPage = () => {
     setErrors({});
 
     const mensagem = [
-      `🦷 *Nova Consulta - ${clinicInfo.name}*`,
+      `🦷 Nova solicitação pelo site — ${clinicInfo.name}`,
       ``,
-      `*Nome:* ${form.name}`,
-      `*Telefone:* ${form.phone}`,
-      form.email ? `*Email:* ${form.email}` : '',
-      `*Serviço:* ${form.service}`,
-      form.message ? `\n*Mensagem:* ${form.message}` : '',
+      `👤 Nome: ${form.name}`,
+      form.email ? `📧 Email: ${form.email}` : '',
+      `🦷 Serviço de interesse: ${form.service}`,
+      `📝 Mensagem: ${form.message?.trim() || '(não informado)'}`,
+      ``,
+      `✅ Pode me orientar sobre o próximo passo?`,
     ].filter(Boolean).join('\n');
 
     const whatsappUrl = `https://wa.me/${clinicInfo.phoneClean}?text=${encodeURIComponent(mensagem)}`;
-    window.location.href = whatsappUrl;
+    window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
 
     setSubmitted(true);
-    toast({ title: "Redirecionando para o WhatsApp...", description: "Complete o envio no WhatsApp." });
+    toast({ title: "Abrindo WhatsApp...", description: "Complete o envio na nova aba." });
   };
 
   const update = (field: string, value: string | boolean) => {
@@ -143,26 +143,19 @@ const ContatoPage = () => {
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label htmlFor="phone" className="text-sm font-medium text-foreground mb-1.5 block">Telefone / WhatsApp *</label>
-                      <Input id="phone" value={form.phone} onChange={(e) => update("phone", e.target.value)} placeholder="(35) 9879-5485" className="rounded-xl focus:ring-primary focus:border-primary focus:shadow-[0_0_0_3px_hsl(199_89%_48%/0.1)]" />
-                      {errors.phone && <p className="text-destructive text-xs mt-1">{errors.phone}</p>}
-                    </div>
-                    <div>
-                      <label htmlFor="service" className="text-sm font-medium text-foreground mb-1.5 block">Serviço de interesse *</label>
-                      <Select onValueChange={(v) => update("service", v)}>
-                        <SelectTrigger id="service" className="rounded-xl">
-                          <SelectValue placeholder="Selecione um serviço" />
-                        </SelectTrigger>
-                        <SelectContent className="bg-card z-50 rounded-xl">
-                          {serviceOptions.map((s) => (
-                            <SelectItem key={s} value={s}>{s}</SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                      {errors.service && <p className="text-destructive text-xs mt-1">{errors.service}</p>}
-                    </div>
+                  <div>
+                    <label htmlFor="service" className="text-sm font-medium text-foreground mb-1.5 block">Serviço de interesse *</label>
+                    <Select onValueChange={(v) => update("service", v)}>
+                      <SelectTrigger id="service" className="rounded-xl">
+                        <SelectValue placeholder="Selecione um serviço" />
+                      </SelectTrigger>
+                      <SelectContent className="bg-card z-50 rounded-xl">
+                        {serviceOptions.map((s) => (
+                          <SelectItem key={s} value={s}>{s}</SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    {errors.service && <p className="text-destructive text-xs mt-1">{errors.service}</p>}
                   </div>
 
                   <div>
@@ -189,9 +182,9 @@ const ContatoPage = () => {
                       className="w-full sm:w-auto rounded-2xl font-heading font-semibold border-0 text-white bg-[hsl(142,70%,45%)] hover:bg-[hsl(142,70%,38%)] shadow-[0_4px_20px_hsl(142_70%_45%/0.35)]"
                     >
                       <MessageCircle className="mr-2 w-5 h-5" />
-                      Enviar pelo WhatsApp
+                      Enviar Mensagem
                     </Button>
-                    <p className="text-xs text-muted-foreground mt-2">Você será redirecionado para o WhatsApp</p>
+                    <p className="text-xs text-muted-foreground mt-2">Abrirá o WhatsApp em uma nova aba</p>
                   </div>
                 </form>
               )}
