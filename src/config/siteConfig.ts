@@ -37,7 +37,7 @@ export const clinicInfo = {
   phone: "(35) 99879-5485",
   phoneClean: "5535998795485", // Sem formatação para links
   email: "contato@sorrisoperfeito.com.br",
-  whatsappMessage: `Ol\u00E1! \u{1F60A} Vim pelo site da Sorriso Perfeito. Poderia me ajudar com uma informa\u00E7\u00E3o?`,
+  whatsappMessage: "Olá! Vim pelo site da Sorriso Perfeito. Poderia me ajudar com uma informação?",
   
   // Endereço
   address: {
