@@ -23,11 +23,11 @@ export function EmergencyBar() {
   if (!visible) return null;
 
   return (
-    <div className="sticky top-0 z-[60] bg-destructive text-destructive-foreground text-center text-sm py-2.5 px-4">
+    <div className="sticky top-0 z-[60] bg-destructive text-destructive-foreground text-center text-xs md:text-sm py-2 md:py-2.5 px-4">
       <div className="container flex items-center justify-center gap-2 flex-wrap">
         <Phone className="w-4 h-4 animate-pulse" />
         <span className="font-medium">
-          🚨 Emergências Odontológicas 24h:{" "}
+          🚨 <span className="hidden md:inline">Emergências Odontológicas 24h:</span><span className="inline md:hidden">Emergência 24h:</span>{" "}
           <a href={`tel:+${clinicInfo.phoneClean}`} className="underline font-bold hover:opacity-80 transition-opacity">
             {clinicInfo.phone}
           </a>

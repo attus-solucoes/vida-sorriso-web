@@ -33,7 +33,7 @@ export function WhatsAppButton() {
         href={getWhatsAppLink()}
         target="_blank"
         rel="noopener noreferrer"
-        className="w-14 h-14 rounded-full flex items-center justify-center transition-transform duration-300 hover:scale-110"
+        className="w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center transition-transform duration-300 hover:scale-110"
         style={{
           background: "hsl(142, 70%, 45%)",
           color: "hsl(0, 0%, 100%)",
@@ -45,7 +45,7 @@ export function WhatsAppButton() {
         transition={{ delay: 1, type: "spring" }}
         aria-label="Contato via WhatsApp"
       >
-        <MessageCircle className="w-7 h-7" />
+        <MessageCircle className="w-6 h-6 md:w-7 md:h-7" />
       </motion.a>
     </div>
   );

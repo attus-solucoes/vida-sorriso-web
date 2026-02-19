@@ -79,7 +79,7 @@ export function Footer() {
         </div>
 
         <div className="border-t border-[hsl(0_0%_100%/0.06)]">
-          <div className="container py-6 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-[hsl(var(--dark-text-muted)/0.5)] relative z-10">
+          <div className="container py-6 pb-20 md:pb-6 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-[hsl(var(--dark-text-muted)/0.5)] relative z-10">
             <p>© {new Date().getFullYear()} Clínica {clinicInfo.name}. Todos os direitos reservados.</p>
             <div className="flex flex-col sm:flex-row items-center gap-4">
               <div className="flex gap-4">
