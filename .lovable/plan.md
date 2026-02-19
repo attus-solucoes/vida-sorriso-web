@@ -1,54 +1,37 @@
 
-# Revisao Mobile - Ajustes de Experiencia
 
-## Problemas Identificados
+# Mobile Hero - Melhorias
 
-### 1. Botao flutuante do WhatsApp sobrepoe conteudo no rodape
-O botao verde do WhatsApp (canto inferior direito) cobre o texto "Termos de Uso" e o link "Solvia Hub" no rodape em telas pequenas. O tooltip "Fale conosco" tambem pode ficar atras de outros elementos.
+## Problemas Atuais
 
-### 2. Barra de emergencia ocupa muito espaco no mobile
-O texto "Emergencias Odontologicas 24h: (35) 99879-5485" quebra em 2 linhas no mobile, ocupando ~70px de altura vertical que comprime o conteudo.
+1. **Imagem de fundo duplicada**: A mesma imagem do Unsplash aparece duas vezes no mobile -- uma como fundo (quase invisivel atras do overlay escuro de 78%) e outra como o cartao grande abaixo do texto. Isso e redundante e confuso.
 
-### 3. Formulario de contato - botao "Enviar Mensagem"
-O botao ja tem `w-full sm:w-auto`, porem o `sm:w-auto` pode deixar o botao estreito em telas entre 640px-767px. Nao e critico, mas pode melhorar.
+2. **Hero muito longo no mobile**: O grid empilha texto + imagem (350px de altura), fazendo o hero ocupar quase 2 telas inteiras no celular. O usuario precisa rolar muito antes de ver qualquer conteudo.
 
-### 4. Mapa com formato organico na pagina de contato
-O iframe do mapa usa `borderRadius: '30% 70% 70% 30% / 30% 30% 70% 70%'` que corta muito conteudo do mapa em telas pequenas, dificultando a visualizacao.
+3. **Sem video no mobile**: O video esta oculto com `hidden md:block`. Isso e correto (performance), mas o fallback atual (imagem quase invisivel) nao agrega valor visual.
 
-### 5. Footer - links cortados pelo botao WhatsApp
-Os links "Politica de Privacidade" e "Termos de Uso" ficam parcialmente escondidos pelo botao flutuante do WhatsApp no mobile.
+## Solucao
 
----
+Esconder o cartao de imagem no mobile e deixar a imagem de fundo mais visivel, criando um hero compacto e impactante.
 
-## Solucao Proposta
+### Mudancas no arquivo `src/components/HeroSection.tsx`
 
-### Arquivo: `src/components/Footer.tsx`
-- Adicionar `pb-20` (padding-bottom) na secao inferior do footer para que os links de "Politica de Privacidade" e "Termos de Uso" nao fiquem escondidos pelo botao flutuante do WhatsApp
+**1. Esconder o cartao de imagem no mobile**
+- Adicionar `hidden lg:block` ao `motion.div` que envolve o cartao de imagem (linha 83)
+- No mobile, o hero mostrara apenas o texto com botoes sobre a imagem de fundo
+- No desktop (lg+), o cartao continua aparecendo ao lado do texto como antes
 
-### Arquivo: `src/components/WhatsAppButton.tsx`
-- Reduzir o tamanho do botao levemente no mobile (de `w-14 h-14` para `w-12 h-12` em telas pequenas)
-- Ajustar posicao `bottom-20` no mobile para ficar acima da area do footer quando o usuario rola ate o final
+**2. Reduzir a opacidade do overlay no mobile**
+- Mudar o overlay de 78% fixo para responsivo: 65% no mobile, 78% no desktop
+- Isso deixa a imagem de fundo mais visivel no mobile, dando mais impacto visual
+- Implementar com duas divs de overlay (uma `md:hidden` com 65%, outra `hidden md:block` com 78%)
 
-### Arquivo: `src/pages/Contato.tsx`
-- No mapa embutido: usar `borderRadius` mais suave no mobile (ex: `rounded-2xl` em vez do formato organico extremo) para que o mapa fique mais legivel em telas pequenas
+**3. Ajustar padding vertical do hero no mobile**
+- Reduzir `py-14` para `py-10` no mobile para um hero mais compacto
+- Manter `md:py-20 lg:py-28` para telas maiores
 
-### Arquivo: `src/components/EmergencyBar.tsx`
-- Compactar o texto no mobile: usar fonte menor (`text-xs`) e abreviar para "Emergencia 24h" no mobile, mantendo o texto completo no desktop
+### Resultado esperado
 
----
+- Hero mobile: texto + botoes sobre imagem de fundo visivel, compacto (1 tela)
+- Hero desktop: sem mudancas (texto a esquerda, cartao de imagem a direita, video de fundo)
 
-## Detalhes Tecnicos
-
-### Footer (`src/components/Footer.tsx`)
-- Linha 81: Adicionar `pb-20 md:pb-0` na div inferior para dar espaco ao botao flutuante
-
-### WhatsAppButton (`src/components/WhatsAppButton.tsx`)
-- Alterar classe do botao de `w-14 h-14` para `w-12 h-12 md:w-14 md:h-14`
-- Ajustar icone de `w-7 h-7` para `w-6 h-6 md:w-7 md:h-7`
-
-### Contato (`src/pages/Contato.tsx`)
-- Linha 223: Trocar o `style={{ borderRadius: '30% 70%...' }}` por `className="rounded-2xl md:rounded-none md:overflow-hidden"` e manter o estilo organico apenas no desktop com media query
-
-### EmergencyBar (`src/components/EmergencyBar.tsx`)
-- Reduzir padding e tamanho de fonte no mobile: `text-xs md:text-sm py-2 md:py-2.5`
-- Texto mobile: "Emergencia 24h:" em vez de "Emergencias Odontologicas 24h:"
