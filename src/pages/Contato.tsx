@@ -220,7 +220,8 @@ const ContatoPage = () => {
                 </div>
               ))}
 
-              <div className="overflow-hidden shadow-elevated" style={{ borderRadius: '30% 70% 70% 30% / 30% 30% 70% 70%' }}>
+              <style>{`@media (min-width: 768px) { .map-organic { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70% !important; } }`}</style>
+              <div className="overflow-hidden shadow-elevated rounded-2xl map-organic">
                 <iframe
                   src={clinicInfo.mapEmbedUrl}
                   width="100%"
