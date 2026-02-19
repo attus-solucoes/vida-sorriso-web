@@ -49,14 +49,14 @@ const ContatoPage = () => {
     setErrors({});
 
     const mensagem = [
-      `🦷 Nova solicitação pelo site — ${clinicInfo.name}`,
+      `\u{1F9B7} Nova solicita\u00E7\u00E3o pelo site \u2014 ${clinicInfo.name}`,
       ``,
-      `👤 Nome: ${form.name}`,
-      form.email ? `📧 Email: ${form.email}` : '',
-      `🦷 Serviço de interesse: ${form.service}`,
-      `📝 Mensagem: ${form.message?.trim() || '(não informado)'}`,
+      `\u{1F464} Nome: ${form.name}`,
+      form.email ? `\u{1F4E7} Email: ${form.email}` : '',
+      `\u{1F9B7} Servi\u00E7o de interesse: ${form.service}`,
+      `\u{1F4DD} Mensagem: ${form.message?.trim() || '(n\u00E3o informado)'}`,
       ``,
-      `✅ Pode me orientar sobre o próximo passo?`,
+      `\u2705 Pode me orientar sobre o pr\u00F3ximo passo?`,
     ].filter(Boolean).join('\n');
 
     const whatsappUrl = `https://wa.me/${clinicInfo.phoneClean}?text=${encodeURIComponent(mensagem)}`;
